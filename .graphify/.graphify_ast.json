@@ -1,0 +1,5171 @@
+{
+  "nodes": [
+    {
+      "id": "app_init",
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "backend/app/__init__.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_api",
+      "label": "api.py",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_api_lineupdate",
+      "label": "LineUpdate",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "basemodel",
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_api_submissionin",
+      "label": "SubmissionIn",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L23"
+    },
+    {
+      "id": "app_api_decisionin",
+      "label": "DecisionIn",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L29"
+    },
+    {
+      "id": "app_api_newresource",
+      "label": "NewResource",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L35"
+    },
+    {
+      "id": "app_api_newproject",
+      "label": "NewProject",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L49"
+    },
+    {
+      "id": "app_api_users",
+      "label": "users()",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L67"
+    },
+    {
+      "id": "app_api_portfolio",
+      "label": "portfolio()",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L73"
+    },
+    {
+      "id": "app_api_project_detail",
+      "label": "project_detail()",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L79"
+    },
+    {
+      "id": "app_api_create_project",
+      "label": "create_project()",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L88"
+    },
+    {
+      "id": "app_api_baseline",
+      "label": "baseline()",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L94"
+    },
+    {
+      "id": "app_api_submission",
+      "label": "submission()",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L103"
+    },
+    {
+      "id": "app_api_save_submission",
+      "label": "save_submission()",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L112"
+    },
+    {
+      "id": "app_api_review",
+      "label": "review()",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L118"
+    },
+    {
+      "id": "app_api_decide",
+      "label": "decide()",
+      "file_type": "code",
+      "source_file": "backend/app/api.py",
+      "source_location": "L127"
+    },
+    {
+      "id": "app_api_rationale_1",
+      "label": "FastAPI route definitions for PRISM Phase-1.",
+      "file_type": "rationale",
+      "source_file": "backend/app/api.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_calc",
+      "label": "calc.py",
+      "file_type": "code",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_calc_round2",
+      "label": "_round2()",
+      "file_type": "code",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "app_calc_lineinput",
+      "label": "LineInput",
+      "file_type": "code",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L38"
+    },
+    {
+      "id": "app_calc_lineresult",
+      "label": "LineResult",
+      "file_type": "code",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "app_calc_line_calc",
+      "label": "line_calc()",
+      "file_type": "code",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L64"
+    },
+    {
+      "id": "app_calc_projectresult",
+      "label": "ProjectResult",
+      "file_type": "code",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L102"
+    },
+    {
+      "id": "app_calc_project_calc",
+      "label": "project_calc()",
+      "file_type": "code",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L124"
+    },
+    {
+      "id": "app_calc_project_health",
+      "label": "project_health()",
+      "file_type": "code",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L182"
+    },
+    {
+      "id": "app_calc_exceptions_for",
+      "label": "exceptions_for()",
+      "file_type": "code",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L193"
+    },
+    {
+      "id": "app_calc_rationale_1",
+      "label": "PRISM pure calculation engine.  This module is the single source of truth for th",
+      "file_type": "rationale",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_calc_rationale_39",
+      "label": "One effort/resource line as fed to the engine.",
+      "file_type": "rationale",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L39"
+    },
+    {
+      "id": "app_calc_rationale_65",
+      "label": "Cost roll-up for a single resource line.",
+      "file_type": "rationale",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L65"
+    },
+    {
+      "id": "app_calc_rationale_129",
+      "label": "Full project roll-up and the revenue chain.      ``prior_frozen_ytd`` is the cum",
+      "file_type": "rationale",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L129"
+    },
+    {
+      "id": "app_calc_rationale_183",
+      "label": "RAG health from the computed result.",
+      "file_type": "rationale",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L183"
+    },
+    {
+      "id": "app_calc_rationale_194",
+      "label": "Auto-generated QC exceptions for a project result.",
+      "file_type": "rationale",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L194"
+    },
+    {
+      "id": "app_db",
+      "label": "db.py",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_db_init_db",
+      "label": "init_db()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "app_db_get_session",
+      "label": "get_session()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L23"
+    },
+    {
+      "id": "app_db_rationale_1",
+      "label": "SQLite engine + session helpers.",
+      "file_type": "rationale",
+      "source_file": "backend/app/db.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_main",
+      "label": "main.py",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_main_startup",
+      "label": "_startup()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L29"
+    },
+    {
+      "id": "app_main_health",
+      "label": "health()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L40"
+    },
+    {
+      "id": "app_main_rationale_1",
+      "label": "PRISM FastAPI application entry point.  Run:     cd backend && .venv/Scripts/pyt",
+      "file_type": "rationale",
+      "source_file": "backend/app/main.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_models",
+      "label": "models.py",
+      "file_type": "code",
+      "source_file": "backend/app/models.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_models_utcnow",
+      "label": "_utcnow()",
+      "file_type": "code",
+      "source_file": "backend/app/models.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "app_models_user",
+      "label": "User",
+      "file_type": "code",
+      "source_file": "backend/app/models.py",
+      "source_location": "L20"
+    },
+    {
+      "id": "sqlmodel",
+      "label": "SQLModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_models_project",
+      "label": "Project",
+      "file_type": "code",
+      "source_file": "backend/app/models.py",
+      "source_location": "L27"
+    },
+    {
+      "id": "app_models_effortline",
+      "label": "EffortLine",
+      "file_type": "code",
+      "source_file": "backend/app/models.py",
+      "source_location": "L51"
+    },
+    {
+      "id": "app_models_period",
+      "label": "Period",
+      "file_type": "code",
+      "source_file": "backend/app/models.py",
+      "source_location": "L73"
+    },
+    {
+      "id": "app_models_ledgerentry",
+      "label": "LedgerEntry",
+      "file_type": "code",
+      "source_file": "backend/app/models.py",
+      "source_location": "L80"
+    },
+    {
+      "id": "app_models_submission",
+      "label": "Submission",
+      "file_type": "code",
+      "source_file": "backend/app/models.py",
+      "source_location": "L98"
+    },
+    {
+      "id": "app_models_approval",
+      "label": "Approval",
+      "file_type": "code",
+      "source_file": "backend/app/models.py",
+      "source_location": "L112"
+    },
+    {
+      "id": "app_models_rationale_1",
+      "label": "SQLModel entities for PRISM Phase-1.  This is the *scoped* slice of the full 20-",
+      "file_type": "rationale",
+      "source_file": "backend/app/models.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_models_rationale_81",
+      "label": "The frozen revenue ledger -- one immutable row per project per period.",
+      "file_type": "rationale",
+      "source_file": "backend/app/models.py",
+      "source_location": "L81"
+    },
+    {
+      "id": "app_seed",
+      "label": "seed.py",
+      "file_type": "code",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_seed_lines_for",
+      "label": "_lines_for()",
+      "file_type": "code",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "app_seed_calc_inputs",
+      "label": "_calc_inputs()",
+      "file_type": "code",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L53"
+    },
+    {
+      "id": "app_seed_ledger_ramp",
+      "label": "_ledger_ramp()",
+      "file_type": "code",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L131"
+    },
+    {
+      "id": "app_seed_seed",
+      "label": "seed()",
+      "file_type": "code",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L157"
+    },
+    {
+      "id": "app_seed_rationale_1",
+      "label": "Deterministic demo seed for PRISM Phase-1.  Run directly to (re)seed:  PYTHONPAT",
+      "file_type": "rationale",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_seed_rationale_132",
+      "label": "Synthesise frozen Apr..Aug rows ramping cumulative revenue up to prior_ytd.",
+      "file_type": "rationale",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L132"
+    },
+    {
+      "id": "app_service",
+      "label": "service.py",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_service_utcnow",
+      "label": "_utcnow()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L27"
+    },
+    {
+      "id": "app_service_current_period",
+      "label": "current_period()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "app_service_lines",
+      "label": "_lines()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L42"
+    },
+    {
+      "id": "app_service_calc_inputs",
+      "label": "_calc_inputs()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L46"
+    },
+    {
+      "id": "app_service_prior_ytd",
+      "label": "_prior_ytd()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L58"
+    },
+    {
+      "id": "app_service_compute",
+      "label": "compute()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L70"
+    },
+    {
+      "id": "app_service_list_users",
+      "label": "list_users()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L79"
+    },
+    {
+      "id": "app_service_user",
+      "label": "_user()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L86"
+    },
+    {
+      "id": "app_service_visible_projects",
+      "label": "_visible_projects()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L93"
+    },
+    {
+      "id": "app_service_portfolio",
+      "label": "portfolio()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L104"
+    },
+    {
+      "id": "app_service_line_view",
+      "label": "_line_view()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L160"
+    },
+    {
+      "id": "app_service_ledger",
+      "label": "_ledger()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L185"
+    },
+    {
+      "id": "app_service_project_detail",
+      "label": "project_detail()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L203"
+    },
+    {
+      "id": "app_service_trend",
+      "label": "_trend()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L299"
+    },
+    {
+      "id": "app_service_baseline_view",
+      "label": "baseline_view()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L332"
+    },
+    {
+      "id": "app_service_approval_for",
+      "label": "_approval_for()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L364"
+    },
+    {
+      "id": "app_service_submission_view",
+      "label": "submission_view()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L387"
+    },
+    {
+      "id": "app_service_save_submission",
+      "label": "save_submission()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L417"
+    },
+    {
+      "id": "app_service_review_view",
+      "label": "review_view()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L467"
+    },
+    {
+      "id": "app_service_decide",
+      "label": "decide()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L481"
+    },
+    {
+      "id": "app_service_create_project",
+      "label": "create_project()",
+      "file_type": "code",
+      "source_file": "backend/app/service.py",
+      "source_location": "L516"
+    },
+    {
+      "id": "app_service_rationale_1",
+      "label": "Service layer: load entities, run the calc engine, shape API responses.",
+      "file_type": "rationale",
+      "source_file": "backend/app/service.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_service_rationale_59",
+      "label": "Latest frozen cumulative revenue; else the seeded snapshot.",
+      "file_type": "rationale",
+      "source_file": "backend/app/service.py",
+      "source_location": "L59"
+    },
+    {
+      "id": "app_service_rationale_300",
+      "label": "Cumulative effort trend Apr..Sep with linear baseline-to-date + drift.",
+      "file_type": "rationale",
+      "source_file": "backend/app/service.py",
+      "source_location": "L300"
+    },
+    {
+      "id": "app_service_rationale_418",
+      "label": "Update actual/etc/completion on lines, then draft or submit.",
+      "file_type": "rationale",
+      "source_file": "backend/app/service.py",
+      "source_location": "L418"
+    },
+    {
+      "id": "src_api",
+      "label": "api.ts",
+      "file_type": "code",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_api_req",
+      "label": "req()",
+      "file_type": "code",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_api_user",
+      "label": "User",
+      "file_type": "code",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "src_api_portfoliocard",
+      "label": "PortfolioCard",
+      "file_type": "code",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L28"
+    },
+    {
+      "id": "src_api_portfolio",
+      "label": "Portfolio",
+      "file_type": "code",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L45"
+    },
+    {
+      "id": "src_api_line",
+      "label": "Line",
+      "file_type": "code",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L62"
+    },
+    {
+      "id": "src_api_exception",
+      "label": "Exception",
+      "file_type": "code",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L85"
+    },
+    {
+      "id": "src_api_projectdetail",
+      "label": "ProjectDetail",
+      "file_type": "code",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L91"
+    },
+    {
+      "id": "src_api_baseline",
+      "label": "Baseline",
+      "file_type": "code",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L157"
+    },
+    {
+      "id": "src_api_submission",
+      "label": "Submission",
+      "file_type": "code",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L175"
+    },
+    {
+      "id": "src_api_api",
+      "label": "api",
+      "file_type": "code",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L207"
+    },
+    {
+      "id": "src_auth",
+      "label": "auth.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_auth_authctx",
+      "label": "AuthCtx",
+      "file_type": "code",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_auth_ctx",
+      "label": "Ctx",
+      "file_type": "code",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_auth_authprovider",
+      "label": "AuthProvider()",
+      "file_type": "code",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L21"
+    },
+    {
+      "id": "src_auth_useauth",
+      "label": "useAuth()",
+      "file_type": "code",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L50"
+    },
+    {
+      "id": "components_layout",
+      "label": "Layout.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_layout_logo",
+      "label": "Logo()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "components_layout_nav",
+      "label": "NAV",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L20"
+    },
+    {
+      "id": "components_layout_navitem",
+      "label": "NavItem()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L25"
+    },
+    {
+      "id": "components_layout_layout",
+      "label": "Layout()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L54"
+    },
+    {
+      "id": "components_layout_gridicon",
+      "label": "GridIcon()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L129"
+    },
+    {
+      "id": "components_layout_plusicon",
+      "label": "PlusIcon()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L139"
+    },
+    {
+      "id": "components_layout_bellicon",
+      "label": "BellIcon()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L146"
+    },
+    {
+      "id": "components_ui",
+      "label": "ui.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_ui_card",
+      "label": "Card()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "components_ui_sectiontitle",
+      "label": "SectionTitle()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L26"
+    },
+    {
+      "id": "components_ui_tints",
+      "label": "TINTS",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L49"
+    },
+    {
+      "id": "components_ui_stattile",
+      "label": "StatTile()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L57"
+    },
+    {
+      "id": "components_ui_ctile",
+      "label": "CTile()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L90"
+    },
+    {
+      "id": "components_ui_status",
+      "label": "STATUS",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L116"
+    },
+    {
+      "id": "components_ui_chip",
+      "label": "Chip()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L145"
+    },
+    {
+      "id": "components_ui_stepper",
+      "label": "Stepper()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L160"
+    },
+    {
+      "id": "components_ui_tabs",
+      "label": "Tabs()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L199"
+    },
+    {
+      "id": "components_ui_button",
+      "label": "Button()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L230"
+    },
+    {
+      "id": "components_ui_input",
+      "label": "Input()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L265"
+    },
+    {
+      "id": "components_ui_select",
+      "label": "Select()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L276"
+    },
+    {
+      "id": "components_ui_field",
+      "label": "Field()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L287"
+    },
+    {
+      "id": "components_ui_spinner",
+      "label": "Spinner()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L299"
+    },
+    {
+      "id": "components_ui_errorbox",
+      "label": "ErrorBox()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L308"
+    },
+    {
+      "id": "lib_calcpreview",
+      "label": "calcPreview.ts",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/calcPreview.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_calcpreview_previewline",
+      "label": "PreviewLine",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/calcPreview.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "lib_calcpreview_previewresult",
+      "label": "PreviewResult",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/calcPreview.ts",
+      "source_location": "L14"
+    },
+    {
+      "id": "lib_calcpreview_preview",
+      "label": "preview()",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/calcPreview.ts",
+      "source_location": "L28"
+    },
+    {
+      "id": "lib_format",
+      "label": "format.ts",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/format.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_format_money",
+      "label": "money()",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/format.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "lib_format_k",
+      "label": "k()",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/format.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "lib_format_pct",
+      "label": "pct()",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/format.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "lib_format_days",
+      "label": "days()",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/format.ts",
+      "source_location": "L25"
+    },
+    {
+      "id": "lib_format_signed",
+      "label": "signed()",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/format.ts",
+      "source_location": "L29"
+    },
+    {
+      "id": "lib_useasync",
+      "label": "useAsync.ts",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/useAsync.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_useasync_asyncstate",
+      "label": "AsyncState",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/useAsync.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "lib_useasync_useasync",
+      "label": "useAsync()",
+      "file_type": "code",
+      "source_file": "frontend/src/lib/useAsync.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "src_main",
+      "label": "main.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_main_requireauth",
+      "label": "RequireAuth()",
+      "file_type": "code",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L16"
+    },
+    {
+      "id": "src_main_requireapprover",
+      "label": "RequireApprover()",
+      "file_type": "code",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L23"
+    },
+    {
+      "id": "src_main_app",
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L30"
+    },
+    {
+      "id": "pages_baseline",
+      "label": "Baseline.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "pages_baseline_baseline",
+      "label": "Baseline()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "pages_login",
+      "label": "Login.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "pages_login_role_hint",
+      "label": "ROLE_HINT",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "pages_login_login",
+      "label": "Login()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L15"
+    },
+    {
+      "id": "pages_newproject",
+      "label": "NewProject.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "pages_newproject_resrow",
+      "label": "ResRow",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L20"
+    },
+    {
+      "id": "pages_newproject_subrow",
+      "label": "SubRow",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L28"
+    },
+    {
+      "id": "pages_newproject_steps",
+      "label": "STEPS",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L37"
+    },
+    {
+      "id": "pages_newproject_newproject",
+      "label": "NewProject()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L39"
+    },
+    {
+      "id": "pages_pdreview",
+      "label": "PdReview.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "pages_pdreview_pdreview",
+      "label": "PdReview()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "pages_pmsubmission",
+      "label": "PmSubmission.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "pages_pmsubmission_pmsubmission",
+      "label": "PmSubmission()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "pages_portfolio",
+      "label": "Portfolio.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "pages_portfolio_metric",
+      "label": "Metric()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "pages_portfolio_projectrow",
+      "label": "ProjectRow()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L28"
+    },
+    {
+      "id": "pages_portfolio_portfolio",
+      "label": "Portfolio()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L66"
+    },
+    {
+      "id": "pages_portfolio_dollaricon",
+      "label": "DollarIcon()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L137"
+    },
+    {
+      "id": "pages_portfolio_pulseicon",
+      "label": "PulseIcon()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L144"
+    },
+    {
+      "id": "pages_portfolio_checkicon",
+      "label": "CheckIcon()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L151"
+    },
+    {
+      "id": "pages_portfolio_charticon",
+      "label": "ChartIcon()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L158"
+    },
+    {
+      "id": "pages_portfolio_stackicon",
+      "label": "StackIcon()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L165"
+    },
+    {
+      "id": "pages_projectdetail",
+      "label": "ProjectDetail.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "pages_projectdetail_cat_color",
+      "label": "CAT_COLOR",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L23"
+    },
+    {
+      "id": "pages_projectdetail_exportexcel",
+      "label": "exportExcel()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L29"
+    },
+    {
+      "id": "pages_projectdetail_trendtooltip",
+      "label": "TrendTooltip()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L46"
+    },
+    {
+      "id": "pages_projectdetail_projectdetail",
+      "label": "ProjectDetail()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L61"
+    },
+    {
+      "id": "src_vite_env_d",
+      "label": "vite-env.d.ts",
+      "file_type": "code",
+      "source_file": "frontend/src/vite-env.d.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_vite_config",
+      "label": "vite.config.ts",
+      "file_type": "code",
+      "source_file": "frontend/vite.config.ts",
+      "source_location": "L1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "app_api",
+      "target": "typing",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "fastapi",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "pydantic",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "db",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L10",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_lineupdate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L16",
+      "weight": 1
+    },
+    {
+      "source": "app_api_lineupdate",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L16",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_submissionin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L23",
+      "weight": 1
+    },
+    {
+      "source": "app_api_submissionin",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L23",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_decisionin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L29",
+      "weight": 1
+    },
+    {
+      "source": "app_api_decisionin",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L29",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_newresource",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L35",
+      "weight": 1
+    },
+    {
+      "source": "app_api_newresource",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L35",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_newproject",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L49",
+      "weight": 1
+    },
+    {
+      "source": "app_api_newproject",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L49",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_users",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L67",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_portfolio",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L73",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_project_detail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L79",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_create_project",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L88",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_baseline",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L94",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_submission",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L103",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_save_submission",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L112",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_review",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L118",
+      "weight": 1
+    },
+    {
+      "source": "app_api",
+      "target": "app_api_decide",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L127",
+      "weight": 1
+    },
+    {
+      "source": "app_api_rationale_1",
+      "target": "app_api",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/api.py",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "app_calc",
+      "target": "dataclasses",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L25",
+      "weight": 1
+    },
+    {
+      "source": "app_calc",
+      "target": "app_calc_round2",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L33",
+      "weight": 1
+    },
+    {
+      "source": "app_calc",
+      "target": "app_calc_lineinput",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L38",
+      "weight": 1
+    },
+    {
+      "source": "app_calc",
+      "target": "app_calc_lineresult",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L52",
+      "weight": 1
+    },
+    {
+      "source": "app_calc",
+      "target": "app_calc_line_calc",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L64",
+      "weight": 1
+    },
+    {
+      "source": "app_calc",
+      "target": "app_calc_projectresult",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L102",
+      "weight": 1
+    },
+    {
+      "source": "app_calc",
+      "target": "app_calc_project_calc",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L124",
+      "weight": 1
+    },
+    {
+      "source": "app_calc",
+      "target": "app_calc_project_health",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L182",
+      "weight": 1
+    },
+    {
+      "source": "app_calc",
+      "target": "app_calc_exceptions_for",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L193",
+      "weight": 1
+    },
+    {
+      "source": "app_calc_line_calc",
+      "target": "app_calc_lineresult",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L72",
+      "weight": 1
+    },
+    {
+      "source": "app_calc_line_calc",
+      "target": "app_calc_round2",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L74",
+      "weight": 1
+    },
+    {
+      "source": "app_calc_project_calc",
+      "target": "app_calc_line_calc",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L134",
+      "weight": 1
+    },
+    {
+      "source": "app_calc_project_calc",
+      "target": "app_calc_round2",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L136",
+      "weight": 1
+    },
+    {
+      "source": "app_calc_project_calc",
+      "target": "app_calc_projectresult",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L152",
+      "weight": 1
+    },
+    {
+      "source": "app_calc_rationale_1",
+      "target": "app_calc",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "app_calc_rationale_39",
+      "target": "app_calc_lineinput",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L39",
+      "weight": 1
+    },
+    {
+      "source": "app_calc_rationale_65",
+      "target": "app_calc_line_calc",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L65",
+      "weight": 1
+    },
+    {
+      "source": "app_calc_rationale_129",
+      "target": "app_calc_project_calc",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L129",
+      "weight": 1
+    },
+    {
+      "source": "app_calc_rationale_183",
+      "target": "app_calc_project_health",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L183",
+      "weight": 1
+    },
+    {
+      "source": "app_calc_rationale_194",
+      "target": "app_calc_exceptions_for",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/calc.py",
+      "source_location": "L194",
+      "weight": 1
+    },
+    {
+      "source": "app_db",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "app_db",
+      "target": "sqlmodel",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "app_db",
+      "target": "app_db_init_db",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L16",
+      "weight": 1
+    },
+    {
+      "source": "app_db",
+      "target": "app_db_get_session",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L23",
+      "weight": 1
+    },
+    {
+      "source": "app_db_rationale_1",
+      "target": "app_db",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "app_main",
+      "target": "fastapi",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L8",
+      "weight": 1
+    },
+    {
+      "source": "app_main",
+      "target": "fastapi_middleware_cors",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "app_main",
+      "target": "sqlmodel",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L10",
+      "weight": 1
+    },
+    {
+      "source": "app_main",
+      "target": "api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L12",
+      "weight": 1
+    },
+    {
+      "source": "app_main",
+      "target": "db",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L13",
+      "weight": 1
+    },
+    {
+      "source": "app_main",
+      "target": "models",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L14",
+      "weight": 1
+    },
+    {
+      "source": "app_main",
+      "target": "app_main_startup",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L29",
+      "weight": 1
+    },
+    {
+      "source": "app_main",
+      "target": "app_main_health",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L40",
+      "weight": 1
+    },
+    {
+      "source": "app_main_rationale_1",
+      "target": "app_main",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "app_models",
+      "target": "datetime",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "app_models",
+      "target": "typing",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L10",
+      "weight": 1
+    },
+    {
+      "source": "app_models",
+      "target": "sqlmodel",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L12",
+      "weight": 1
+    },
+    {
+      "source": "app_models",
+      "target": "app_models_utcnow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L15",
+      "weight": 1
+    },
+    {
+      "source": "app_models",
+      "target": "app_models_user",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L20",
+      "weight": 1
+    },
+    {
+      "source": "app_models_user",
+      "target": "sqlmodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L20",
+      "weight": 1
+    },
+    {
+      "source": "app_models",
+      "target": "app_models_project",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L27",
+      "weight": 1
+    },
+    {
+      "source": "app_models_project",
+      "target": "sqlmodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L27",
+      "weight": 1
+    },
+    {
+      "source": "app_models",
+      "target": "app_models_effortline",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L51",
+      "weight": 1
+    },
+    {
+      "source": "app_models_effortline",
+      "target": "sqlmodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L51",
+      "weight": 1
+    },
+    {
+      "source": "app_models",
+      "target": "app_models_period",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L73",
+      "weight": 1
+    },
+    {
+      "source": "app_models_period",
+      "target": "sqlmodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L73",
+      "weight": 1
+    },
+    {
+      "source": "app_models",
+      "target": "app_models_ledgerentry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L80",
+      "weight": 1
+    },
+    {
+      "source": "app_models_ledgerentry",
+      "target": "sqlmodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L80",
+      "weight": 1
+    },
+    {
+      "source": "app_models",
+      "target": "app_models_submission",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L98",
+      "weight": 1
+    },
+    {
+      "source": "app_models_submission",
+      "target": "sqlmodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L98",
+      "weight": 1
+    },
+    {
+      "source": "app_models",
+      "target": "app_models_approval",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L112",
+      "weight": 1
+    },
+    {
+      "source": "app_models_approval",
+      "target": "sqlmodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L112",
+      "weight": 1
+    },
+    {
+      "source": "app_models_rationale_1",
+      "target": "app_models",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "app_models_rationale_81",
+      "target": "app_models_ledgerentry",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/models.py",
+      "source_location": "L81",
+      "weight": 1
+    },
+    {
+      "source": "app_seed",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L11",
+      "weight": 1
+    },
+    {
+      "source": "app_seed",
+      "target": "sqlmodel",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L13",
+      "weight": 1
+    },
+    {
+      "source": "app_seed",
+      "target": "",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L15",
+      "weight": 1
+    },
+    {
+      "source": "app_seed",
+      "target": "db",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L16",
+      "weight": 1
+    },
+    {
+      "source": "app_seed",
+      "target": "models",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 1
+    },
+    {
+      "source": "app_seed",
+      "target": "app_seed_lines_for",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L31",
+      "weight": 1
+    },
+    {
+      "source": "app_seed",
+      "target": "app_seed_calc_inputs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L53",
+      "weight": 1
+    },
+    {
+      "source": "app_seed",
+      "target": "app_seed_ledger_ramp",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L131",
+      "weight": 1
+    },
+    {
+      "source": "app_seed",
+      "target": "app_seed_seed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L157",
+      "weight": 1
+    },
+    {
+      "source": "app_seed_seed",
+      "target": "app_seed_lines_for",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L185",
+      "weight": 1
+    },
+    {
+      "source": "app_seed_seed",
+      "target": "app_seed_calc_inputs",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L187",
+      "weight": 1
+    },
+    {
+      "source": "app_seed_seed",
+      "target": "app_seed_ledger_ramp",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L203",
+      "weight": 1
+    },
+    {
+      "source": "app_seed_rationale_1",
+      "target": "app_seed",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "app_seed_rationale_132",
+      "target": "app_seed_ledger_ramp",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L132",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "datetime",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "typing",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "sqlmodel",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "models",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_utcnow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L27",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_current_period",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L34",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_lines",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L42",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_calc_inputs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L46",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_prior_ytd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L58",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_compute",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L70",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_list_users",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L79",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_user",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L86",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_visible_projects",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L93",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_portfolio",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L104",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_line_view",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L160",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_ledger",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L185",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_project_detail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L203",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_trend",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L299",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_baseline_view",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L332",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_approval_for",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L364",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_submission_view",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L387",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_save_submission",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L417",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_review_view",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L467",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_decide",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L481",
+      "weight": 1
+    },
+    {
+      "source": "app_service",
+      "target": "app_service_create_project",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L516",
+      "weight": 1
+    },
+    {
+      "source": "app_service_compute",
+      "target": "app_service_lines",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L71",
+      "weight": 1
+    },
+    {
+      "source": "app_service_compute",
+      "target": "app_service_calc_inputs",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L73",
+      "weight": 1
+    },
+    {
+      "source": "app_service_compute",
+      "target": "app_service_prior_ytd",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L73",
+      "weight": 1
+    },
+    {
+      "source": "app_service_portfolio",
+      "target": "app_service_user",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L105",
+      "weight": 1
+    },
+    {
+      "source": "app_service_portfolio",
+      "target": "app_service_visible_projects",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L106",
+      "weight": 1
+    },
+    {
+      "source": "app_service_portfolio",
+      "target": "app_service_current_period",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L107",
+      "weight": 1
+    },
+    {
+      "source": "app_service_portfolio",
+      "target": "app_service_compute",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L113",
+      "weight": 1
+    },
+    {
+      "source": "app_service_project_detail",
+      "target": "app_service_lines",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L207",
+      "weight": 1
+    },
+    {
+      "source": "app_service_project_detail",
+      "target": "app_service_calc_inputs",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L209",
+      "weight": 1
+    },
+    {
+      "source": "app_service_project_detail",
+      "target": "app_service_prior_ytd",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L209",
+      "weight": 1
+    },
+    {
+      "source": "app_service_project_detail",
+      "target": "app_service_current_period",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L210",
+      "weight": 1
+    },
+    {
+      "source": "app_service_project_detail",
+      "target": "app_service_ledger",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L214",
+      "weight": 1
+    },
+    {
+      "source": "app_service_project_detail",
+      "target": "app_service_trend",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L239",
+      "weight": 1
+    },
+    {
+      "source": "app_service_project_detail",
+      "target": "app_service_line_view",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L291",
+      "weight": 1
+    },
+    {
+      "source": "app_service_baseline_view",
+      "target": "app_service_lines",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L336",
+      "weight": 1
+    },
+    {
+      "source": "app_service_baseline_view",
+      "target": "app_service_calc_inputs",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L337",
+      "weight": 1
+    },
+    {
+      "source": "app_service_baseline_view",
+      "target": "app_service_line_view",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L340",
+      "weight": 1
+    },
+    {
+      "source": "app_service_approval_for",
+      "target": "app_service_user",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L376",
+      "weight": 1
+    },
+    {
+      "source": "app_service_submission_view",
+      "target": "app_service_lines",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L391",
+      "weight": 1
+    },
+    {
+      "source": "app_service_submission_view",
+      "target": "app_service_calc_inputs",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L393",
+      "weight": 1
+    },
+    {
+      "source": "app_service_submission_view",
+      "target": "app_service_prior_ytd",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L393",
+      "weight": 1
+    },
+    {
+      "source": "app_service_submission_view",
+      "target": "app_service_current_period",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L394",
+      "weight": 1
+    },
+    {
+      "source": "app_service_submission_view",
+      "target": "app_service_line_view",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L412",
+      "weight": 1
+    },
+    {
+      "source": "app_service_submission_view",
+      "target": "app_service_approval_for",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L413",
+      "weight": 1
+    },
+    {
+      "source": "app_service_save_submission",
+      "target": "app_service_lines",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L422",
+      "weight": 1
+    },
+    {
+      "source": "app_service_save_submission",
+      "target": "app_service_calc_inputs",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L438",
+      "weight": 1
+    },
+    {
+      "source": "app_service_save_submission",
+      "target": "app_service_prior_ytd",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L438",
+      "weight": 1
+    },
+    {
+      "source": "app_service_save_submission",
+      "target": "app_service_current_period",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L439",
+      "weight": 1
+    },
+    {
+      "source": "app_service_save_submission",
+      "target": "app_service_utcnow",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L452",
+      "weight": 1
+    },
+    {
+      "source": "app_service_save_submission",
+      "target": "app_service_submission_view",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L461",
+      "weight": 1
+    },
+    {
+      "source": "app_service_review_view",
+      "target": "app_service_submission_view",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L471",
+      "weight": 1
+    },
+    {
+      "source": "app_service_review_view",
+      "target": "app_service_lines",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L472",
+      "weight": 1
+    },
+    {
+      "source": "app_service_review_view",
+      "target": "app_service_calc_inputs",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L474",
+      "weight": 1
+    },
+    {
+      "source": "app_service_review_view",
+      "target": "app_service_prior_ytd",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L474",
+      "weight": 1
+    },
+    {
+      "source": "app_service_decide",
+      "target": "app_service_current_period",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L485",
+      "weight": 1
+    },
+    {
+      "source": "app_service_decide",
+      "target": "app_service_utcnow",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L499",
+      "weight": 1
+    },
+    {
+      "source": "app_service_decide",
+      "target": "app_service_review_view",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L510",
+      "weight": 1
+    },
+    {
+      "source": "app_service_create_project",
+      "target": "app_service_calc_inputs",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L539",
+      "weight": 1
+    },
+    {
+      "source": "app_service_create_project",
+      "target": "app_service_utcnow",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L543",
+      "weight": 1
+    },
+    {
+      "source": "app_service_rationale_1",
+      "target": "app_service",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "app_service_rationale_59",
+      "target": "app_service_prior_ytd",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L59",
+      "weight": 1
+    },
+    {
+      "source": "app_service_rationale_300",
+      "target": "app_service_trend",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L300",
+      "weight": 1
+    },
+    {
+      "source": "app_service_rationale_418",
+      "target": "app_service_save_submission",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L418",
+      "weight": 1
+    },
+    {
+      "source": "src_api",
+      "target": "src_api_req",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "src_api",
+      "target": "src_api_user",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L21",
+      "weight": 1
+    },
+    {
+      "source": "src_api",
+      "target": "src_api_portfoliocard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L28",
+      "weight": 1
+    },
+    {
+      "source": "src_api",
+      "target": "src_api_portfolio",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L45",
+      "weight": 1
+    },
+    {
+      "source": "src_api",
+      "target": "src_api_line",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L62",
+      "weight": 1
+    },
+    {
+      "source": "src_api",
+      "target": "src_api_exception",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L85",
+      "weight": 1
+    },
+    {
+      "source": "src_api",
+      "target": "src_api_projectdetail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L91",
+      "weight": 1
+    },
+    {
+      "source": "src_api",
+      "target": "src_api_baseline",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L157",
+      "weight": 1
+    },
+    {
+      "source": "src_api",
+      "target": "src_api_submission",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L175",
+      "weight": 1
+    },
+    {
+      "source": "src_api",
+      "target": "src_api_api",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api.ts",
+      "source_location": "L207",
+      "weight": 1
+    },
+    {
+      "source": "src_auth",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "src_auth",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "src_auth",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "src_auth",
+      "target": "src_api_user",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "src_auth",
+      "target": "src_auth_authctx",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "src_auth",
+      "target": "src_auth_ctx",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L14",
+      "weight": 1
+    },
+    {
+      "source": "src_auth",
+      "target": "src_auth_authprovider",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L21",
+      "weight": 1
+    },
+    {
+      "source": "src_auth",
+      "target": "src_auth_useauth",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/auth.tsx",
+      "source_location": "L50",
+      "weight": 1
+    },
+    {
+      "source": "components_layout",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "components_layout",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "components_layout",
+      "target": "src_auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "components_layout",
+      "target": "src_auth_useauth",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "components_layout",
+      "target": "components_layout_logo",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "components_layout",
+      "target": "components_layout_nav",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L20",
+      "weight": 1
+    },
+    {
+      "source": "components_layout",
+      "target": "components_layout_navitem",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L25",
+      "weight": 1
+    },
+    {
+      "source": "components_layout",
+      "target": "components_layout_layout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L54",
+      "weight": 1
+    },
+    {
+      "source": "components_layout",
+      "target": "components_layout_gridicon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L129",
+      "weight": 1
+    },
+    {
+      "source": "components_layout",
+      "target": "components_layout_plusicon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L139",
+      "weight": 1
+    },
+    {
+      "source": "components_layout",
+      "target": "components_layout_bellicon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Layout.tsx",
+      "source_location": "L146",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_card",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_sectiontitle",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L26",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_tints",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L49",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_stattile",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L57",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_ctile",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L90",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L116",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L132",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_chip",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L145",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_stepper",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L160",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_tabs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L199",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_button",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L230",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_input",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L265",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_select",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L276",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_field",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L287",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_spinner",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L299",
+      "weight": 1
+    },
+    {
+      "source": "components_ui",
+      "target": "components_ui_errorbox",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ui.tsx",
+      "source_location": "L308",
+      "weight": 1
+    },
+    {
+      "source": "lib_calcpreview",
+      "target": "lib_calcpreview_previewline",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/lib/calcPreview.ts",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "lib_calcpreview",
+      "target": "lib_calcpreview_previewresult",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/lib/calcPreview.ts",
+      "source_location": "L14",
+      "weight": 1
+    },
+    {
+      "source": "lib_calcpreview",
+      "target": "lib_calcpreview_preview",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/lib/calcPreview.ts",
+      "source_location": "L28",
+      "weight": 1
+    },
+    {
+      "source": "lib_format",
+      "target": "lib_format_money",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/lib/format.ts",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "lib_format",
+      "target": "lib_format_k",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/lib/format.ts",
+      "source_location": "L17",
+      "weight": 1
+    },
+    {
+      "source": "lib_format",
+      "target": "lib_format_pct",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/lib/format.ts",
+      "source_location": "L21",
+      "weight": 1
+    },
+    {
+      "source": "lib_format",
+      "target": "lib_format_days",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/lib/format.ts",
+      "source_location": "L25",
+      "weight": 1
+    },
+    {
+      "source": "lib_format",
+      "target": "lib_format_signed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/lib/format.ts",
+      "source_location": "L29",
+      "weight": 1
+    },
+    {
+      "source": "lib_useasync",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/lib/useAsync.ts",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "lib_useasync",
+      "target": "lib_useasync_asyncstate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/lib/useAsync.ts",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "lib_useasync",
+      "target": "lib_useasync_useasync",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/lib/useAsync.ts",
+      "source_location": "L10",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "client",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "c_prism_code_frontend_src_index_css",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "src_auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "src_auth_authprovider",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "src_auth_useauth",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "components_layout",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "components_layout_layout",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "pages_login",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L8",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "pages_portfolio",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "pages_projectdetail",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L10",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "pages_baseline",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L11",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "pages_pmsubmission",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L12",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "pages_pdreview",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L13",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "pages_newproject",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L14",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_requireauth",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L16",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_requireapprover",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L23",
+      "weight": 1
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_app",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L30",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "src_api_api",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "lib_useasync",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "lib_useasync_useasync",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "lib_format",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "lib_format_money",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "lib_format_pct",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "components_ui",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "components_ui_card",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "components_ui_ctile",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "components_ui_errorbox",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "components_ui_sectiontitle",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "components_ui_spinner",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_baseline",
+      "target": "pages_baseline_baseline",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Baseline.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "src_api_api",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "src_api_user",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "src_auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "src_auth_useauth",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "lib_useasync",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "lib_useasync_useasync",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "components_ui",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "components_ui_spinner",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "pages_login_role_hint",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L8",
+      "weight": 1
+    },
+    {
+      "source": "pages_login",
+      "target": "pages_login_login",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Login.tsx",
+      "source_location": "L15",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "src_api_api",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "src_api_user",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "src_auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "src_auth_useauth",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "lib_useasync",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "lib_useasync_useasync",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "lib_format",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "lib_format_money",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "lib_format_pct",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "lib_calcpreview",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L8",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "lib_calcpreview_preview",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L8",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "components_ui",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "components_ui_button",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "components_ui_card",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "components_ui_ctile",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "components_ui_field",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "components_ui_input",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "components_ui_sectiontitle",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "components_ui_select",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "components_ui_stepper",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "pages_newproject_resrow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L20",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "pages_newproject_subrow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L28",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "pages_newproject_steps",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L37",
+      "weight": 1
+    },
+    {
+      "source": "pages_newproject",
+      "target": "pages_newproject_newproject",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/NewProject.tsx",
+      "source_location": "L39",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "src_api_api",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "src_api_submission",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "src_auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "src_auth_useauth",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "lib_format",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "lib_format_money",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "lib_format_pct",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "components_ui",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "components_ui_button",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "components_ui_card",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "components_ui_ctile",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "components_ui_errorbox",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "components_ui_sectiontitle",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "components_ui_spinner",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "components_ui_status",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pdreview",
+      "target": "pages_pdreview_pdreview",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PdReview.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "src_api_api",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "src_api_line",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "src_api_submission",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "src_auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "src_auth_useauth",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "lib_format",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "lib_format_money",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "lib_format_pct",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "components_ui",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "components_ui_button",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "components_ui_card",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "components_ui_ctile",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "components_ui_errorbox",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "components_ui_input",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "components_ui_sectiontitle",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "components_ui_spinner",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "components_ui_status",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "lib_calcpreview",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L8",
+      "weight": 1
+    },
+    {
+      "source": "pages_pmsubmission",
+      "target": "pages_pmsubmission_pmsubmission",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PmSubmission.tsx",
+      "source_location": "L10",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "src_api_api",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "src_api_portfoliocard",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "src_auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "src_auth_useauth",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L4",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "lib_useasync",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "lib_useasync_useasync",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L5",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "lib_format",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "lib_format_money",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "lib_format_pct",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L6",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "components_ui",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "components_ui_card",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "components_ui_errorbox",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "components_ui_sectiontitle",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "components_ui_spinner",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "components_ui_stattile",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "components_ui_status",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L7",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "pages_portfolio_metric",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "pages_portfolio_projectrow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L28",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "pages_portfolio_portfolio",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L66",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "pages_portfolio_dollaricon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L137",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "pages_portfolio_pulseicon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L144",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "pages_portfolio_checkicon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L151",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "pages_portfolio_charticon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L158",
+      "weight": 1
+    },
+    {
+      "source": "pages_portfolio",
+      "target": "pages_portfolio_stackicon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Portfolio.tsx",
+      "source_location": "L165",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "recharts",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L16",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "src_api_api",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L16",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "src_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L17",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "src_api_projectdetail",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L17",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "src_auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L18",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "src_auth_useauth",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L18",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "lib_useasync",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L19",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "lib_useasync_useasync",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L19",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "lib_format",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L20",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "lib_format_k",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L20",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "lib_format_money",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L20",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "lib_format_pct",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L20",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "lib_format_signed",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L20",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "components_ui",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L21",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "components_ui_button",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L21",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "components_ui_card",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L21",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "components_ui_ctile",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L21",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "components_ui_errorbox",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L21",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "components_ui_sectiontitle",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L21",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "components_ui_spinner",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L21",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "components_ui_status",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L21",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "pages_projectdetail_cat_color",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L23",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "pages_projectdetail_exportexcel",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L29",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "pages_projectdetail_trendtooltip",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L46",
+      "weight": 1
+    },
+    {
+      "source": "pages_projectdetail",
+      "target": "pages_projectdetail_projectdetail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ProjectDetail.tsx",
+      "source_location": "L61",
+      "weight": 1
+    },
+    {
+      "source": "frontend_vite_config",
+      "target": "vite",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/vite.config.ts",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "frontend_vite_config",
+      "target": "plugin_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/vite.config.ts",
+      "source_location": "L2",
+      "weight": 1
+    },
+    {
+      "source": "frontend_vite_config",
+      "target": "vite",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/vite.config.ts",
+      "source_location": "L3",
+      "weight": 1
+    },
+    {
+      "source": "app_main_rationale_1",
+      "target": "app_models_project",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L14",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_1",
+      "target": "app_models_approval",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_132",
+      "target": "app_models_approval",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_1",
+      "target": "app_models_effortline",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_132",
+      "target": "app_models_effortline",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_1",
+      "target": "app_models_ledgerentry",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_132",
+      "target": "app_models_ledgerentry",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_1",
+      "target": "app_models_period",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_132",
+      "target": "app_models_period",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_1",
+      "target": "app_models_project",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_132",
+      "target": "app_models_project",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_1",
+      "target": "app_models_submission",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_132",
+      "target": "app_models_submission",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_1",
+      "target": "app_models_user",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_seed_rationale_132",
+      "target": "app_models_user",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/seed.py",
+      "source_location": "L17",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_1",
+      "target": "app_models_approval",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_59",
+      "target": "app_models_approval",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_300",
+      "target": "app_models_approval",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_418",
+      "target": "app_models_approval",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_1",
+      "target": "app_models_effortline",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_59",
+      "target": "app_models_effortline",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_300",
+      "target": "app_models_effortline",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_418",
+      "target": "app_models_effortline",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_1",
+      "target": "app_models_ledgerentry",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_59",
+      "target": "app_models_ledgerentry",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_300",
+      "target": "app_models_ledgerentry",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_418",
+      "target": "app_models_ledgerentry",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_1",
+      "target": "app_models_period",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_59",
+      "target": "app_models_period",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_300",
+      "target": "app_models_period",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_418",
+      "target": "app_models_period",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_1",
+      "target": "app_models_project",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_59",
+      "target": "app_models_project",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_300",
+      "target": "app_models_project",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_418",
+      "target": "app_models_project",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_1",
+      "target": "app_models_submission",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_59",
+      "target": "app_models_submission",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_300",
+      "target": "app_models_submission",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_418",
+      "target": "app_models_submission",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_1",
+      "target": "app_models_user",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_59",
+      "target": "app_models_user",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_300",
+      "target": "app_models_user",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    },
+    {
+      "source": "app_service_rationale_418",
+      "target": "app_models_user",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/app/service.py",
+      "source_location": "L10",
+      "weight": 0.8
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "hyperedges": []
+}
