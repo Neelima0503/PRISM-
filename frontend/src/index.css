@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ *  PRISM design system — NTT DATA dark-blue + white theme
+ * ------------------------------------------------------------------ */
+@theme {
+  --color-bg: #f3f6fb;
+  --color-surface: #ffffff;
+  --color-surface2: #f7fafd;
+  --color-surface3: #eef3f9;
+  --color-border: #e1e8f0;
+  --color-border2: #cfdae8;
+
+  --color-ink: #0f1f33;
+  --color-ink2: #4a5a6e;
+  --color-ink3: #8494a6;
+
+  /* NTT DATA Blue */
+  --color-primary: #0072bc;
+  --color-primary2: #003a70;
+  --color-primary-soft: #e6f1fa;
+  --color-primary-soft2: #cfe4f5;
+
+  /* dark navy sidebar */
+  --color-nav: #0a1f3d;
+  --color-nav2: #102a52;
+  --color-nav-ink: #9fb3cc;
+
+  --color-teal: #0d9488;
+  --color-teal-soft: #e2f4f1;
+  --color-amber: #b9791a;
+  --color-amber-soft: #f8eedb;
+  --color-green: #1a8a52;
+  --color-green-soft: #e2f3ea;
+  --color-red: #cb4634;
+  --color-red-soft: #fae6e2;
+  --color-indigo: #003a70;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+:root {
+  --shadow: 0 1px 2px rgba(15, 31, 51, 0.06), 0 4px 16px rgba(15, 31, 51, 0.05);
+  --shadow2: 0 8px 30px rgba(15, 31, 51, 0.09);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: "IBM Plex Mono", monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* hide number-input spinner arrows everywhere */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+
+.shadow-card { box-shadow: var(--shadow); }
+.shadow-card2 { box-shadow: var(--shadow2); }
+
+::-webkit-scrollbar { height: 9px; width: 9px; }
+::-webkit-scrollbar-thumb { background: #cfd8e3; border-radius: 9px; }
+::-webkit-scrollbar-track { background: transparent; }

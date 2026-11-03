@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PRISM · PD Review &amp; Approval (Sep 2025)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef0f4; --surface:#ffffff; --surface2:#f8f9fb; --surface3:#f2f4f7;
+  --border:#e3e6ec; --border2:#d3d8e0;
+  --ink:#171c26; --ink2:#5b6472; --ink3:#8b94a4;
+  --primary:#2b3a8c; --primary2:#222e72; --primary-soft:#edf0fb; --primary-soft2:#e2e7f8;
+  --teal:#0d9488; --teal-soft:#e2f4f1;
+  --amber:#b9791a; --amber-soft:#f8eedb;
+  --green:#1a8a52; --green-soft:#e2f3ea;
+  --red:#cb4634; --red-soft:#fae6e2;
+  --indigo:#4654b0;
+  --shadow:0 1px 2px rgba(20,30,60,.06),0 4px 16px rgba(20,30,60,.05);
+  --shadow2:0 8px 30px rgba(20,30,60,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+button{font-family:inherit;cursor:pointer}
+input,select{font-family:inherit;font-size:13px;color:var(--ink)}
+
+/* ---- top bar ---- */
+.topbar{height:58px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:18px;position:sticky;top:0;z-index:30}
+.logo{display:flex;align-items:center;gap:11px}
+.logomark{width:30px;height:30px;border-radius:8px;background:linear-gradient(140deg,var(--primary),var(--indigo));position:relative;box-shadow:0 2px 6px rgba(43,58,140,.35)}
+.logomark:after{content:"";position:absolute;inset:8px;border:2px solid #fff;border-radius:3px;opacity:.9}
+.logomark:before{content:"";position:absolute;left:8px;top:14px;width:14px;height:2px;background:#fff;opacity:.9}
+.logo .name{font-weight:700;letter-spacing:.4px;font-size:16px}
+.logo .name b{color:var(--primary)}
+.logo .sub{font-size:10px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-top:-2px}
+.tb-spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:7px 11px;width:300px;color:var(--ink3)}
+.search input{border:0;background:transparent;outline:none;width:100%;color:var(--ink)}
+.period{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:9px;padding:7px 11px;background:var(--surface);font-weight:500}
+.period .lab{color:var(--ink3);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.iconbtn{width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--ink2);position:relative}
+.iconbtn .badge{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--red);border-radius:50%;border:1.5px solid #fff}
+.user{display:flex;align-items:center;gap:9px;padding-left:6px}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(140deg,#2b3a8c,#4654b0);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px}
+.user .who{line-height:1.15}
+.user .who .n{font-weight:600;font-size:12.5px}
+.user .who .r{font-size:10.5px;color:var(--primary);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+
+/* ---- shell ---- */
+.shell{display:flex;min-height:calc(100vh - 58px)}
+.nav{width:230px;background:var(--surface);border-right:1px solid var(--border);padding:14px 12px;flex-shrink:0;position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto}
+.nav .grp{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin:14px 10px 7px}
+.nav .grp:first-child{margin-top:2px}
+.nav a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;color:var(--ink2);text-decoration:none;font-weight:500;font-size:12.7px;margin-bottom:2px;position:relative}
+.nav a:hover{background:var(--surface3);color:var(--ink)}
+.nav a.on{background:var(--primary-soft);color:var(--primary2);font-weight:600}
+.nav a.on:before{content:"";position:absolute;left:-12px;top:8px;bottom:8px;width:3px;background:var(--primary);border-radius:0 3px 3px 0}
+.nav a .ico{width:16px;height:16px;flex-shrink:0;opacity:.85}
+.nav a .ct{margin-left:auto;font-size:10.5px;background:var(--surface3);border:1px solid var(--border);border-radius:20px;padding:0 7px;color:var(--ink2);font-weight:600}
+.nav a.on .ct{background:#fff}
+
+/* ---- main ---- */
+.main{flex:1;padding:22px 26px 60px;min-width:0}
+.crumb{display:flex;align-items:center;gap:7px;color:var(--ink3);font-size:11.5px;margin-bottom:10px}
+.crumb b{color:var(--ink2);font-weight:600}
+.crumb .sep{opacity:.5}
+.pagehead{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.pagehead h1{font-size:22px;font-weight:700;margin:0;letter-spacing:-.2px}
+.pagehead .meta{display:flex;align-items:center;gap:10px;margin-top:7px;flex-wrap:wrap}
+.chipcode{font-family:'IBM Plex Mono';font-size:11.5px;background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:3px 8px;color:var(--ink2);font-weight:500}
+.pill{font-size:11px;font-weight:600;border-radius:20px;padding:3px 10px;letter-spacing:.02em;display:inline-flex;align-items:center;gap:6px}
+.pill .d{width:6px;height:6px;border-radius:50%}
+.pill.active{background:var(--green-soft);color:var(--green)}
+.pill.draft{background:var(--amber-soft);color:var(--amber)}
+.headactions{margin-left:auto;display:flex;gap:9px}
+.btn{border:1px solid var(--primary);background:var(--primary);color:#fff;border-radius:9px;padding:9px 16px;font-weight:600;font-size:12.7px;display:inline-flex;align-items:center;gap:7px;box-shadow:0 1px 2px rgba(43,58,140,.2)}
+.btn:hover{background:var(--primary2)}
+.btn.ghost{background:#fff;color:var(--ink);border-color:var(--border2)}
+.btn.ghost:hover{background:var(--surface3)}
+
+.cols{display:grid;grid-template-columns:1fr 332px;gap:18px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+.card .ch{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.card .ch h3{font-size:14px;font-weight:700;margin:0}
+.card .ch .desc{font-size:11.5px;color:var(--ink3);margin-top:1px}
+.card .ch .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.card .cb{padding:18px}
+.card+.card{margin-top:18px}
+
+/* field grid */
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 18px}
+.f{display:flex;flex-direction:column;gap:6px}
+.f label{font-size:10.5px;color:var(--ink3);letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.f .box{border:1px solid var(--border2);background:#fff;border-radius:9px;padding:9px 11px;font-weight:500;display:flex;align-items:center;gap:8px;min-height:38px}
+.f .box.ro{background:var(--surface3);color:var(--ink2);border-style:dashed}
+.f .box.calc{background:var(--primary-soft);border-color:var(--primary-soft2);color:var(--primary2);font-weight:600}
+.f .box .mono{font-weight:600}
+.f .box .unit{color:var(--ink3);font-size:11px;margin-left:auto}
+.f .box select,.f .box input{border:0;outline:none;background:transparent;width:100%;font-weight:500}
+.f .box .caret{color:var(--ink3);margin-left:auto}
+
+/* segmented */
+.seg{display:inline-flex;background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--ink2);padding:6px 13px;border-radius:6px;font-weight:600;font-size:12px}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+
+/* matrix table */
+table{width:100%;border-collapse:collapse;font-size:12.6px}
+thead th{text-align:left;color:var(--ink3);font-weight:600;font-size:10.3px;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap}
+th.num,td.num{text-align:right;font-family:'IBM Plex Mono';font-variant-numeric:tabular-nums}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--surface3)}
+.mod-row td{background:var(--surface2);font-weight:700;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.mod-row .mname{display:flex;align-items:center;gap:9px}
+.mod-row .micon{width:7px;height:18px;border-radius:3px;background:var(--primary)}
+.line td:first-child{padding-left:30px}
+.sub-row td{font-weight:700;background:#fff;border-bottom:1px solid var(--border)}
+.tot-row td{background:var(--primary);color:#fff;font-weight:700;border:0}
+.tot-row td:first-child{border-radius:0 0 0 11px}
+.tot-row td:last-child{border-radius:0 0 11px 0}
+.rtag{font-size:10px;font-weight:600;border-radius:6px;padding:2px 8px;letter-spacing:.02em}
+.rtag.int{background:var(--primary-soft);color:var(--primary2)}
+.rtag.fl{background:var(--amber-soft);color:var(--amber)}
+.rtag.sub{background:var(--teal-soft);color:var(--teal)}
+.lvl{font-family:'IBM Plex Mono';font-weight:600;color:var(--ink);background:var(--surface3);border:1px solid var(--border);border-radius:6px;padding:1px 7px;font-size:11px;margin-right:8px}
+.editcell{color:var(--ink);position:relative}
+.editcell:after{content:"";position:absolute;right:8px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-right:1.5px solid var(--ink3);border-bottom:1.5px solid var(--ink3);transform:translateY(-60%) rotate(45deg);opacity:0}
+tbody tr.line:hover td{background:var(--primary-soft)}
+
+/* phases / gantt */
+.gantt{display:flex;flex-direction:column;gap:10px}
+.gmonths{display:grid;grid-template-columns:170px repeat(12,1fr);font-size:9.5px;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.gmonths span{text-align:center;padding-bottom:6px}
+.gmonths span:first-child{text-align:left}
+.grow{display:grid;grid-template-columns:170px repeat(12,1fr);align-items:center;height:30px}
+.grow .gname{font-weight:600;font-size:12.3px}
+.gtrack{grid-column:2 / span 12;position:relative;height:30px}
+.gbar{position:absolute;top:7px;height:16px;border-radius:6px;display:flex;align-items:center;padding:0 9px;color:#fff;font-size:10.5px;font-weight:600;white-space:nowrap;box-shadow:0 1px 3px rgba(20,30,60,.18)}
+
+/* right rail */
+.rail{position:sticky;top:80px}
+.outcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.outhead{padding:15px 18px 14px;background:linear-gradient(150deg,#2b3a8c,#3a47a0);color:#fff}
+.outhead .t{font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.85;font-weight:600}
+.outhead .marg{display:flex;align-items:baseline;gap:10px;margin-top:8px}
+.outhead .marg .pc{font-family:'IBM Plex Mono';font-size:34px;font-weight:600;letter-spacing:-1px}
+.outhead .marg .ab{font-family:'IBM Plex Mono';font-size:14px;opacity:.85}
+.outhead .lab2{font-size:11px;opacity:.8;margin-top:3px}
+.outbody{padding:16px 18px}
+.orow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border)}
+.orow:last-of-type{border-bottom:0}
+.orow .k{color:var(--ink2);font-size:12px}
+.orow .v{font-family:'IBM Plex Mono';font-weight:600}
+.mixbar{height:12px;border-radius:7px;overflow:hidden;display:flex;margin:14px 0 9px;border:1px solid var(--border)}
+.mixbar i{height:100%}
+.mixleg{display:flex;flex-direction:column;gap:7px;font-size:11.5px}
+.mixleg .ml{display:flex;align-items:center;gap:8px}
+.mixleg .ml .dot{width:9px;height:9px;border-radius:3px}
+.mixleg .ml .mv{margin-left:auto;font-family:'IBM Plex Mono';color:var(--ink2);font-weight:600}
+.scaption{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin:16px 0 6px}
+.note{background:var(--primary-soft);border:1px solid var(--primary-soft2);border-radius:10px;padding:11px 13px;color:var(--primary2);font-size:11.7px;line-height:1.5}
+.audit{font-size:11px;color:var(--ink3);margin-top:16px;display:flex;align-items:center;gap:8px}
+.divlabel{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+.divlabel .ln{flex:1;height:1px;background:var(--border)}
+.divlabel .tx{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+.legend{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink2)}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:middle}
+.smallnote{font-size:11px;color:var(--ink3);margin-top:10px}
+.addline{display:inline-flex;align-items:center;gap:7px;color:var(--primary);font-weight:600;font-size:12px;margin-top:12px;cursor:pointer}
+
+/* month-wise matrix */
+.unitcap{font-size:11.5px;color:var(--ink3);font-weight:500}.unitcap b{color:var(--ink2)}
+.matrix-wrap{overflow-x:auto;border-bottom:1px solid var(--border)}
+table.mx{min-width:1080px;border-collapse:separate;border-spacing:0}
+table.mx th,table.mx td{border-bottom:1px solid var(--surface3)}
+table.mx thead th{border-bottom:1px solid var(--border)}
+.mcol{width:54px;min-width:54px}
+table.mx th.sticky-l,table.mx td.sticky-l{position:sticky;left:0;z-index:3;width:236px;min-width:236px;text-align:left;box-shadow:1px 0 0 var(--border)}
+table.mx th.sticky-r,table.mx td.sticky-r{position:sticky;right:0;z-index:3;width:104px;min-width:104px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-l,table.mx thead th.sticky-r{background:var(--surface2);z-index:4}
+.line .sticky-l,.line .sticky-r{background:#fff}
+.mod-row .sticky-l,.mod-row .sticky-r{background:var(--surface2)}
+.tot-row .sticky-l,.tot-row .sticky-r{background:var(--primary);color:#fff}
+table.mx td.line-name{font-weight:500}
+table.mx tbody td{padding:8px 12px}
+table.mx .mod-row td{background:var(--surface2)}
+table.mx .tot-row td{background:var(--primary);color:#fff}
+table.mx .line td.num{color:var(--ink2)}
+table.mx .mod-row td.num{color:var(--ink);font-weight:700}
+table.mx .tot-row td.num{color:#fff;font-weight:700}
+.mx.collapsed .mcol{display:none}
+.mx.collapsed{min-width:0}
+
+
+/* combined effort+cost · second sticky-right column */
+table.mx th.sticky-r,table.mx td.sticky-r{right:0;width:120px;min-width:120px}
+table.mx th.sticky-r2,table.mx td.sticky-r2{position:sticky;right:120px;z-index:3;width:96px;min-width:96px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-r2{background:var(--surface2);z-index:4}
+.line .sticky-r2{background:#fff}
+.mod-row .sticky-r2{background:var(--surface2)}
+.tot-row .sticky-r2{background:var(--primary);color:#fff}
+table.mx{min-width:1100px}
+
+
+/* type column + man-day rate + cost, frozen left (line,type) & right (effort,rate,cost) */
+table.mx{min-width:1280px;border-collapse:separate;border-spacing:0}
+.mx.collapsed{min-width:0}
+.mcol{width:54px;min-width:54px}
+table.mx th.sticky-l,table.mx td.sticky-l{position:sticky;left:0;z-index:3;width:200px;min-width:200px;text-align:left;box-shadow:none}
+table.mx th.sticky-l2,table.mx td.sticky-l2{position:sticky;left:200px;z-index:3;width:112px;min-width:112px;text-align:left;box-shadow:1px 0 0 var(--border)}
+table.mx th.sticky-r,table.mx td.sticky-r{position:sticky;right:0;z-index:3;width:116px;min-width:116px;box-shadow:none}
+table.mx th.sticky-r2,table.mx td.sticky-r2{position:sticky;right:116px;z-index:3;width:104px;min-width:104px;box-shadow:none}
+table.mx th.sticky-r3,table.mx td.sticky-r3{position:sticky;right:220px;z-index:3;width:104px;min-width:104px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-l,table.mx thead th.sticky-l2,table.mx thead th.sticky-r,table.mx thead th.sticky-r2,table.mx thead th.sticky-r3{background:var(--surface2);z-index:4}
+.line .sticky-l,.line .sticky-l2,.line .sticky-r,.line .sticky-r2,.line .sticky-r3{background:#fff}
+.mod-row .sticky-l,.mod-row .sticky-l2,.mod-row .sticky-r,.mod-row .sticky-r2,.mod-row .sticky-r3{background:var(--surface2)}
+.tot-row .sticky-l,.tot-row .sticky-l2,.tot-row .sticky-r,.tot-row .sticky-r2,.tot-row .sticky-r3{background:var(--primary);color:#fff}
+
+</style><style>
+.kstrip{display:grid;gap:14px;margin-bottom:18px}
+.kpic{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:14px 15px;box-shadow:var(--shadow)}
+.kpic .lab{font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink3);font-weight:600}
+.kpic .val{font-family:'IBM Plex Mono';font-size:20px;font-weight:600;margin-top:8px;letter-spacing:-.5px}
+.kpic .dl{font-size:11px;margin-top:6px;font-weight:600}
+.up{color:var(--green)}.down{color:var(--red)}.neu{color:var(--ink3);font-weight:500}
+.kpic.hi{background:linear-gradient(150deg,#4654b0,#5b68c8);border-color:#4654b0}
+.kpic.hi .lab{color:#d3d7f5}.kpic.hi .val{color:#fff}.kpic.hi .dl{color:#dfe2f8}
+.formula{font-family:'IBM Plex Mono';font-size:12px;color:var(--ink2);background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:9px 12px}.formula b{color:var(--primary)}
+.stepper{display:flex;align-items:center;margin:2px 0 20px}
+.step{display:flex;align-items:center;gap:9px}
+.step .sc{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
+.step.done .sc{background:var(--green);color:#fff}.step.pend .sc{background:var(--surface3);color:var(--ink3);border:1px solid var(--border)}
+.step .sl{font-size:12.5px;font-weight:600}.step.pend .sl{color:var(--ink3)}
+.stepline{flex:1;height:2px;background:var(--border);margin:0 12px;min-width:18px}.stepline.done{background:var(--green)}
+.remark{display:flex;gap:12px}
+.ravatar{width:34px;height:34px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px;flex-shrink:0}
+.ravatar.pm{background:linear-gradient(140deg,#b9791a,#d99427)}.ravatar.pd{background:linear-gradient(140deg,#4654b0,#6b78d8)}
+.rbody{flex:1}.rhead{display:flex;align-items:center;gap:9px;font-size:12.5px}
+.rrole{font-size:10px;font-weight:600;padding:2px 7px;border-radius:6px}.rrole.pm{background:var(--amber-soft);color:var(--amber)}.rrole.pd{background:#e7e9f8;color:var(--indigo)}
+.rtime{color:var(--ink3);font-size:11px;margin-left:auto}.rtext{font-size:12.5px;margin-top:6px;line-height:1.55}
+.rsign{margin-top:8px}.signed{font-size:11px;font-weight:600;color:var(--green);background:var(--green-soft);border:1px solid #bfe3cd;border-radius:7px;padding:3px 9px}
+.rchk{display:flex;flex-direction:column}
+.rci{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--surface3);font-size:12.5px}.rci:last-child{border-bottom:0}
+.rcbox{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;font-size:12px;font-weight:700}
+.rcbox.on{background:var(--green);border-color:var(--green)}
+.rci .meta{margin-left:auto;font-size:11px;color:var(--ink3);font-family:'IBM Plex Mono'}
+.statusline{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink2);margin-top:10px}.dot2{width:7px;height:7px;border-radius:50%}
+</style>
+<style>
+/* ---- EAC chart (same as project detail & PM submission) ---- */
+.chartwrap{position:relative}
+.modsel{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.modsel .msl{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);font-weight:600;margin-right:4px}
+.modsel button{border:1px solid var(--border2);background:#fff;color:var(--ink2);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600}
+.modsel button:hover{border-color:var(--primary);color:var(--primary)}
+.modsel button.on{background:var(--primary);border-color:var(--primary);color:#fff}
+.charttip{position:absolute;pointer-events:none;background:#11181d;color:#fff;border-radius:10px;padding:10px 12px;font-size:11.5px;box-shadow:0 8px 22px rgba(0,0,0,.28);opacity:0;transition:opacity .08s;z-index:6;min-width:210px;top:6px;transform:translateX(-50%)}
+.charttip.on{opacity:1}
+.charttip .tm{font-weight:700;margin-bottom:7px;font-size:12px}
+.charttip .tr{display:flex;align-items:center;gap:8px;margin:4px 0}
+.charttip .tr .cd{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.charttip .tr .nm{color:#aab4c0}
+.charttip .tr .vl{margin-left:auto;font-family:'IBM Plex Mono';font-weight:600}
+.charttip .tr .inc{font-family:'IBM Plex Mono';font-size:10.5px;font-weight:600;margin-left:7px;color:#6fd08a}
+.charttip .tr .inc.down{color:#e8836f}
+.charttip .tr .inc.zero{color:#8b94a4}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo"><div class="logomark"></div><div><div class="name"><b>PRISM</b></div><div class="sub">Project Revenue &amp; Margin</div></div></div>
+  <div class="tb-spacer"></div>
+  <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input placeholder="Search projects, customers, codes…"/></div>
+  <div class="period"><span class="lab">FY</span> 2025–26 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b94a4" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+  <div class="iconbtn"><span class="badge"></span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+  <div class="user"><div class="avatar" style="background:linear-gradient(140deg,#4654b0,#6b78d8)">MS</div><div class="who"><div class="n">M. Schäfer</div><div class="r" style="color:var(--indigo)">Project Director</div></div></div>
+</div>
+<div class="shell">
+  <nav class="nav">
+    <div class="grp">Review</div>
+    <a href="#" class="on"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Review queue</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Projects</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Period closure</a>
+    <div class="grp">Delivery view</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg>Margin &amp; variance</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="8"/><rect x="10" y="7" width="4" height="13"/><rect x="17" y="3" width="4" height="17"/></svg>EAC trend</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Timeline</a>
+  </nav>
+  <main class="main">
+    <div class="crumb"><b>Review queue</b><span class="sep">/</span>S/4HANA Finance Transformation<span class="sep">/</span><b>Sep 2025</b></div>
+    <div class="pagehead">
+      <div><h1>Period Review &amp; Approval</h1>
+      <div class="meta"><span class="chipcode">PRJ-2025-0418</span>
+        <span class="pill active"><span class="d" style="background:var(--green)"></span>Approved · released to Finance</span>
+        <span style="color:var(--ink3);font-size:12px">12 Oct 2025</span></div></div>
+      <div class="headactions"><button class="btn ghost">View audit trail</button><button class="btn ghost" disabled style="opacity:.5">Approved ✓</button></div>
+    </div>
+
+    <div class="stepper">
+      <div class="step done"><span class="sc">✓</span><span class="sl">Draft</span></div><span class="stepline done"></span>
+      <div class="step done"><span class="sc">✓</span><span class="sl">Uploaded</span></div><span class="stepline done"></span>
+      <div class="step done"><span class="sc">✓</span><span class="sl">Validated</span></div><span class="stepline done"></span>
+      <div class="step done"><span class="sc">✓</span><span class="sl">Submitted</span></div><span class="stepline done"></span>
+      <div class="step done"><span class="sc">✓</span><span class="sl">PD review</span></div><span class="stepline done"></span>
+      <div class="step done"><span class="sc">✓</span><span class="sl">Approved</span></div>
+    </div>
+
+    <div class="kstrip" style="grid-template-columns:repeat(5,1fr)">
+      <div class="kpic"><div class="lab">POC (cost basis)</div><div class="val">57.9%</div><div class="dl neu">$720,000 ÷ $1,243,000</div></div>
+      <div class="kpic"><div class="lab">Estimate at completion</div><div class="val">$1,243,000</div><div class="dl down">+$62,968 vs baseline</div></div>
+      <div class="kpic hi"><div class="lab">Forecast margin</div><div class="val">32.8%</div><div class="dl">▼ 3.4 pp vs sold 36.2%</div></div>
+      <div class="kpic"><div class="lab">EAC effort</div><div class="val">1,839 md</div><div class="dl down">+90 md · +5.1%</div></div>
+      <div class="kpic"><div class="lab">Validation</div><div class="val">43 / 43</div><div class="dl up">clean</div></div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <!-- MODULE EFFORT VARIANCE -->
+        <div class="card">
+          <div class="ch"><div><h3>Variance at completion — effort by module</h3><div class="desc">Man-days · sold vs EAC · positive = overrun</div></div></div>
+          <table>
+            <thead><tr><th>Module</th><th class="num">Sold md</th><th class="num">EAC md</th><th class="num">Δ md</th><th class="num">%</th></tr></thead>
+            <tbody>
+              <tr class="line"><td class="grp">FI / GL &amp; Closing</td><td class="num">336</td><td class="num">328</td><td class="num up">−8</td><td class="num up">−2.4%</td></tr>
+              <tr class="line"><td class="grp">CO / Profitability</td><td class="num">318</td><td class="num">367</td><td class="num down">+49</td><td class="num down">+15.4%</td></tr>
+              <tr class="line"><td class="grp">Treasury &amp; Cash Mgmt</td><td class="num">208</td><td class="num">192</td><td class="num up">−16</td><td class="num up">−7.7%</td></tr>
+              <tr class="line"><td class="grp">Data Migration &amp; Cutover</td><td class="num">323</td><td class="num">330</td><td class="num down">+7</td><td class="num down">+2.2%</td></tr>
+              <tr class="line"><td class="grp">SD/MM Integration &amp; Localization</td><td class="num">564</td><td class="num">622</td><td class="num down">+58</td><td class="num down">+10.3%</td></tr>
+              <tr class="tot-row" style="background:var(--primary)"><td style="border-radius:0 0 0 11px">Total effort</td><td class="num">1,749</td><td class="num">1,839</td><td class="num">+90</td><td class="num" style="border-radius:0 0 11px 0">+5.1%</td></tr>
+            </tbody>
+          </table>
+          <div class="cb"><div class="formula">Overrun concentrated in <b>CO (+49 md)</b> and <b>SD/MM (+58 md)</b>; offset by under-runs in <b>Treasury (−16)</b> and <b>FI (−8)</b>. Net <b>+90 md</b> effort drift.</div></div>
+        </div>
+
+        <!-- COST VARIANCE BY CATEGORY + EFFORT OWN/FL -->
+        <div class="card">
+          <div class="ch"><div><h3>Cost variance by resource category</h3><div class="desc">Baseline → EAC · cost rolls up at category level</div></div></div>
+          <table>
+            <thead><tr><th>Category</th><th class="num">Baseline cost</th><th class="num">EAC cost</th><th class="num">Δ cost</th><th class="num">Effort EAC</th></tr></thead>
+            <tbody>
+              <tr class="line"><td><span class="rtag int">Internal</span>&nbsp; own</td><td class="num">753,152</td><td class="num">800,000</td><td class="num down">+46,848</td><td class="num">1,312 md · +61</td></tr>
+              <tr class="line"><td><span class="rtag fl">Freelancer</span>&nbsp; T&amp;M</td><td class="num">278,880</td><td class="num">295,000</td><td class="num down">+16,120</td><td class="num">527 md · +29</td></tr>
+              <tr class="line"><td><span class="rtag sub">Subcontractor</span>&nbsp; fixed</td><td class="num">148,000</td><td class="num">148,000</td><td class="num neu">0</td><td class="num neu">fixed</td></tr>
+              <tr class="tot-row" style="background:var(--primary)"><td style="border-radius:0 0 0 11px">Total</td><td class="num">1,180,032</td><td class="num">1,243,000</td><td class="num">+62,968</td><td class="num" style="border-radius:0 0 11px 0">1,839 md · +90</td></tr>
+            </tbody>
+          </table>
+          <div class="cb"><div class="formula">EAC cost <b>$1,243,000</b> → forecast margin <b>32.8%</b> (sold 36.2%, ▼3.4 pp). Subcontractor fixed-price unchanged at $148,000.</div></div>
+        </div>
+
+        <!-- DUAL SIGN-OFF -->
+        <div class="card">
+          <div class="ch"><div><h3>Deviation remarks &amp; dual sign-off</h3><div class="desc">PM commentary and PD approval · both required before recognition</div></div></div>
+          <div class="cb">
+            <div class="remark">
+              <div class="ravatar pm">AR</div>
+              <div class="rbody">
+                <div class="rhead"><b>Anita Rao</b><span class="rrole pm">Project Manager</span><span class="rtime">11 Oct 2025, 16:20</span></div>
+                <div class="rtext">CO localization scope expanded post-blueprint and the integration-dev ramp was slower than planned. Internal effort EAC +61 md, freelancer +29 md (+90 md / +5.1% total), lifting EAC cost to $1,243,000. ETC revised; ~$22,700 of Sep revenue deferred to Oct–Nov. No change to contract scope or TCV.</div>
+                <div class="rsign"><span class="signed">✓ Submitted &amp; signed by PM · 11 Oct 2025</span></div>
+              </div>
+            </div>
+            <div class="remark" style="margin-top:18px;padding-top:18px;border-top:1px solid var(--border)">
+              <div class="ravatar pd">MS</div>
+              <div class="rbody">
+                <div class="rhead"><b>M. Schäfer</b><span class="rrole pd">Project Director</span><span class="rtime">12 Oct 2025, 09:45</span></div>
+                <div class="rtext">Reviewed. Effort drift within delivery tolerance (&lt;6%). Recovery plan agreed for SD/MM build to protect Q4 margin. EAC and the 32.8% forecast margin accepted. Approved for revenue recognition for Sep 2025.</div>
+                <div class="rsign"><span class="signed">✓ Reviewed, approved &amp; signed by PD · 12 Oct 2025</span></div>
+              </div>
+            </div>
+
+            <div class="scaption" style="margin-top:18px">Period-closure checklist</div>
+            <div class="rchk">
+              <div class="rci"><span class="rcbox on">✓</span>Upload validation passed<span class="meta">43 / 43</span></div>
+              <div class="rci"><span class="rcbox on">✓</span>Effort &amp; cost variances reviewed<span class="meta">+90 md · +$62,968</span></div>
+              <div class="rci"><span class="rcbox on">✓</span>Deviation remarks provided by PM<span class="meta">signed 11 Oct</span></div>
+              <div class="rci"><span class="rcbox on">✓</span>Margin impact within tolerance<span class="meta">−3.4 pp · &lt; −5 pp limit</span></div>
+              <div class="rci"><span class="rcbox on">✓</span>PD approval &amp; sign-off<span class="meta">signed 12 Oct</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT RAIL -->
+      <div class="rail">
+        <div class="outcard">
+          <div class="outhead" style="background:linear-gradient(150deg,#1a8a52,#1f9d5e)">
+            <div class="t">Approved &amp; released · Sep 2025</div>
+            <div class="marg"><span class="pc" style="font-size:30px">32.8%</span><span class="ab">margin</span></div>
+            <div class="lab2">sold 36.2% · ▼ 3.4 pp</div>
+          </div>
+          <div class="outbody">
+            <div class="orow"><span class="k">POC (cost basis)</span><span class="v">57.9%</span></div>
+            <div class="orow"><span class="k">Cost to date</span><span class="v">$720,000</span></div>
+            <div class="orow"><span class="k">Estimate at completion</span><span class="v">$1,243,000</span></div>
+            <div class="orow"><span class="k">EAC vs baseline</span><span class="v" style="color:var(--red)">+$62,968</span></div>
+            <div class="orow"><span class="k">Effort EAC</span><span class="v">1,839 md · +90</span></div>
+
+            <div class="scaption">Sign-offs</div>
+            <div class="orow"><span class="k">PM · Anita Rao</span><span class="v" style="color:var(--green)">Signed 11 Oct</span></div>
+            <div class="orow"><span class="k">PD · M. Schäfer</span><span class="v" style="color:var(--green)">Signed 12 Oct</span></div>
+
+            <div class="note" style="margin-top:14px">Dual sign-off complete. Sep 2025 is released to Finance for cost-based POC recognition and the period is locked. This EAC and margin flow into the revenue-recognition ledger.</div>
+            <div class="statusline"><span class="dot2" style="background:var(--green)"></span>Released to Finance · audit trail on</div>
+          </div>
+        </div>
+      </div>
+    </div><!-- closes .cols -->
+
+    <!-- ═══════════════════════════════════════════════════════════
+         COST ROLL-UP · EFFORT VARIANCE · EAC TREND (continuation)
+    ════════════════════════════════════════════════════════════ -->
+
+    <div class="divlabel" style="margin-top:28px"><span class="ln"></span><span class="tx">Cost roll-up — POC basis</span><span class="ln"></span></div>
+    <div class="card">
+      <div class="ch"><div><h3>Cost roll-up — POC basis</h3><div class="desc">Effort converted to cost at rate master · subcontractor weighted by completion % · Sep 2025</div></div></div>
+      <table>
+        <thead><tr><th>Cost element</th><th class="num">Actual cost to date</th><th class="num">Est. cost to complete</th><th class="num">Est. at completion</th><th class="num">% of EAC</th></tr></thead>
+        <tbody>
+          <tr class="line"><td><span class="rtag int">Internal</span>&nbsp; own FTEs (L1–L7)</td><td class="num">488,600</td><td class="num">311,400</td><td class="num">800,000</td><td class="num">64.4%</td></tr>
+          <tr class="line"><td><span class="rtag fl">Freelancer</span>&nbsp; T&amp;M</td><td class="num">165,000</td><td class="num">130,000</td><td class="num">295,000</td><td class="num">23.7%</td></tr>
+          <tr class="line"><td><span class="rtag sub">Subcontractor</span>&nbsp; fixed price · completion % <span style="font-size:10px;font-weight:600;border-radius:6px;padding:2px 8px;background:var(--teal-soft);color:var(--teal)">BTP 60%</span> <span style="font-size:10px;font-weight:600;border-radius:6px;padding:2px 8px;background:var(--teal-soft);color:var(--teal)">Basis 20%</span></td><td class="num">66,400</td><td class="num">81,600</td><td class="num">148,000</td><td class="num">11.9%</td></tr>
+          <tr class="tot-row"><td style="border-radius:0 0 0 11px">Total project cost</td><td class="num">720,000</td><td class="num">523,000</td><td class="num">1,243,000</td><td class="num" style="border-radius:0 0 11px 0">100%</td></tr>
+        </tbody>
+      </table>
+      <div class="cb"><div class="formula">POC&nbsp;% = actual cost to date <b>$720,000</b> ÷ estimate at completion <b>$1,243,000</b> = <b>57.9%</b> &nbsp;·&nbsp; Subcontract EAC fixed at $148,000; completion % drives cost-to-date only.</div></div>
+    </div>
+
+    <div class="divlabel" style="margin-top:24px"><span class="ln"></span><span class="tx">Effort variance — baseline vs forecast</span><span class="ln"></span></div>
+    <div class="card">
+      <div class="ch"><div><h3>Effort variance — baseline vs forecast</h3><div class="desc">Man-days · where effort changed: own (internal) vs freelancer · Sep 2025</div></div></div>
+      <table>
+        <thead><tr><th>Resource category</th><th class="num">Baseline (md)</th><th class="num">Actual to date</th><th class="num">ETC</th><th class="num">EAC (md)</th><th class="num">Δ vs baseline</th></tr></thead>
+        <tbody>
+          <tr class="line"><td><span class="rtag int">Internal</span>&nbsp; own effort (L1–L7)</td><td class="num">1,251</td><td class="num">781</td><td class="num">531</td><td class="num">1,312</td><td class="num" style="color:var(--red);font-weight:700">+61 · +4.9%</td></tr>
+          <tr class="line"><td><span class="rtag fl">Freelancer</span>&nbsp; T&amp;M</td><td class="num">498</td><td class="num">295</td><td class="num">232</td><td class="num">527</td><td class="num" style="color:var(--red);font-weight:700">+29 · +5.8%</td></tr>
+          <tr class="line"><td><span class="rtag sub">Subcontractor</span>&nbsp; fixed (completion %)</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num" style="color:var(--ink3)">n/a · fixed cost</td></tr>
+          <tr class="tot-row"><td style="border-radius:0 0 0 11px">Total effort</td><td class="num">1,749</td><td class="num">1,076</td><td class="num">763</td><td class="num">1,839</td><td class="num" style="border-radius:0 0 11px 0">+90 · +5.1%</td></tr>
+        </tbody>
+      </table>
+      <div class="cb"><div class="formula">Own effort overrun <b>+61 md</b> (CO &amp; SD/MM build) · freelancer <b>+29 md</b> (CO specialist, integration dev). Effort drift is the primary driver of the <b>$62,968</b> EAC cost increase and the <b>3.4 pp</b> margin erosion.</div></div>
+    </div>
+
+    <div class="divlabel" style="margin-top:24px"><span class="ln"></span><span class="tx">EAC effort trend vs baseline</span><span class="ln"></span></div>
+    <div class="card">
+      <div class="ch"><div><h3>EAC effort trend vs baseline</h3><div class="desc">Man-day drift above baseline by period · filter by module to locate variance · hover for detail</div></div></div>
+      <div class="cb">
+        <div class="modsel" id="modsel">
+          <span class="msl">Module</span>
+          <button data-k="all" class="on">All modules</button>
+          <button data-k="fi">FI / GL</button>
+          <button data-k="co">CO</button>
+          <button data-k="tr">Treasury</button>
+          <button data-k="dm">Data Migration</button>
+          <button data-k="sd">SD/MM</button>
+        </div>
+        <div class="chartwrap"><div id="etip" class="charttip"></div><svg id="eacsvg" viewBox="0 0 660 240" width="100%" style="display:block"></svg></div>
+        <div class="legend" id="elegend"></div>
+        <div class="formula" id="ecap" style="margin-top:12px"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+<script>
+const MODS={"all":{"name":"All modules","hasFl":true,"baseOwn":1251,"baseFl":498,"baseTot":1749,"own":[0,5,19,34,49,61],"fl":[0,2,8,14,22,29],"tot":[0,7,27,48,71,90]},"fi":{"name":"FI / GL & Closing","hasFl":false,"baseOwn":336,"baseFl":0,"baseTot":336,"own":[0,-1,-2,-4,-6,-8],"fl":[0,0,0,0,0,0],"tot":[0,-1,-2,-4,-6,-8]},"co":{"name":"CO / Profitability","hasFl":true,"baseOwn":170,"baseFl":148,"baseTot":318,"own":[0,2,8,16,26,35],"fl":[0,1,4,7,11,14],"tot":[0,3,12,23,37,49]},"tr":{"name":"Treasury & Cash Mgmt","hasFl":false,"baseOwn":208,"baseFl":0,"baseTot":208,"own":[0,-1,-4,-8,-12,-16],"fl":[0,0,0,0,0,0],"tot":[0,-1,-4,-8,-12,-16]},"dm":{"name":"Data Migration & Cutover","hasFl":true,"baseOwn":178,"baseFl":145,"baseTot":323,"own":[0,0,1,3,6,10],"fl":[0,0,-1,-2,-3,-3],"tot":[0,0,0,1,3,7]},"sd":{"name":"SD/MM Integration & Localization","hasFl":true,"baseOwn":359,"baseFl":205,"baseTot":564,"own":[0,5,16,27,35,40],"fl":[0,1,5,9,14,18],"tot":[0,6,21,36,49,58]}};
+(function(){
+ const W=660,H=240,L=46,R=74,T=18,B=30,pW=W-L-R,pH=H-T-B,MM=['Apr','May','Jun','Jul','Aug','Sep'];
+ const Xf=i=>L+(i/5)*pW;
+ const svg=document.getElementById('eacsvg'),tip=document.getElementById('etip'),
+       elegend=document.getElementById('elegend'),ecap=document.getElementById('ecap');
+ function dom(vals){let mn=Math.min(0,...vals),mx=Math.max(0,...vals);let pad=Math.max(3,(mx-mn)*0.18);return[mn-pad,mx+pad];}
+ const Yf=(v,mn,mx)=>T+(1-(v-mn)/(mx-mn))*pH;
+ function render(key){
+   const d=MODS[key];const series=[];
+   if(d.hasFl){
+     series.push({name:'Total',color:'#0d9488',w:2.6,base:d.baseTot,drift:d.tot});
+     series.push({name:'Own (internal)',color:'#2b3a8c',w:2,base:d.baseOwn,drift:d.own});
+     series.push({name:'Freelancer',color:'#b9791a',w:2,base:d.baseFl,drift:d.fl});
+   }else{
+     series.push({name:'Own (internal)',color:'#2b3a8c',w:2.6,base:d.baseOwn,drift:d.own});
+   }
+   const allv=[];series.forEach(s=>allv.push(...s.drift));const[mn,mx]=dom(allv);
+   let g='';
+   for(let t=0;t<5;t++){const v=mn+(mx-mn)*t/4,y=Yf(v,mn,mx);g+=`<line x1="${L}" y1="${y.toFixed(1)}" x2="${W-R}" y2="${y.toFixed(1)}" stroke="#eceef3"/><text x="${L-8}" y="${(y+3).toFixed(1)}" text-anchor="end" font-size="10" fill="#8b94a4" font-family="IBM Plex Mono">${v>=0?'+':''}${Math.round(v)}</text>`;}
+   MM.forEach((m,i)=>g+=`<text x="${Xf(i).toFixed(1)}" y="${H-9}" text-anchor="middle" font-size="10" fill="#8b94a4">${m}</text>`);
+   const y0=Yf(0,mn,mx);g+=`<line x1="${L}" y1="${y0.toFixed(1)}" x2="${W-R}" y2="${y0.toFixed(1)}" stroke="#9aa3b5" stroke-width="1.4" stroke-dasharray="5 4"/><text x="${L+4}" y="${(y0-6).toFixed(1)}" font-size="9.5" fill="#9aa3b5" font-weight="600">Baseline ${d.baseTot.toLocaleString()} md</text>`;
+   g+=`<line id="eguide" x1="0" y1="${T}" x2="0" y2="${T+pH}" stroke="#2b3a8c" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>`;
+   series.forEach(s=>{
+     const pts=s.drift.map((v,i)=>`${Xf(i).toFixed(1)},${Yf(v,mn,mx).toFixed(1)}`).join(' ');
+     g+=`<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="${s.w}"/>`;
+     s.drift.forEach((v,i)=>g+=`<circle cx="${Xf(i).toFixed(1)}" cy="${Yf(v,mn,mx).toFixed(1)}" r="3" fill="${s.color}"/>`);
+     const lv=s.drift[5];g+=`<text x="${(Xf(5)+8).toFixed(1)}" y="${(Yf(lv,mn,mx)+3).toFixed(1)}" font-size="11" font-weight="700" fill="${s.color}" font-family="IBM Plex Mono">${lv>=0?'+':''}${lv}</text>`;
+   });
+   series.forEach((_,idx)=>g+=`<circle class="hl" data-i="${idx}" r="5" fill="${series[idx].color}" stroke="#fff" stroke-width="1.5" opacity="0"/>`);
+   svg.innerHTML=g;
+   elegend.innerHTML=series.map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join('')+`<span><i style="background:#9aa3b5"></i>Baseline</span>`+(d.hasFl?'':'<span style="color:#8b94a4">· no freelancer</span>');
+   const sv=d.tot[5];ecap.innerHTML=`<b>${d.name}</b>: EAC effort ${sv>=0?'+':''}${sv} md vs baseline at Sep`+(d.hasFl?` — own ${d.own[5]>=0?'+':''}${d.own[5]} md, freelancer ${d.fl[5]>=0?'+':''}${d.fl[5]} md.`:` (internal only).`)+` &nbsp;Positive = overrun · negative = under-run.`;
+   document.querySelectorAll('#modsel button').forEach(b=>b.classList.toggle('on',b.dataset.k===key));
+ }
+ function move(e){
+   if(!MODS)return;const rect=svg.getBoundingClientRect();const fx=(e.clientX-rect.left)/rect.width*W;
+   let bi=0,bd=1e9;for(let i=0;i<6;i++){const dd=Math.abs(Xf(i)-fx);if(dd<bd){bd=dd;bi=i;}}
+   const gd=svg.querySelector('#eguide');gd.setAttribute('x1',Xf(bi).toFixed(1));gd.setAttribute('x2',Xf(bi).toFixed(1));gd.setAttribute('opacity','1');
+   const key=document.querySelector('#modsel button.on').dataset.k;const d=MODS[key];
+   const series=[];
+   if(d.hasFl){series.push({name:'Total',color:'#0d9488',drift:d.tot,base:d.baseTot});series.push({name:'Own (internal)',color:'#2b3a8c',drift:d.own,base:d.baseOwn});series.push({name:'Freelancer',color:'#b9791a',drift:d.fl,base:d.baseFl});}
+   else{series.push({name:'Own (internal)',color:'#2b3a8c',drift:d.own,base:d.baseOwn});}
+   const allv=[];series.forEach(s=>allv.push(...s.drift));const[mn,mx]=dom(allv);
+   const hls=svg.querySelectorAll('.hl');
+   series.forEach((s,idx)=>{const c=hls[idx];c.setAttribute('cx',Xf(bi).toFixed(1));c.setAttribute('cy',Yf(s.drift[bi],mn,mx).toFixed(1));c.setAttribute('opacity','1');});
+   let rows=`<div class="tm">${MM[bi]} 2025 · ${d.name}</div>`;
+   series.forEach(s=>{const ab=s.base+s.drift[bi];const inc=bi===0?0:(s.drift[bi]-s.drift[bi-1]);
+     const ih=inc>0?`<span class="inc">▲ +${inc}</span>`:(inc<0?`<span class="inc down">▼ ${inc}</span>`:`<span class="inc zero">—</span>`);
+     rows+=`<div class="tr"><span class="cd" style="background:${s.color}"></span><span class="nm">${s.name}</span><span class="vl">${ab.toLocaleString()} md</span>${ih}</div>`;});
+   rows+=`<div class="tr" style="border-top:1px solid #2a343c;margin-top:6px;padding-top:6px"><span class="nm">Drift vs baseline</span><span class="vl">${d.tot[bi]>=0?'+':''}${d.tot[bi]} md</span></div>`;
+   tip.innerHTML=rows;const px=(Xf(bi)/W)*rect.width,half=tip.offsetWidth/2;
+   tip.style.left=Math.max(half+2,Math.min(rect.width-half-2,px))+'px';tip.classList.add('on');
+ }
+ svg.addEventListener('mousemove',move);
+ svg.addEventListener('mouseleave',()=>{tip.classList.remove('on');const gd=svg.querySelector('#eguide');if(gd)gd.setAttribute('opacity','0');svg.querySelectorAll('.hl').forEach(c=>c.setAttribute('opacity','0'));});
+ document.querySelectorAll('#modsel button').forEach(b=>b.addEventListener('click',()=>render(b.dataset.k)));
+ render('all');
+})();
+</script>
+</body>
+</html>

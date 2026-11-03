@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>PRISM · Database &amp; Data Flow Diagram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#2b3a8c;--primary-soft:#edf0fb;--primary-soft2:#e2e7f8;
+  --teal:#0d9488;--teal-soft:#e2f4f1;
+  --amber:#b9791a;--amber-soft:#f8eedb;
+  --green:#1a8a52;--green-soft:#e2f3ea;
+  --indigo:#4654b0;--indigo-soft:#ebe9f7;
+  --ink:#171c26;--ink2:#5b6472;--ink3:#8b94a4;
+  --border:#e3e6ec;--surface:#fff;--surface2:#f8f9fb;--surface3:#f2f4f7;
+  --shadow:0 1px 2px rgba(20,30,60,.06),0 4px 16px rgba(20,30,60,.05);
+}
+*{box-sizing:border-box}
+html,body{margin:0;font-family:'Hanken Grotesk',sans-serif;font-size:13px;line-height:1.5;color:var(--ink);background:#f0f2f6;-webkit-font-smoothing:antialiased}
+.mono{font-family:'IBM Plex Mono',monospace}
+.page{max-width:1100px;margin:0 auto;background:#fff;box-shadow:0 2px 24px rgba(20,30,60,.08);min-height:100vh}
+
+/* header */
+.hdr{background:linear-gradient(150deg,#1a2468,#2b3a8c);color:#fff;padding:32px 48px 28px;display:flex;align-items:center;gap:20px}
+.hdr h1{margin:0;font-size:26px;font-weight:700;letter-spacing:-.3px}
+.hdr h1 b{color:#93c5fd}
+.hdr .sub{font-size:13px;opacity:.75;margin-top:2px}
+.hdr .vbadge{margin-left:auto;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600}
+
+.doc{padding:32px 48px 80px}
+
+/* section headings */
+.shd{font-size:18px;font-weight:700;color:var(--primary);padding-bottom:8px;border-bottom:2px solid var(--primary-soft);margin:0 0 20px;display:flex;align-items:center;gap:12px}
+.shd .sn{font-family:'IBM Plex Mono';font-size:10px;font-weight:600;background:var(--primary);color:#fff;border-radius:4px;padding:2px 7px}
+
+/* ==============================
+   DATA FLOW DIAGRAM
+   ============================== */
+.flow-wrap{overflow-x:auto;margin-bottom:28px}
+.flow-svg{display:block;min-width:900px}
+
+/* ==============================
+   RELATIONSHIP TABLE
+   ============================== */
+.tbl-wrap{overflow-x:auto;margin-bottom:28px;border-radius:11px;border:1px solid var(--border);box-shadow:0 1px 4px rgba(20,30,60,.04)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead th{text-align:left;background:var(--surface2);color:var(--ink3);font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:9px 13px;border-bottom:1px solid var(--border);white-space:nowrap}
+tbody td{padding:8px 13px;border-bottom:1px solid #f0f2f6;vertical-align:top;line-height:1.4}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--surface2)}
+code{font-family:'IBM Plex Mono';font-size:11px;background:var(--surface3);border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--ink)}
+.rel-type{font-size:11px;font-weight:700;font-family:'IBM Plex Mono';letter-spacing:.04em}
+
+/* ==============================
+   ENTITY CATALOG
+   ============================== */
+.catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.ent{border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
+.ent-hd{padding:10px 14px;display:flex;align-items:center;gap:9px}
+.ent-hd .en{font-family:'IBM Plex Mono';font-weight:600;font-size:12.5px;color:#fff;flex:1}
+.ent-hd .ec{font-size:9.5px;font-weight:600;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.08em}
+.ent-body{background:#fff}
+.ent-row{display:flex;align-items:center;gap:8px;padding:5px 14px;border-bottom:1px solid #f4f5f8;font-size:11.8px}
+.ent-row:last-child{border-bottom:0}
+.ent-row .fi{width:16px;flex-shrink:0;font-family:'IBM Plex Mono';font-size:9px;font-weight:700;border-radius:3px;padding:1px 3px;text-align:center}
+.fi.pk{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.fi.fk{background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe}
+.fi.ix{background:#f3e8ff;color:#6d28d9;border:1px solid #e9d5ff}
+.fi.nn{background:var(--surface3);color:var(--ink3);border:1px solid var(--border)}
+.ent-row .fn{flex:1;font-weight:500;color:var(--ink)}
+.ent-row .ft{font-family:'IBM Plex Mono';font-size:10.5px;color:var(--ink3);flex-shrink:0}
+.ent-row .fd{font-size:10.5px;color:var(--ink3);margin-left:auto;max-width:140px;text-align:right;line-height:1.3}
+.domain-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;padding:6px 0 8px;color:var(--ink3);display:flex;align-items:center;gap:8px;grid-column:1/-1}
+.domain-label:before{content:"";flex:1;height:1px;background:var(--border)}
+.domain-label:after{content:"";flex:1;height:1px;background:var(--border)}
+
+/* domain header colors */
+.hd-indigo{background:linear-gradient(120deg,#4654b0,#6b78d8)}
+.hd-teal{background:linear-gradient(120deg,#0d9488,#14b8a6)}
+.hd-amber{background:linear-gradient(120deg,#b9791a,#d4921e)}
+.hd-primary{background:linear-gradient(120deg,#2b3a8c,#3a47a0)}
+.hd-green{background:linear-gradient(120deg,#1a8a52,#22a864)}
+
+/* legend */
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px;padding:12px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:10px}
+.legend .li{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink2)}
+.legend .li .fi{width:20px}
+
+@media print{
+  html{background:#fff}
+  .page{box-shadow:none}
+  .catalog{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="hdr">
+  <div>
+    <h1><b>PRISM</b> Database &amp; Data Flow</h1>
+    <div class="sub">20 entities · 5 domains · all fields · key relationships</div>
+  </div>
+  <div class="vbadge">v1.0 · Oct 2025</div>
+</div>
+
+<div class="doc">
+
+  <!-- ===========================
+       SECTION 1: DATA FLOW DIAGRAM
+       =========================== -->
+  <div class="shd"><span class="sn">01</span> Data Flow Diagram</div>
+
+  <div class="flow-wrap">
+    <svg class="flow-svg" viewBox="0 0 1060 310" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="7" refX="8" refY="3.5" orient="auto">
+          <polygon points="0 0, 8 3.5, 0 7" fill="#8b94a4"/>
+        </marker>
+        <marker id="arr-b" markerWidth="8" markerHeight="7" refX="8" refY="3.5" orient="auto">
+          <polygon points="0 0, 8 3.5, 0 7" fill="#2b3a8c"/>
+        </marker>
+        <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+          <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="rgba(20,30,60,.10)"/>
+        </filter>
+      </defs>
+
+      <!-- Domain 1: Master Data -->
+      <rect x="8" y="24" width="172" height="262" rx="10" fill="#ebe9f7" stroke="#4654b0" stroke-width="1.2" filter="url(#shadow)"/>
+      <rect x="8" y="24" width="172" height="30" rx="10" fill="#4654b0"/>
+      <rect x="8" y="44" width="172" height="10" fill="#4654b0"/>
+      <text x="94" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Hanken Grotesk">Master Data</text>
+      <text x="18" y="74" font-size="10" fill="#4654b0" font-weight="600" font-family="IBM Plex Mono">users</text>
+      <text x="18" y="90" font-size="10" fill="#4654b0" font-weight="600" font-family="IBM Plex Mono">countries</text>
+      <text x="18" y="106" font-size="10" fill="#4654b0" font-weight="600" font-family="IBM Plex Mono">fx_history</text>
+      <text x="18" y="122" font-size="10" fill="#4654b0" font-weight="600" font-family="IBM Plex Mono">rate_masters</text>
+      <text x="18" y="138" font-size="10" fill="#4654b0" font-weight="600" font-family="IBM Plex Mono">internal_rates</text>
+      <text x="18" y="154" font-size="10" fill="#4654b0" font-weight="600" font-family="IBM Plex Mono">freelancer_rates</text>
+      <rect x="18" y="166" width="152" height="1" fill="#4654b0" opacity=".2"/>
+      <text x="18" y="182" font-size="9.5" fill="#6b78d8" font-family="Hanken Grotesk">FY-versioned rates</text>
+      <text x="18" y="196" font-size="9.5" fill="#6b78d8" font-family="Hanken Grotesk">Country FX lookup</text>
+      <text x="18" y="210" font-size="9.5" fill="#6b78d8" font-family="Hanken Grotesk">User role &amp; access</text>
+      <text x="18" y="224" font-size="9.5" fill="#6b78d8" font-family="Hanken Grotesk">Referenced by all</text>
+      <text x="18" y="238" font-size="9.5" fill="#6b78d8" font-family="Hanken Grotesk">domains ↓↓</text>
+
+      <!-- Arrow: Master → Project Setup -->
+      <path d="M 180 130 L 204 130" stroke="#8b94a4" stroke-width="1.4" marker-end="url(#arr)" fill="none"/>
+      <text x="191" y="124" text-anchor="middle" font-size="8" fill="#8b94a4" font-family="Hanken Grotesk">rates</text>
+
+      <!-- Domain 2: Project Setup -->
+      <rect x="205" y="24" width="182" height="262" rx="10" fill="#e2f4f1" stroke="#0d9488" stroke-width="1.2" filter="url(#shadow)"/>
+      <rect x="205" y="24" width="182" height="30" rx="10" fill="#0d9488"/>
+      <rect x="205" y="44" width="182" height="10" fill="#0d9488"/>
+      <text x="296" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Hanken Grotesk">Project Setup</text>
+      <text x="215" y="74" font-size="10" fill="#0d7a70" font-weight="600" font-family="IBM Plex Mono">projects</text>
+      <text x="215" y="90" font-size="10" fill="#0d7a70" font-weight="600" font-family="IBM Plex Mono">baselines</text>
+      <text x="215" y="106" font-size="10" fill="#0d7a70" font-weight="600" font-family="IBM Plex Mono">phases</text>
+      <text x="215" y="122" font-size="10" fill="#0d7a70" font-weight="600" font-family="IBM Plex Mono">milestones</text>
+      <text x="215" y="138" font-size="10" fill="#0d7a70" font-weight="600" font-family="IBM Plex Mono">resources</text>
+      <text x="215" y="154" font-size="10" fill="#0d7a70" font-weight="600" font-family="IBM Plex Mono">project_user_access</text>
+      <rect x="215" y="166" width="162" height="1" fill="#0d9488" opacity=".2"/>
+      <text x="215" y="182" font-size="9.5" fill="#0d9488" font-family="Hanken Grotesk">Baseline TCV &amp; cost</text>
+      <text x="215" y="196" font-size="9.5" fill="#0d9488" font-family="Hanken Grotesk">Phase Gantt &amp; milestones</text>
+      <text x="215" y="210" font-size="9.5" fill="#0d9488" font-family="Hanken Grotesk">Resource type &amp; rates</text>
+
+      <!-- Arrow: Project Setup → Period/Effort -->
+      <path d="M 387 110 L 411 110" stroke="#8b94a4" stroke-width="1.4" marker-end="url(#arr)" fill="none"/>
+      <text x="399" y="104" text-anchor="middle" font-size="8" fill="#8b94a4" font-family="Hanken Grotesk">res.</text>
+
+      <!-- Arrow: Project Setup → Submissions (skip over Period box) -->
+      <path d="M 387 180 Q 440 230 460 200" stroke="#8b94a4" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)" fill="none"/>
+
+      <!-- Domain 3: Period & Effort -->
+      <rect x="412" y="50" width="168" height="180" rx="10" fill="#f8eedb" stroke="#b9791a" stroke-width="1.2" filter="url(#shadow)"/>
+      <rect x="412" y="50" width="168" height="30" rx="10" fill="#b9791a"/>
+      <rect x="412" y="70" width="168" height="10" fill="#b9791a"/>
+      <text x="496" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Hanken Grotesk">Period &amp; Effort</text>
+      <text x="422" y="100" font-size="10" fill="#8a5010" font-weight="600" font-family="IBM Plex Mono">periods</text>
+      <text x="422" y="116" font-size="10" fill="#8a5010" font-weight="600" font-family="IBM Plex Mono">effort_plan</text>
+      <rect x="422" y="128" width="148" height="1" fill="#b9791a" opacity=".2"/>
+      <text x="422" y="144" font-size="9.5" fill="#b9791a" font-family="Hanken Grotesk">Period calendar state</text>
+      <text x="422" y="158" font-size="9.5" fill="#b9791a" font-family="Hanken Grotesk">Monthly resource days</text>
+      <text x="422" y="172" font-size="9.5" fill="#b9791a" font-family="Hanken Grotesk">Baseline / actual / ETC</text>
+      <text x="422" y="186" font-size="9.5" fill="#b9791a" font-family="Hanken Grotesk">Feeds EAC computation</text>
+      <text x="422" y="200" font-size="9.5" fill="#b9791a" font-family="Hanken Grotesk">per submission</text>
+
+      <!-- Arrow: Period/Effort → Submissions -->
+      <path d="M 580 130 L 604 130" stroke="#8b94a4" stroke-width="1.4" marker-end="url(#arr)" fill="none"/>
+      <text x="591" y="124" text-anchor="middle" font-size="8" fill="#8b94a4" font-family="Hanken Grotesk">ETC</text>
+
+      <!-- Domain 4: Submissions -->
+      <rect x="605" y="50" width="168" height="180" rx="10" fill="#edf0fb" stroke="#2b3a8c" stroke-width="1.2" filter="url(#shadow)"/>
+      <rect x="605" y="50" width="168" height="30" rx="10" fill="#2b3a8c"/>
+      <rect x="605" y="70" width="168" height="10" fill="#2b3a8c"/>
+      <text x="689" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Hanken Grotesk">Submissions</text>
+      <text x="615" y="100" font-size="10" fill="#1a2468" font-weight="600" font-family="IBM Plex Mono">submissions</text>
+      <text x="615" y="116" font-size="10" fill="#1a2468" font-weight="600" font-family="IBM Plex Mono">approvals</text>
+      <rect x="615" y="128" width="148" height="1" fill="#2b3a8c" opacity=".2"/>
+      <text x="615" y="144" font-size="9.5" fill="#2b3a8c" font-family="Hanken Grotesk">PM → ETC + POC% + EAC</text>
+      <text x="615" y="158" font-size="9.5" fill="#2b3a8c" font-family="Hanken Grotesk">PD → Approve/Reject/Hold</text>
+      <text x="615" y="172" font-size="9.5" fill="#2b3a8c" font-family="Hanken Grotesk">One submission per</text>
+      <text x="615" y="186" font-size="9.5" fill="#2b3a8c" font-family="Hanken Grotesk">project per period</text>
+
+      <!-- Arrow: Submissions → Outcomes -->
+      <path d="M 773 130 L 797 130" stroke="#8b94a4" stroke-width="1.4" marker-end="url(#arr)" fill="none"/>
+      <text x="785" y="124" text-anchor="middle" font-size="8" fill="#8b94a4" font-family="Hanken Grotesk">lock</text>
+
+      <!-- Domain 5: Outcomes -->
+      <rect x="798" y="24" width="254" height="262" rx="10" fill="#e2f3ea" stroke="#1a8a52" stroke-width="1.2" filter="url(#shadow)"/>
+      <rect x="798" y="24" width="254" height="30" rx="10" fill="#1a8a52"/>
+      <rect x="798" y="44" width="254" height="10" fill="#1a8a52"/>
+      <text x="925" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Hanken Grotesk">Outcomes</text>
+      <text x="808" y="74" font-size="10" fill="#0d6633" font-weight="600" font-family="IBM Plex Mono">revenue_recognition</text>
+      <text x="808" y="90" font-size="10" fill="#0d6633" font-weight="600" font-family="IBM Plex Mono">freelancer_invoices</text>
+      <text x="808" y="106" font-size="10" fill="#0d6633" font-weight="600" font-family="IBM Plex Mono">exceptions</text>
+      <text x="808" y="122" font-size="10" fill="#0d6633" font-weight="600" font-family="IBM Plex Mono">audit_log</text>
+      <rect x="808" y="134" width="234" height="1" fill="#1a8a52" opacity=".2"/>
+      <text x="808" y="150" font-size="9.5" fill="#1a8a52" font-family="Hanken Grotesk">Locked revenue per period (immutable)</text>
+      <text x="808" y="164" font-size="9.5" fill="#1a8a52" font-family="Hanken Grotesk">Invoice vs booked days reconciliation</text>
+      <text x="808" y="178" font-size="9.5" fill="#1a8a52" font-family="Hanken Grotesk">Auto-generated QC exception flags</text>
+      <text x="808" y="192" font-size="9.5" fill="#1a8a52" font-family="Hanken Grotesk">Full change audit trail (all entities)</text>
+
+      <!-- Master Data → Outcomes arrow (top, FX) -->
+      <path d="M 94 24 Q 94 10 925 10 L 925 24" stroke="#8b94a4" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)" fill="none"/>
+      <text x="510" y="8" text-anchor="middle" font-size="8" fill="#8b94a4" font-family="Hanken Grotesk">FX rate for USD display · user_id for locked_by</text>
+
+      <!-- Bottom: POC formula callout -->
+      <rect x="8" y="296" width="1044" height="1" fill="#e3e6ec"/>
+      <text x="14" y="308" font-size="9.5" fill="#8b94a4" font-family="IBM Plex Mono">POC% = actuals_to_date ÷ eac_lc</text>
+      <text x="300" y="308" font-size="9.5" fill="#8b94a4" font-family="IBM Plex Mono">Revenue_this_period = (tcv_lc × POC%) − frozen_prior_ytd_lc</text>
+      <text x="720" y="308" font-size="9.5" fill="#8b94a4" font-family="IBM Plex Mono">EAC = actuals + ETC</text>
+    </svg>
+  </div>
+
+  <!-- ===========================
+       SECTION 2: KEY RELATIONSHIPS
+       =========================== -->
+  <div class="shd" style="margin-top:8px"><span class="sn">02</span> Key Relationships</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>From Entity</th><th>Relationship</th><th>To Entity</th><th>Foreign Key</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><code>projects</code></td><td><span class="rel-type">N:1</span></td><td><code>countries</code></td><td><code>country_id</code></td><td>Determines LC currency and FX rate</td></tr>
+        <tr><td><code>projects</code></td><td><span class="rel-type">N:1</span></td><td><code>users</code></td><td><code>pm_user_id</code>, <code>pd_user_id</code></td><td>PM and PD assigned at project level</td></tr>
+        <tr><td><code>projects</code></td><td><span class="rel-type">N:1</span></td><td><code>rate_masters</code></td><td><code>rate_version_id</code></td><td>FY rate version at baseline creation; immutable</td></tr>
+        <tr><td><code>baselines</code></td><td><span class="rel-type">N:1</span></td><td><code>projects</code></td><td><code>project_id</code></td><td>Multiple versions possible; one active per project</td></tr>
+        <tr><td><code>phases</code></td><td><span class="rel-type">N:1</span></td><td><code>projects</code></td><td><code>project_id</code></td><td>Phase Gantt bars; ordered by sequence_order</td></tr>
+        <tr><td><code>milestones</code></td><td><span class="rel-type">N:1</span></td><td><code>projects</code></td><td><code>project_id</code></td><td>Sum of milestone amounts must = TCV</td></tr>
+        <tr><td><code>resources</code></td><td><span class="rel-type">N:1</span></td><td><code>projects</code></td><td><code>project_id</code></td><td>Own FTE / Freelancer / Fixed Subcon per project</td></tr>
+        <tr><td><code>resources</code></td><td><span class="rel-type">N:1</span></td><td><code>rate_masters</code></td><td><code>rate_version_id</code></td><td>Rate at resource creation; used to cost effort_plan days</td></tr>
+        <tr><td><code>project_user_access</code></td><td><span class="rel-type">M:N</span></td><td><code>projects</code> + <code>users</code></td><td><code>project_id</code>, <code>user_id</code></td><td>Scoped access for PM and Read Only roles</td></tr>
+        <tr><td><code>effort_plan</code></td><td><span class="rel-type">N:1</span></td><td><code>resources</code></td><td><code>resource_id</code></td><td>Monthly days per resource: baseline / actual / ETC</td></tr>
+        <tr><td><code>effort_plan</code></td><td><span class="rel-type">N:1</span></td><td><code>periods</code></td><td><code>period_id</code></td><td>One row per resource per period</td></tr>
+        <tr><td><code>effort_plan</code></td><td><span class="rel-type">N:1</span></td><td><code>submissions</code></td><td><code>submission_id</code></td><td>ETC rows locked to submission at submit time</td></tr>
+        <tr><td><code>submissions</code></td><td><span class="rel-type">N:1</span></td><td><code>projects</code></td><td><code>project_id</code></td><td>One submission per project per period</td></tr>
+        <tr><td><code>submissions</code></td><td><span class="rel-type">N:1</span></td><td><code>periods</code></td><td><code>period_id</code></td><td>Unique constraint: (project_id, period_id)</td></tr>
+        <tr><td><code>approvals</code></td><td><span class="rel-type">N:1</span></td><td><code>submissions</code></td><td><code>submission_id</code></td><td>One approval record per submission</td></tr>
+        <tr><td><code>revenue_recognition</code></td><td><span class="rel-type">N:1</span></td><td><code>submissions</code></td><td><code>submission_id</code></td><td>Locked from approved submission; immutable once frozen</td></tr>
+        <tr><td><code>freelancer_invoices</code></td><td><span class="rel-type">N:1</span></td><td><code>resources</code></td><td><code>resource_id</code></td><td>One invoice row per freelancer per period</td></tr>
+        <tr><td><code>exceptions</code></td><td><span class="rel-type">N:1</span></td><td><code>projects</code> + <code>periods</code></td><td><code>project_id</code>, <code>period_id</code></td><td>Auto-generated; never manually created</td></tr>
+        <tr><td><code>internal_rates</code></td><td><span class="rel-type">N:1</span></td><td><code>rate_masters</code></td><td><code>rate_master_id</code></td><td>7 rows (L1–L7) per rate master version</td></tr>
+        <tr><td><code>freelancer_rates</code></td><td><span class="rel-type">N:1</span></td><td><code>rate_masters</code></td><td><code>rate_master_id</code></td><td>4 band rows per rate master version</td></tr>
+        <tr><td><code>fx_history</code></td><td><span class="rel-type">N:1</span></td><td><code>countries</code></td><td><code>country_id</code></td><td>All past FX rates; latest effective rate used at runtime</td></tr>
+        <tr><td><code>audit_log</code></td><td><span class="rel-type">N:1</span></td><td><code>users</code></td><td><code>changed_by</code></td><td>Covers every entity; entity_type + entity_id polymorphic ref</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===========================
+       SECTION 3: ENTITY CATALOG
+       =========================== -->
+  <div class="shd"><span class="sn">03</span> Entity Catalog — All Fields</div>
+
+  <div class="legend">
+    <div class="li"><span class="fi pk">PK</span> Primary key</div>
+    <div class="li"><span class="fi fk">FK</span> Foreign key</div>
+    <div class="li"><span class="fi ix">IX</span> Indexed / unique constraint</div>
+    <div class="li"><span class="fi nn">—</span> Standard field</div>
+  </div>
+
+  <div class="catalog">
+
+    <!-- DOMAIN: Master Data -->
+    <div class="domain-label" style="color:#4654b0">Master Data</div>
+
+    <!-- users -->
+    <div class="ent">
+      <div class="ent-hd hd-indigo"><span class="en">users</span><span class="ec">Master</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">user_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">full_name</span><span class="ft">VARCHAR(120)</span></div>
+        <div class="ent-row"><span class="fi ix">IX</span><span class="fn">email</span><span class="ft">VARCHAR(200)</span><span class="fd">unique</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">role</span><span class="ft">ENUM</span><span class="fd">PM/PD/Portfolio_Dir/Finance/Admin/ReadOnly</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">status</span><span class="ft">ENUM</span><span class="fd">Active/Inactive</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">last_login_at</span><span class="ft">DATETIME</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">created_at</span><span class="ft">DATETIME</span></div>
+      </div>
+    </div>
+
+    <!-- countries -->
+    <div class="ent">
+      <div class="ent-hd hd-indigo"><span class="en">countries</span><span class="ec">Master</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">country_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi ix">IX</span><span class="fn">country_code</span><span class="ft">CHAR(2)</span><span class="fd">ISO 3166 e.g. TH</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">country_name</span><span class="ft">VARCHAR(80)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">currency_code</span><span class="ft">CHAR(3)</span><span class="fd">THB, EUR, SGD…</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">currency_name</span><span class="ft">VARCHAR(60)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">fx_rate_per_usd</span><span class="ft">DECIMAL(12,4)</span><span class="fd">LC per 1 USD</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">fx_effective_date</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">status</span><span class="ft">ENUM</span><span class="fd">Active/Inactive</span></div>
+      </div>
+    </div>
+
+    <!-- fx_history -->
+    <div class="ent">
+      <div class="ent-hd hd-indigo"><span class="en">fx_history</span><span class="ec">Master</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">fx_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">country_id</span><span class="ft">INT</span><span class="fd">→ countries</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">fx_rate</span><span class="ft">DECIMAL(12,4)</span><span class="fd">LC per 1 USD</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">effective_date</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">entered_by</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">entered_at</span><span class="ft">DATETIME</span></div>
+      </div>
+    </div>
+
+    <!-- rate_masters -->
+    <div class="ent">
+      <div class="ent-hd hd-indigo"><span class="en">rate_masters</span><span class="ec">Master</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">rate_master_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">fy_label</span><span class="ft">VARCHAR(20)</span><span class="fd">e.g. FY 2025–26</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">effective_from</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">effective_to</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">currency_basis</span><span class="ft">CHAR(3)</span><span class="fd">USD</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">status</span><span class="ft">ENUM</span><span class="fd">Draft/Published/Archived</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">published_by</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">published_at</span><span class="ft">DATETIME</span></div>
+      </div>
+    </div>
+
+    <!-- internal_rates -->
+    <div class="ent">
+      <div class="ent-hd hd-indigo"><span class="en">internal_rates</span><span class="ec">Master</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">rate_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">rate_master_id</span><span class="ft">INT</span><span class="fd">→ rate_masters</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">grade_level</span><span class="ft">ENUM</span><span class="fd">L1/L2/L3/L4/L5/L6/L7</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">cost_rate_usd</span><span class="ft">DECIMAL(10,2)</span><span class="fd">USD/day</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">cost_rate_lc</span><span class="ft">DECIMAL(12,2)</span><span class="fd">computed: rate × FX</span></div>
+      </div>
+    </div>
+
+    <!-- freelancer_rates -->
+    <div class="ent">
+      <div class="ent-hd hd-indigo"><span class="en">freelancer_rates</span><span class="ec">Master</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">fl_rate_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">rate_master_id</span><span class="ft">INT</span><span class="fd">→ rate_masters</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">band_name</span><span class="ft">VARCHAR(80)</span><span class="fd">Functional/Technical/Basis/Data</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">day_rate_usd</span><span class="ft">DECIMAL(10,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">day_rate_lc</span><span class="ft">DECIMAL(12,2)</span><span class="fd">computed: rate × FX</span></div>
+      </div>
+    </div>
+
+    <!-- DOMAIN: Project Setup -->
+    <div class="domain-label" style="color:#0d9488">Project Setup</div>
+
+    <!-- projects -->
+    <div class="ent">
+      <div class="ent-hd hd-teal"><span class="en">projects</span><span class="ec">Core</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">project_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi ix">IX</span><span class="fn">project_code</span><span class="ft">VARCHAR(20)</span><span class="fd">unique</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">project_name</span><span class="ft">VARCHAR(200)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">client_name</span><span class="ft">VARCHAR(150)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">bu_name</span><span class="ft">VARCHAR(80)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">sap_line</span><span class="ft">VARCHAR(80)</span><span class="fd">SAP Finance/S4/BTP…</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">region</span><span class="ft">VARCHAR(40)</span><span class="fd">EMEA / APAC</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">country_id</span><span class="ft">INT</span><span class="fd">→ countries</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">pm_user_id</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">pd_user_id</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">start_date</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">end_date</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">tcv_lc</span><span class="ft">DECIMAL(15,2)</span><span class="fd">Local currency only</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">sold_margin_pct</span><span class="ft">DECIMAL(6,4)</span><span class="fd">e.g. 0.362</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">status</span><span class="ft">ENUM</span><span class="fd">Active/Completed/On-Hold</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">active_baseline_id</span><span class="ft">INT</span><span class="fd">→ baselines</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">rate_version_id</span><span class="ft">INT</span><span class="fd">→ rate_masters</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">created_by</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">created_at</span><span class="ft">DATETIME</span></div>
+      </div>
+    </div>
+
+    <!-- baselines -->
+    <div class="ent">
+      <div class="ent-hd hd-teal"><span class="en">baselines</span><span class="ec">Core</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">baseline_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">project_id</span><span class="ft">INT</span><span class="fd">→ projects</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">version_number</span><span class="ft">INT</span><span class="fd">starts at 1</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">tcv_lc</span><span class="ft">DECIMAL(15,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">baseline_cost_lc</span><span class="ft">DECIMAL(15,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">sold_margin_pct</span><span class="ft">DECIMAL(6,4)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">status</span><span class="ft">ENUM</span><span class="fd">Draft/Active/Superseded</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">locked_by</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">locked_at</span><span class="ft">DATETIME</span></div>
+      </div>
+    </div>
+
+    <!-- phases -->
+    <div class="ent">
+      <div class="ent-hd hd-teal"><span class="en">phases</span><span class="ec">Core</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">phase_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">project_id</span><span class="ft">INT</span><span class="fd">→ projects</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">phase_name</span><span class="ft">VARCHAR(100)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">start_month</span><span class="ft">INT</span><span class="fd">1–12</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">start_year</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">end_month</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">end_year</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">sequence_order</span><span class="ft">INT</span></div>
+      </div>
+    </div>
+
+    <!-- milestones -->
+    <div class="ent">
+      <div class="ent-hd hd-teal"><span class="en">milestones</span><span class="ec">Core</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">milestone_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">project_id</span><span class="ft">INT</span><span class="fd">→ projects</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">milestone_name</span><span class="ft">VARCHAR(150)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">due_date</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">invoice_amount_lc</span><span class="ft">DECIMAL(15,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">invoice_number</span><span class="ft">VARCHAR(50)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">invoice_date</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">status</span><span class="ft">ENUM</span><span class="fd">Pending/Invoiced/Collected</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">collected_date</span><span class="ft">DATE</span><span class="fd">null until paid</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">sequence_order</span><span class="ft">INT</span></div>
+      </div>
+    </div>
+
+    <!-- resources -->
+    <div class="ent">
+      <div class="ent-hd hd-teal"><span class="en">resources</span><span class="ec">Core</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">resource_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">project_id</span><span class="ft">INT</span><span class="fd">→ projects</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">baseline_id</span><span class="ft">INT</span><span class="fd">→ baselines</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">resource_name</span><span class="ft">VARCHAR(120)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">resource_type</span><span class="ft">ENUM</span><span class="fd">Own_FTE/Freelancer/Fixed_Subcon</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">grade_level</span><span class="ft">ENUM</span><span class="fd">L1–L7; null if not Own_FTE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">freelancer_band</span><span class="ft">VARCHAR(80)</span><span class="fd">null if not Freelancer</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">subcon_fixed_price_lc</span><span class="ft">DECIMAL(15,2)</span><span class="fd">null if not Fixed_Subcon</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">rate_version_id</span><span class="ft">INT</span><span class="fd">→ rate_masters</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">is_active</span><span class="ft">BOOLEAN</span></div>
+      </div>
+    </div>
+
+    <!-- project_user_access -->
+    <div class="ent">
+      <div class="ent-hd hd-teal"><span class="en">project_user_access</span><span class="ec">Core</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">access_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">project_id</span><span class="ft">INT</span><span class="fd">→ projects</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">user_id</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">access_level</span><span class="ft">ENUM</span><span class="fd">PM/PD/ReadOnly</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">granted_at</span><span class="ft">DATETIME</span></div>
+      </div>
+    </div>
+
+    <!-- DOMAIN: Period & Effort -->
+    <div class="domain-label" style="color:#b9791a">Period &amp; Effort</div>
+
+    <!-- periods -->
+    <div class="ent">
+      <div class="ent-hd hd-amber"><span class="en">periods</span><span class="ec">Calendar</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">period_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">fy_year</span><span class="ft">INT</span><span class="fd">e.g. 2025 for FY25-26</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">month_number</span><span class="ft">INT</span><span class="fd">1–12</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">month_name</span><span class="ft">VARCHAR(20)</span><span class="fd">e.g. Oct 2025</span></div>
+        <div class="ent-row"><span class="fi ix">IX</span><span class="fn">period_label</span><span class="ft">VARCHAR(20)</span><span class="fd">unique: YYYY-MM</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">status</span><span class="ft">ENUM</span><span class="fd">Not_Opened/Open/Frozen</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">opened_date</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">submission_deadline</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">closed_date</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">frozen_date</span><span class="ft">DATE</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">frozen_by</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+      </div>
+    </div>
+
+    <!-- effort_plan -->
+    <div class="ent">
+      <div class="ent-hd hd-amber"><span class="en">effort_plan</span><span class="ec">Calendar</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">effort_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">resource_id</span><span class="ft">INT</span><span class="fd">→ resources</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">project_id</span><span class="ft">INT</span><span class="fd">→ projects</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">period_id</span><span class="ft">INT</span><span class="fd">→ periods</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">baseline_days</span><span class="ft">DECIMAL(6,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">actual_days</span><span class="ft">DECIMAL(6,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">etc_days</span><span class="ft">DECIMAL(6,2)</span><span class="fd">PM-entered ETC</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">submission_id</span><span class="ft">INT</span><span class="fd">→ submissions (nullable)</span></div>
+      </div>
+    </div>
+
+    <!-- DOMAIN: Submissions -->
+    <div class="domain-label" style="color:#2b3a8c">Submissions</div>
+
+    <!-- submissions -->
+    <div class="ent">
+      <div class="ent-hd hd-primary"><span class="en">submissions</span><span class="ec">Workflow</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">submission_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">project_id</span><span class="ft">INT</span><span class="fd">→ projects</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">period_id</span><span class="ft">INT</span><span class="fd">→ periods</span></div>
+        <div class="ent-row"><span class="fi ix">IX</span><span class="fn">(project_id, period_id)</span><span class="ft"></span><span class="fd">unique constraint</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">pm_user_id</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">status</span><span class="ft">ENUM</span><span class="fd">Draft/Submitted/Approved/Locked</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">eac_lc</span><span class="ft">DECIMAL(15,2)</span><span class="fd">actuals + ETC</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">poc_pct</span><span class="ft">DECIMAL(6,4)</span><span class="fd">actuals ÷ EAC</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">subcon_completion_pct</span><span class="ft">DECIMAL(6,4)</span><span class="fd">Fixed subcon %</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">actuals_to_date_lc</span><span class="ft">DECIMAL(15,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">frozen_prior_ytd_lc</span><span class="ft">DECIMAL(15,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">revenue_this_period_lc</span><span class="ft">DECIMAL(15,2)</span><span class="fd">(TCV×POC%)−prior_ytd</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">cumulative_recognised_lc</span><span class="ft">DECIMAL(15,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">submitted_at</span><span class="ft">DATETIME</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">updated_at</span><span class="ft">DATETIME</span></div>
+      </div>
+    </div>
+
+    <!-- approvals -->
+    <div class="ent">
+      <div class="ent-hd hd-primary"><span class="en">approvals</span><span class="ec">Workflow</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">approval_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">submission_id</span><span class="ft">INT</span><span class="fd">→ submissions</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">pd_user_id</span><span class="ft">INT</span><span class="fd">→ users (PD)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">decision</span><span class="ft">ENUM</span><span class="fd">Approved/Rejected/Held</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">comments</span><span class="ft">TEXT</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">decided_at</span><span class="ft">DATETIME</span></div>
+      </div>
+    </div>
+
+    <!-- DOMAIN: Outcomes -->
+    <div class="domain-label" style="color:#1a8a52">Outcomes</div>
+
+    <!-- revenue_recognition -->
+    <div class="ent">
+      <div class="ent-hd hd-green"><span class="en">revenue_recognition</span><span class="ec">Outcome</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">recognition_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">project_id</span><span class="ft">INT</span><span class="fd">→ projects</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">period_id</span><span class="ft">INT</span><span class="fd">→ periods</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">submission_id</span><span class="ft">INT</span><span class="fd">→ submissions</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">tcv_lc</span><span class="ft">DECIMAL(15,2)</span><span class="fd">snapshot at freeze</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">eac_lc</span><span class="ft">DECIMAL(15,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">poc_pct</span><span class="ft">DECIMAL(6,4)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">frozen_prior_ytd_lc</span><span class="ft">DECIMAL(15,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">revenue_this_period_lc</span><span class="ft">DECIMAL(15,2)</span><span class="fd">IMMUTABLE once frozen</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">cumulative_recognised_lc</span><span class="ft">DECIMAL(15,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">fx_rate_used</span><span class="ft">DECIMAL(12,4)</span><span class="fd">rate at freeze time</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">locked_by</span><span class="ft">INT</span><span class="fd">→ users (Finance)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">locked_at</span><span class="ft">DATETIME</span></div>
+      </div>
+    </div>
+
+    <!-- freelancer_invoices -->
+    <div class="ent">
+      <div class="ent-hd hd-green"><span class="en">freelancer_invoices</span><span class="ec">Outcome</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">invoice_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">project_id</span><span class="ft">INT</span><span class="fd">→ projects</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">period_id</span><span class="ft">INT</span><span class="fd">→ periods</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">resource_id</span><span class="ft">INT</span><span class="fd">→ resources</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">freelancer_name</span><span class="ft">VARCHAR(120)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">agency_name</span><span class="ft">VARCHAR(120)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">freelancer_band</span><span class="ft">VARCHAR(80)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">days_booked</span><span class="ft">DECIMAL(6,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">rate_lc</span><span class="ft">DECIMAL(12,2)</span><span class="fd">LC/day</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">expected_amount_lc</span><span class="ft">DECIMAL(15,2)</span><span class="fd">days × rate</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">invoice_number</span><span class="ft">VARCHAR(60)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">invoiced_amount_lc</span><span class="ft">DECIMAL(15,2)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">variance_lc</span><span class="ft">DECIMAL(15,2)</span><span class="fd">computed</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">status</span><span class="ft">ENUM</span><span class="fd">Matched/Pending/Disputed</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">approved_by</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">approved_at</span><span class="ft">DATETIME</span></div>
+      </div>
+    </div>
+
+    <!-- exceptions -->
+    <div class="ent">
+      <div class="ent-hd hd-green"><span class="en">exceptions</span><span class="ec">Outcome</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">exception_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">project_id</span><span class="ft">INT</span><span class="fd">→ projects</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">period_id</span><span class="ft">INT</span><span class="fd">→ periods</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">exception_type</span><span class="ft">VARCHAR(60)</span><span class="fd">Onerous/Margin_Erosion…</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">severity</span><span class="ft">ENUM</span><span class="fd">Red/Amber</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">description</span><span class="ft">TEXT</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">status</span><span class="ft">ENUM</span><span class="fd">Open/Resolved</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">auto_generated</span><span class="ft">BOOLEAN</span><span class="fd">always TRUE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">raised_at</span><span class="ft">DATETIME</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">resolved_by</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">resolved_at</span><span class="ft">DATETIME</span></div>
+      </div>
+    </div>
+
+    <!-- audit_log -->
+    <div class="ent">
+      <div class="ent-hd hd-green"><span class="en">audit_log</span><span class="ec">Outcome</span></div>
+      <div class="ent-body">
+        <div class="ent-row"><span class="fi pk">PK</span><span class="fn">audit_id</span><span class="ft">BIGINT</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">entity_type</span><span class="ft">VARCHAR(60)</span><span class="fd">submissions/projects…</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">entity_id</span><span class="ft">INT</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">action</span><span class="ft">ENUM</span><span class="fd">INSERT/UPDATE/DELETE</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">field_name</span><span class="ft">VARCHAR(80)</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">old_value</span><span class="ft">TEXT</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">new_value</span><span class="ft">TEXT</span></div>
+        <div class="ent-row"><span class="fi fk">FK</span><span class="fn">changed_by</span><span class="ft">INT</span><span class="fd">→ users</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">changed_at</span><span class="ft">DATETIME</span></div>
+        <div class="ent-row"><span class="fi nn">—</span><span class="fn">ip_address</span><span class="ft">VARCHAR(45)</span></div>
+      </div>
+    </div>
+
+  </div><!-- /catalog -->
+
+  <div style="margin-top:32px;padding-top:16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--ink3)">
+    <div><b style="color:var(--primary)">PRISM</b> · Database &amp; Data Flow v1.0 · NTT DATA Business Solutions AG</div>
+    <div>20 entities · 170+ fields · 5 domains · Oct 2025</div>
+  </div>
+
+</div><!-- /doc -->
+</div><!-- /page -->
+</body>
+</html>

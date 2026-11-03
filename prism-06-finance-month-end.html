@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PRISM · Month-End Revenue Summary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef0f4; --surface:#ffffff; --surface2:#f8f9fb; --surface3:#f2f4f7;
+  --border:#e3e6ec; --border2:#d3d8e0;
+  --ink:#171c26; --ink2:#5b6472; --ink3:#8b94a4;
+  --primary:#2b3a8c; --primary2:#222e72; --primary-soft:#edf0fb; --primary-soft2:#e2e7f8;
+  --teal:#0d9488; --teal-soft:#e2f4f1;
+  --amber:#b9791a; --amber-soft:#f8eedb;
+  --green:#1a8a52; --green-soft:#e2f3ea;
+  --red:#cb4634; --red-soft:#fae6e2;
+  --indigo:#4654b0;
+  --shadow:0 1px 2px rgba(20,30,60,.06),0 4px 16px rgba(20,30,60,.05);
+  --shadow2:0 8px 30px rgba(20,30,60,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+button{font-family:inherit;cursor:pointer}
+input,select{font-family:inherit;font-size:13px;color:var(--ink)}
+.topbar{height:58px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:18px;position:sticky;top:0;z-index:30}
+.logo{display:flex;align-items:center;gap:11px}
+.logomark{width:30px;height:30px;border-radius:8px;background:linear-gradient(140deg,var(--primary),var(--indigo));position:relative;box-shadow:0 2px 6px rgba(43,58,140,.35)}
+.logomark:after{content:"";position:absolute;inset:8px;border:2px solid #fff;border-radius:3px;opacity:.9}
+.logomark:before{content:"";position:absolute;left:8px;top:14px;width:14px;height:2px;background:#fff;opacity:.9}
+.logo .name{font-weight:700;letter-spacing:.4px;font-size:16px}
+.logo .name b{color:var(--primary)}
+.logo .sub{font-size:10px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-top:-2px}
+.tb-spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:7px 11px;width:300px;color:var(--ink3)}
+.search input{border:0;background:transparent;outline:none;width:100%;color:var(--ink)}
+.period{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:9px;padding:7px 11px;background:var(--surface);font-weight:500}
+.period .lab{color:var(--ink3);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.iconbtn{width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--ink2);position:relative}
+.iconbtn .badge{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--red);border-radius:50%;border:1.5px solid #fff}
+.user{display:flex;align-items:center;gap:9px;padding-left:6px}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(140deg,#2b3a8c,#4654b0);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px}
+.user .who{line-height:1.15}
+.user .who .n{font-weight:600;font-size:12.5px}
+.user .who .r{font-size:10.5px;color:var(--primary);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.shell{display:flex;min-height:calc(100vh - 58px)}
+.nav{width:230px;background:var(--surface);border-right:1px solid var(--border);padding:14px 12px;flex-shrink:0;position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto}
+.nav .grp{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin:14px 10px 7px}
+.nav .grp:first-child{margin-top:2px}
+.nav a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;color:var(--ink2);text-decoration:none;font-weight:500;font-size:12.7px;margin-bottom:2px;position:relative}
+.nav a:hover{background:var(--surface3);color:var(--ink)}
+.nav a.on{background:var(--primary-soft);color:var(--primary2);font-weight:600}
+.nav a.on:before{content:"";position:absolute;left:-12px;top:8px;bottom:8px;width:3px;background:var(--primary);border-radius:0 3px 3px 0}
+.nav a .ico{width:16px;height:16px;flex-shrink:0;opacity:.85}
+.nav a .ct{margin-left:auto;font-size:10.5px;background:var(--surface3);border:1px solid var(--border);border-radius:20px;padding:0 7px;color:var(--ink2);font-weight:600}
+.nav a.on .ct{background:#fff}
+.main{flex:1;padding:22px 26px 60px;min-width:0}
+.crumb{display:flex;align-items:center;gap:7px;color:var(--ink3);font-size:11.5px;margin-bottom:10px}
+.crumb b{color:var(--ink2);font-weight:600}
+.crumb .sep{opacity:.5}
+.pagehead{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.pagehead h1{font-size:22px;font-weight:700;margin:0;letter-spacing:-.2px}
+.pagehead .meta{display:flex;align-items:center;gap:10px;margin-top:7px;flex-wrap:wrap}
+.chipcode{font-family:'IBM Plex Mono';font-size:11.5px;background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:3px 8px;color:var(--ink2);font-weight:500}
+.pill{font-size:11px;font-weight:600;border-radius:20px;padding:3px 10px;letter-spacing:.02em;display:inline-flex;align-items:center;gap:6px}
+.pill .d{width:6px;height:6px;border-radius:50%}
+.pill.active{background:var(--green-soft);color:var(--green)}
+.pill.draft{background:var(--amber-soft);color:var(--amber)}
+.headactions{margin-left:auto;display:flex;gap:9px}
+.btn{border:1px solid var(--primary);background:var(--primary);color:#fff;border-radius:9px;padding:9px 16px;font-weight:600;font-size:12.7px;display:inline-flex;align-items:center;gap:7px;box-shadow:0 1px 2px rgba(43,58,140,.2)}
+.btn:hover{background:var(--primary2)}
+.btn.ghost{background:#fff;color:var(--ink);border-color:var(--border2)}
+.btn.ghost:hover{background:var(--surface3)}
+.cols{display:grid;grid-template-columns:1fr 332px;gap:18px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+.card .ch{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.card .ch h3{font-size:14px;font-weight:700;margin:0}
+.card .ch .desc{font-size:11.5px;color:var(--ink3);margin-top:1px}
+.card .ch .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.card .cb{padding:18px}
+.card+.card{margin-top:18px}
+table{width:100%;border-collapse:collapse;font-size:12.6px}
+thead th{text-align:left;color:var(--ink3);font-weight:600;font-size:10.3px;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap}
+th.num,td.num{text-align:right;font-family:'IBM Plex Mono';font-variant-numeric:tabular-nums}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--surface3)}
+.line td:first-child{padding-left:14px}
+.tot-row td{background:var(--primary);color:#fff;font-weight:700;border:0}
+.tot-row td:first-child{border-radius:0 0 0 11px}
+.tot-row td:last-child{border-radius:0 0 11px 0}
+.rail{position:sticky;top:80px}
+.outcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.outhead{padding:15px 18px 14px;background:linear-gradient(150deg,#2b3a8c,#3a47a0);color:#fff}
+.outhead .t{font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.85;font-weight:600}
+.outhead .marg{display:flex;align-items:baseline;gap:10px;margin-top:8px}
+.outhead .marg .pc{font-family:'IBM Plex Mono';font-size:34px;font-weight:600;letter-spacing:-1px}
+.outhead .lab2{font-size:11px;opacity:.8;margin-top:3px}
+.outbody{padding:16px 18px}
+.orow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border)}
+.orow:last-of-type{border-bottom:0}
+.orow .k{color:var(--ink2);font-size:12px}
+.orow .v{font-family:'IBM Plex Mono';font-weight:600}
+.scaption{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin:16px 0 6px}
+.note{background:var(--primary-soft);border:1px solid var(--primary-soft2);border-radius:10px;padding:11px 13px;color:var(--primary2);font-size:11.7px;line-height:1.5}
+.divlabel{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+.divlabel .ln{flex:1;height:1px;background:var(--border)}
+.divlabel .tx{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+.legend{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink2)}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:middle}
+.smallnote{font-size:11px;color:var(--ink3);margin-top:10px}
+.kstrip{display:grid;gap:12px;margin-bottom:18px}
+.kpic{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:13px 14px;box-shadow:var(--shadow)}
+.kpic .lab{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);font-weight:600}
+.kpic .val{font-family:'IBM Plex Mono';font-size:17px;font-weight:600;margin-top:7px;letter-spacing:-.5px}
+.kpic .dl{font-size:10.5px;margin-top:5px;font-weight:600}
+.up{color:var(--green)}.down{color:var(--red)}.neu{color:var(--ink3);font-weight:500}
+.kpic.hi{background:linear-gradient(150deg,#2b3a8c,#3a47a0);border-color:#2b3a8c}.kpic.hi .lab{color:#c9d2f5}.kpic.hi .val{color:#fff}.kpic.hi .dl{color:#cdd6f7}
+.closebar{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:11px 16px;margin-bottom:16px;box-shadow:var(--shadow);font-size:12.5px}
+.ci{display:flex;align-items:center;gap:7px;font-weight:600}.ci.muted{color:var(--ink3);font-weight:500;font-family:'IBM Plex Mono';font-size:11.5px}
+.cn{font-family:'IBM Plex Mono';font-size:18px;font-weight:700;color:var(--green)}.cn.amber{color:var(--amber)}.cn.red{color:var(--red)}
+.cdiv{width:1px;height:20px;background:var(--border)}
+.ptab td{vertical-align:middle}.prow:hover{background:var(--surface2)}
+.pn{font-weight:600;font-size:12.8px}.pc2{font-size:10.8px;color:var(--ink3);margin-top:2px}
+.dpp{font-size:10px;font-weight:600;margin-top:1px}.dpp.up{color:var(--green)}.dpp.down{color:var(--red)}
+.held{font-size:9.5px;font-weight:700;color:var(--amber);background:var(--amber-soft);padding:1px 5px;border-radius:5px}
+.barchart{display:flex;align-items:flex-end;gap:18px;height:185px;padding:8px 4px 0}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.bstack{display:flex;flex-direction:column;justify-content:flex-end;width:42px}
+.seg{width:42px;border-radius:3px 3px 0 0}.seg.appr{background:var(--teal)}.seg.held{background:repeating-linear-gradient(45deg,#e6c98a,#e6c98a 3px,#f5e6c5 3px,#f5e6c5 6px);border-radius:3px 3px 0 0;margin-bottom:1px}
+.blab{font-size:11px;color:var(--ink3);margin-top:8px;font-weight:600}.bval{font-size:10px;color:var(--ink2);font-family:'IBM Plex Mono';margin-top:2px}
+.recbtn{width:100%;margin-top:14px;color:#fff;border:0;padding:11px;border-radius:10px;font-weight:600;font-size:13px;box-shadow:0 2px 6px rgba(43,58,140,.3)}.recbtn:hover{filter:brightness(1.04)}
+.warnbox{background:#fbf3e4;border:1px solid #ecd6a6;color:#7a5a16;border-radius:10px;padding:10px 12px;font-size:11.7px;line-height:1.5}
+.statusline{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink2);margin-top:10px}.dot2{width:7px;height:7px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo"><div class="logomark"></div><div><div class="name"><b>PRISM</b></div><div class="sub">Project Revenue &amp; Margin</div></div></div>
+  <div class="tb-spacer"></div>
+  <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input placeholder="Search projects, customers, codes…"/></div>
+  <div class="period"><span class="lab">FY</span> 2025–26 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b94a4" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+  <div class="iconbtn"><span class="badge"></span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+  <div class="user"><div class="avatar">SR</div><div class="who"><div class="n">Sai R.</div><div class="r">Finance</div></div></div>
+</div>
+<div class="shell">
+  <nav class="nav">
+    <div class="grp">Finance</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg>Revenue Recognition</a>
+    <a href="#" class="on"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Month-end Summary</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>Reports &amp; Extracts</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Receivables</a>
+    <div class="grp">Delivery</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Projects <span class="ct">6</span></a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v6H4zM4 14h10v6H4z"/></svg>Baselines</a>
+    <div class="grp">Insights</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="8"/><rect x="10" y="7" width="4" height="13"/><rect x="17" y="3" width="4" height="17"/></svg>Dashboards</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg>Exceptions</a>
+    <div class="grp">Admin</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>Rate Masters</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Periods</a>
+  </nav>
+  <main class="main">
+    <div class="crumb"><b>Finance</b><span class="sep">/</span>Month-end Summary<span class="sep">/</span><b>Sep 2025</b></div>
+    <div class="pagehead">
+      <div><h1>Month-End Revenue Summary</h1>
+      <div class="meta">
+        <div class="period" style="padding:5px 10px"><span class="lab">Period</span> Sep 2025 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8b94a4" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <span class="pill draft"><span class="d" style="background:var(--amber)"></span>Close in progress · 4 of 6 recognised</span></div></div>
+      <div class="headactions"><button class="btn ghost">Export to Excel</button><button class="btn">Post recognised to GL</button></div>
+    </div>
+
+    <div class="closebar">
+      <div class="ci"><span class="cn">4</span> recognised</div><span class="cdiv"></span>
+      <div class="ci"><span class="cn amber">1</span> pending PD</div><span class="cdiv"></span>
+      <div class="ci"><span class="cn red">1</span> onerous flag</div><span class="cdiv"></span>
+      <div class="ci muted">$90,000 held from this month's recognition until cleared</div>
+    </div>
+
+    <div class="kstrip" style="grid-template-columns:repeat(6,1fr)">
+      <div class="kpic hi"><div class="lab">Recognised this month</div><div class="val">$463,300</div><div class="dl">+$90,000 held</div></div>
+      <div class="kpic"><div class="lab">YTD recognised</div><div class="val">$3,425,027</div><div class="dl neu">50.2% of TCV</div></div>
+      <div class="kpic"><div class="lab">Portfolio TCV</div><div class="val">$6,820,000</div><div class="dl neu">6 active projects</div></div>
+      <div class="kpic"><div class="lab">Forecast margin</div><div class="val">24.8%</div><div class="dl down">▼ 5.5 pp vs sold</div></div>
+      <div class="kpic"><div class="lab">Backlog (to recognise)</div><div class="val">$3,394,973</div><div class="dl neu">TCV − recognised</div></div>
+      <div class="kpic"><div class="lab">Unbilled / accrued (net)</div><div class="val">$173,027</div><div class="dl up">2 deferred</div></div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <div class="card">
+          <div class="ch"><div><h3>Recognised revenue by project — Sep 2025 close</h3><div class="desc">Cost-based POC · drill any row to the project recognition</div></div></div>
+          <table class="ptab">
+            <thead><tr><th>Project</th><th class="num">TCV</th><th class="num">POC</th><th class="num">EAC</th><th class="num">Fc margin</th><th class="num">Rec. this month</th><th class="num">YTD recognised</th><th class="num">Unbilled</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr class="line prow">
+      <td><div class="pn">S/4HANA Finance Transformation</div><div class="pc2">Nordwind Logistics AG · EMEA · Germany · <span class="mono">PRJ-2025-0418</span></div></td>
+      <td class="num">$1,850,000</td>
+      <td class="num">57.9%</td>
+      <td class="num">$1,243,000</td>
+      <td class="num"><span class="down">32.8%</span><div class="dpp down">-3.4 pp</div></td>
+      <td class="num">$209,300</td>
+      <td class="num">$1,071,601</td>
+      <td class="num up">$146,601</td>
+      <td><span class="pill active"><span class="d" style="background:var(--green)"></span>Recognised</span></td>
+    </tr><tr class="line prow">
+      <td><div class="pn">SuccessFactors Rollout</div><div class="pc2">Helvetia Pharma · EMEA · Switzerland · <span class="mono">PRJ-2025-0392</span></div></td>
+      <td class="num">$640,000</td>
+      <td class="num">72.0%</td>
+      <td class="num">$470,000</td>
+      <td class="num"><span class="down">26.6%</span><div class="dpp down">-1.6 pp</div></td>
+      <td class="num">$64,000</td>
+      <td class="num">$460,800</td>
+      <td class="num down">-$19,200</td>
+      <td><span class="pill active"><span class="d" style="background:var(--green)"></span>Recognised</span></td>
+    </tr><tr class="line prow">
+      <td><div class="pn">S/4HANA Greenfield</div><div class="pc2">Meridian Foods · APAC · Singapore · <span class="mono">PRJ-2025-0451</span></div></td>
+      <td class="num">$2,400,000</td>
+      <td class="num">41.0%</td>
+      <td class="num">$1,690,000</td>
+      <td class="num"><span class="down">29.6%</span><div class="dpp down">-0.4 pp</div></td>
+      <td class="num">$150,000</td>
+      <td class="num">$984,000</td>
+      <td class="num up">$84,000</td>
+      <td><span class="pill active"><span class="d" style="background:var(--green)"></span>Recognised</span></td>
+    </tr><tr class="line prow">
+      <td><div class="pn">BTP Integration Suite</div><div class="pc2">Pacific Utilities · APAC · Australia · <span class="mono">PRJ-2025-0407</span></div></td>
+      <td class="num">$980,000</td>
+      <td class="num">75.2%</td>
+      <td class="num">$1,010,000</td>
+      <td class="num"><span class="down">−3.1%</span><div class="dpp down">-28.6 pp</div></td>
+      <td class="num"><span style="text-decoration:line-through;color:var(--ink3)">$70,000</span> <span class="held">held</span></td>
+      <td class="num">$737,426</td>
+      <td class="num down">-$62,574</td>
+      <td><span class="pill" style="color:var(--red);background:var(--red-soft)"><span class="d" style="background:var(--red)"></span>Onerous</span></td>
+    </tr><tr class="line prow">
+      <td><div class="pn">SAP Analytics Cloud Planning</div><div class="pc2">Lotus Retail · APAC · Thailand · <span class="mono">PRJ-2025-0463</span></div></td>
+      <td class="num">$520,000</td>
+      <td class="num">23.0%</td>
+      <td class="num">$392,000</td>
+      <td class="num"><span class="down">24.6%</span><div class="dpp down">-1.5 pp</div></td>
+      <td class="num">$40,000</td>
+      <td class="num">$119,600</td>
+      <td class="num up">$15,600</td>
+      <td><span class="pill active"><span class="d" style="background:var(--green)"></span>Recognised</span></td>
+    </tr><tr class="line prow">
+      <td><div class="pn">Ariba Procurement</div><div class="pc2">Surya Industries · India · <span class="mono">PRJ-2025-0478</span></div></td>
+      <td class="num">$430,000</td>
+      <td class="num">12.0%</td>
+      <td class="num">$322,000</td>
+      <td class="num"><span class="down">25.1%</span><div class="dpp down">-0.5 pp</div></td>
+      <td class="num"><span style="text-decoration:line-through;color:var(--ink3)">$20,000</span> <span class="held">held</span></td>
+      <td class="num">$51,600</td>
+      <td class="num up">$8,600</td>
+      <td><span class="pill draft"><span class="d" style="background:var(--amber)"></span>Pending PD</span></td>
+    </tr>
+              <tr class="tot-row" style="background:var(--primary)"><td style="border-radius:0 0 0 11px">Portfolio total</td><td class="num">$6,820,000</td><td class="num">50.2%</td><td class="num">$5,127,000</td><td class="num">24.8%</td><td class="num">$463,300</td><td class="num">$3,425,027</td><td class="num">$173,027</td><td style="border-radius:0 0 11px 0"></td></tr>
+            </tbody>
+          </table>
+          <div class="cb"><div class="smallnote"><b>Pacific Utilities (BTP)</b> is forecast at a loss (EAC $1,010,000 &gt; TCV $980,000 → −3.1% margin); flagged onerous and held pending a provision decision. <b>Surya Ariba</b> awaits PD approval. Both are excluded from this month's recognised figure until cleared.</div></div>
+        </div>
+
+        <div class="card">
+          <div class="ch"><div><h3>Portfolio recognised revenue — by month</h3><div class="desc">$ per month · Sep shows recognised + held</div></div></div>
+          <div class="cb">
+            <div class="barchart"><div class="bcol"><div class="bstack"><div class="seg appr" style="height:106.8px"></div></div><div class="blab">Apr</div><div class="bval">$470k</div></div><div class="bcol"><div class="bstack"><div class="seg appr" style="height:122.3px"></div></div><div class="blab">May</div><div class="bval">$538k</div></div><div class="bcol"><div class="bstack"><div class="seg appr" style="height:134.1px"></div></div><div class="blab">Jun</div><div class="bval">$590k</div></div><div class="bcol"><div class="bstack"><div class="seg appr" style="height:142.3px"></div></div><div class="blab">Jul</div><div class="bval">$626k</div></div><div class="bcol"><div class="bstack"><div class="seg appr" style="height:147.3px"></div></div><div class="blab">Aug</div><div class="bval">$648k</div></div><div class="bcol"><div class="bstack"><div class="seg held" style="height:20.5px"></div><div class="seg appr" style="height:105.3px"></div></div><div class="blab">Sep</div><div class="bval">$553k</div></div></div>
+            <div class="legend" style="margin-top:6px"><span><i style="background:var(--teal)"></i>Recognised</span><span><i style="background:repeating-linear-gradient(45deg,#e6c98a,#e6c98a 3px,#f5e6c5 3px,#f5e6c5 6px)"></i>Held (pending / onerous)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rail">
+        <div class="outcard">
+          <div class="outhead">
+            <div class="t">Sep 2025 close</div>
+            <div class="marg"><span class="pc" style="font-size:30px">$463,300</span></div>
+            <div class="lab2">recognised this month</div>
+          </div>
+          <div class="outbody">
+            <div class="orow"><span class="k">Held (pending / onerous)</span><span class="v" style="color:var(--amber)">$90,000</span></div>
+            <div class="orow"><span class="k">YTD recognised</span><span class="v">$3,425,027</span></div>
+            <div class="orow"><span class="k">Backlog to recognise</span><span class="v">$3,394,973</span></div>
+            <div class="orow"><span class="k">Portfolio fc margin</span><span class="v" style="color:var(--amber)">24.8%</span></div>
+
+            <div class="scaption">Close readiness</div>
+            <div class="orow"><span class="k">Recognised</span><span class="v" style="color:var(--green)">4 projects</span></div>
+            <div class="orow"><span class="k">Pending PD</span><span class="v" style="color:var(--amber)">1 project</span></div>
+            <div class="orow"><span class="k">Onerous flag</span><span class="v" style="color:var(--red)">1 project</span></div>
+
+            <div class="warnbox" style="margin-top:14px">Pacific Utilities forecast at a loss — recognise onerous provision before posting, or hold.</div>
+            <button class="recbtn" style="background:var(--primary)">Post recognised to GL</button>
+            <button class="recbtn" style="background:#fff;color:var(--primary);border:1px solid var(--primary);box-shadow:none;margin-top:8px">Export close pack</button>
+            <div class="statusline"><span class="dot2" style="background:var(--amber)"></span>Close in progress · audit trail on</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

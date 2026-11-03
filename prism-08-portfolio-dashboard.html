@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PRISM · Portfolio Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef0f4; --surface:#ffffff; --surface2:#f8f9fb; --surface3:#f2f4f7;
+  --border:#e3e6ec; --border2:#d3d8e0;
+  --ink:#171c26; --ink2:#5b6472; --ink3:#8b94a4;
+  --primary:#2b3a8c; --primary2:#222e72; --primary-soft:#edf0fb; --primary-soft2:#e2e7f8;
+  --teal:#0d9488; --teal-soft:#e2f4f1;
+  --amber:#b9791a; --amber-soft:#f8eedb;
+  --green:#1a8a52; --green-soft:#e2f3ea;
+  --red:#cb4634; --red-soft:#fae6e2;
+  --indigo:#4654b0;
+  --shadow:0 1px 2px rgba(20,30,60,.06),0 4px 16px rgba(20,30,60,.05);
+  --shadow2:0 8px 30px rgba(20,30,60,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+button{font-family:inherit;cursor:pointer}
+input,select{font-family:inherit;font-size:13px;color:var(--ink)}
+
+/* ---- top bar ---- */
+.topbar{height:58px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:18px;position:sticky;top:0;z-index:30}
+.logo{display:flex;align-items:center;gap:11px}
+.logomark{width:30px;height:30px;border-radius:8px;background:linear-gradient(140deg,var(--primary),var(--indigo));position:relative;box-shadow:0 2px 6px rgba(43,58,140,.35)}
+.logomark:after{content:"";position:absolute;inset:8px;border:2px solid #fff;border-radius:3px;opacity:.9}
+.logomark:before{content:"";position:absolute;left:8px;top:14px;width:14px;height:2px;background:#fff;opacity:.9}
+.logo .name{font-weight:700;letter-spacing:.4px;font-size:16px}
+.logo .name b{color:var(--primary)}
+.logo .sub{font-size:10px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-top:-2px}
+.tb-spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:7px 11px;width:300px;color:var(--ink3)}
+.search input{border:0;background:transparent;outline:none;width:100%;color:var(--ink)}
+.period{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:9px;padding:7px 11px;background:var(--surface);font-weight:500}
+.period .lab{color:var(--ink3);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.iconbtn{width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--ink2);position:relative}
+.iconbtn .badge{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--red);border-radius:50%;border:1.5px solid #fff}
+.user{display:flex;align-items:center;gap:9px;padding-left:6px}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(140deg,#2b3a8c,#4654b0);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px}
+.user .who{line-height:1.15}
+.user .who .n{font-weight:600;font-size:12.5px}
+.user .who .r{font-size:10.5px;color:var(--primary);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+
+/* ---- shell ---- */
+.shell{display:flex;min-height:calc(100vh - 58px)}
+.nav{width:230px;background:var(--surface);border-right:1px solid var(--border);padding:14px 12px;flex-shrink:0;position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto}
+.nav .grp{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin:14px 10px 7px}
+.nav .grp:first-child{margin-top:2px}
+.nav a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;color:var(--ink2);text-decoration:none;font-weight:500;font-size:12.7px;margin-bottom:2px;position:relative}
+.nav a:hover{background:var(--surface3);color:var(--ink)}
+.nav a.on{background:var(--primary-soft);color:var(--primary2);font-weight:600}
+.nav a.on:before{content:"";position:absolute;left:-12px;top:8px;bottom:8px;width:3px;background:var(--primary);border-radius:0 3px 3px 0}
+.nav a .ico{width:16px;height:16px;flex-shrink:0;opacity:.85}
+.nav a .ct{margin-left:auto;font-size:10.5px;background:var(--surface3);border:1px solid var(--border);border-radius:20px;padding:0 7px;color:var(--ink2);font-weight:600}
+.nav a.on .ct{background:#fff}
+
+/* ---- main ---- */
+.main{flex:1;padding:22px 26px 60px;min-width:0}
+.crumb{display:flex;align-items:center;gap:7px;color:var(--ink3);font-size:11.5px;margin-bottom:10px}
+.crumb b{color:var(--ink2);font-weight:600}
+.crumb .sep{opacity:.5}
+.pagehead{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.pagehead h1{font-size:22px;font-weight:700;margin:0;letter-spacing:-.2px}
+.pagehead .meta{display:flex;align-items:center;gap:10px;margin-top:7px;flex-wrap:wrap}
+.chipcode{font-family:'IBM Plex Mono';font-size:11.5px;background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:3px 8px;color:var(--ink2);font-weight:500}
+.pill{font-size:11px;font-weight:600;border-radius:20px;padding:3px 10px;letter-spacing:.02em;display:inline-flex;align-items:center;gap:6px}
+.pill .d{width:6px;height:6px;border-radius:50%}
+.pill.active{background:var(--green-soft);color:var(--green)}
+.pill.draft{background:var(--amber-soft);color:var(--amber)}
+.headactions{margin-left:auto;display:flex;gap:9px}
+.btn{border:1px solid var(--primary);background:var(--primary);color:#fff;border-radius:9px;padding:9px 16px;font-weight:600;font-size:12.7px;display:inline-flex;align-items:center;gap:7px;box-shadow:0 1px 2px rgba(43,58,140,.2)}
+.btn:hover{background:var(--primary2)}
+.btn.ghost{background:#fff;color:var(--ink);border-color:var(--border2)}
+.btn.ghost:hover{background:var(--surface3)}
+
+.cols{display:grid;grid-template-columns:1fr 332px;gap:18px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+.card .ch{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.card .ch h3{font-size:14px;font-weight:700;margin:0}
+.card .ch .desc{font-size:11.5px;color:var(--ink3);margin-top:1px}
+.card .ch .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.card .cb{padding:18px}
+.card+.card{margin-top:18px}
+
+/* field grid */
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 18px}
+.f{display:flex;flex-direction:column;gap:6px}
+.f label{font-size:10.5px;color:var(--ink3);letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.f .box{border:1px solid var(--border2);background:#fff;border-radius:9px;padding:9px 11px;font-weight:500;display:flex;align-items:center;gap:8px;min-height:38px}
+.f .box.ro{background:var(--surface3);color:var(--ink2);border-style:dashed}
+.f .box.calc{background:var(--primary-soft);border-color:var(--primary-soft2);color:var(--primary2);font-weight:600}
+.f .box .mono{font-weight:600}
+.f .box .unit{color:var(--ink3);font-size:11px;margin-left:auto}
+.f .box select,.f .box input{border:0;outline:none;background:transparent;width:100%;font-weight:500}
+.f .box .caret{color:var(--ink3);margin-left:auto}
+
+/* segmented */
+.seg{display:inline-flex;background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--ink2);padding:6px 13px;border-radius:6px;font-weight:600;font-size:12px}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+
+/* matrix table */
+table{width:100%;border-collapse:collapse;font-size:12.6px}
+thead th{text-align:left;color:var(--ink3);font-weight:600;font-size:10.3px;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap}
+th.num,td.num{text-align:right;font-family:'IBM Plex Mono';font-variant-numeric:tabular-nums}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--surface3)}
+.mod-row td{background:var(--surface2);font-weight:700;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.mod-row .mname{display:flex;align-items:center;gap:9px}
+.mod-row .micon{width:7px;height:18px;border-radius:3px;background:var(--primary)}
+.line td:first-child{padding-left:30px}
+.sub-row td{font-weight:700;background:#fff;border-bottom:1px solid var(--border)}
+.tot-row td{background:var(--primary);color:#fff;font-weight:700;border:0}
+.tot-row td:first-child{border-radius:0 0 0 11px}
+.tot-row td:last-child{border-radius:0 0 11px 0}
+.rtag{font-size:10px;font-weight:600;border-radius:6px;padding:2px 8px;letter-spacing:.02em}
+.rtag.int{background:var(--primary-soft);color:var(--primary2)}
+.rtag.fl{background:var(--amber-soft);color:var(--amber)}
+.rtag.sub{background:var(--teal-soft);color:var(--teal)}
+.lvl{font-family:'IBM Plex Mono';font-weight:600;color:var(--ink);background:var(--surface3);border:1px solid var(--border);border-radius:6px;padding:1px 7px;font-size:11px;margin-right:8px}
+.editcell{color:var(--ink);position:relative}
+.editcell:after{content:"";position:absolute;right:8px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-right:1.5px solid var(--ink3);border-bottom:1.5px solid var(--ink3);transform:translateY(-60%) rotate(45deg);opacity:0}
+tbody tr.line:hover td{background:var(--primary-soft)}
+
+/* phases / gantt */
+.gantt{display:flex;flex-direction:column;gap:10px}
+.gmonths{display:grid;grid-template-columns:170px repeat(12,1fr);font-size:9.5px;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.gmonths span{text-align:center;padding-bottom:6px}
+.gmonths span:first-child{text-align:left}
+.grow{display:grid;grid-template-columns:170px repeat(12,1fr);align-items:center;height:30px}
+.grow .gname{font-weight:600;font-size:12.3px}
+.gtrack{grid-column:2 / span 12;position:relative;height:30px}
+.gbar{position:absolute;top:7px;height:16px;border-radius:6px;display:flex;align-items:center;padding:0 9px;color:#fff;font-size:10.5px;font-weight:600;white-space:nowrap;box-shadow:0 1px 3px rgba(20,30,60,.18)}
+
+/* right rail */
+.rail{position:sticky;top:80px}
+.outcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.outhead{padding:15px 18px 14px;background:linear-gradient(150deg,#2b3a8c,#3a47a0);color:#fff}
+.outhead .t{font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.85;font-weight:600}
+.outhead .marg{display:flex;align-items:baseline;gap:10px;margin-top:8px}
+.outhead .marg .pc{font-family:'IBM Plex Mono';font-size:34px;font-weight:600;letter-spacing:-1px}
+.outhead .marg .ab{font-family:'IBM Plex Mono';font-size:14px;opacity:.85}
+.outhead .lab2{font-size:11px;opacity:.8;margin-top:3px}
+.outbody{padding:16px 18px}
+.orow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border)}
+.orow:last-of-type{border-bottom:0}
+.orow .k{color:var(--ink2);font-size:12px}
+.orow .v{font-family:'IBM Plex Mono';font-weight:600}
+.mixbar{height:12px;border-radius:7px;overflow:hidden;display:flex;margin:14px 0 9px;border:1px solid var(--border)}
+.mixbar i{height:100%}
+.mixleg{display:flex;flex-direction:column;gap:7px;font-size:11.5px}
+.mixleg .ml{display:flex;align-items:center;gap:8px}
+.mixleg .ml .dot{width:9px;height:9px;border-radius:3px}
+.mixleg .ml .mv{margin-left:auto;font-family:'IBM Plex Mono';color:var(--ink2);font-weight:600}
+.scaption{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin:16px 0 6px}
+.note{background:var(--primary-soft);border:1px solid var(--primary-soft2);border-radius:10px;padding:11px 13px;color:var(--primary2);font-size:11.7px;line-height:1.5}
+.audit{font-size:11px;color:var(--ink3);margin-top:16px;display:flex;align-items:center;gap:8px}
+.divlabel{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+.divlabel .ln{flex:1;height:1px;background:var(--border)}
+.divlabel .tx{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+.legend{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink2)}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:middle}
+.smallnote{font-size:11px;color:var(--ink3);margin-top:10px}
+.addline{display:inline-flex;align-items:center;gap:7px;color:var(--primary);font-weight:600;font-size:12px;margin-top:12px;cursor:pointer}
+
+/* month-wise matrix */
+.unitcap{font-size:11.5px;color:var(--ink3);font-weight:500}.unitcap b{color:var(--ink2)}
+.matrix-wrap{overflow-x:auto;border-bottom:1px solid var(--border)}
+table.mx{min-width:1080px;border-collapse:separate;border-spacing:0}
+table.mx th,table.mx td{border-bottom:1px solid var(--surface3)}
+table.mx thead th{border-bottom:1px solid var(--border)}
+.mcol{width:54px;min-width:54px}
+table.mx th.sticky-l,table.mx td.sticky-l{position:sticky;left:0;z-index:3;width:236px;min-width:236px;text-align:left;box-shadow:1px 0 0 var(--border)}
+table.mx th.sticky-r,table.mx td.sticky-r{position:sticky;right:0;z-index:3;width:104px;min-width:104px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-l,table.mx thead th.sticky-r{background:var(--surface2);z-index:4}
+.line .sticky-l,.line .sticky-r{background:#fff}
+.mod-row .sticky-l,.mod-row .sticky-r{background:var(--surface2)}
+.tot-row .sticky-l,.tot-row .sticky-r{background:var(--primary);color:#fff}
+table.mx td.line-name{font-weight:500}
+table.mx tbody td{padding:8px 12px}
+table.mx .mod-row td{background:var(--surface2)}
+table.mx .tot-row td{background:var(--primary);color:#fff}
+table.mx .line td.num{color:var(--ink2)}
+table.mx .mod-row td.num{color:var(--ink);font-weight:700}
+table.mx .tot-row td.num{color:#fff;font-weight:700}
+.mx.collapsed .mcol{display:none}
+.mx.collapsed{min-width:0}
+
+
+/* combined effort+cost · second sticky-right column */
+table.mx th.sticky-r,table.mx td.sticky-r{right:0;width:120px;min-width:120px}
+table.mx th.sticky-r2,table.mx td.sticky-r2{position:sticky;right:120px;z-index:3;width:96px;min-width:96px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-r2{background:var(--surface2);z-index:4}
+.line .sticky-r2{background:#fff}
+.mod-row .sticky-r2{background:var(--surface2)}
+.tot-row .sticky-r2{background:var(--primary);color:#fff}
+table.mx{min-width:1100px}
+
+
+/* type column + man-day rate + cost, frozen left (line,type) & right (effort,rate,cost) */
+table.mx{min-width:1280px;border-collapse:separate;border-spacing:0}
+.mx.collapsed{min-width:0}
+.mcol{width:54px;min-width:54px}
+table.mx th.sticky-l,table.mx td.sticky-l{position:sticky;left:0;z-index:3;width:200px;min-width:200px;text-align:left;box-shadow:none}
+table.mx th.sticky-l2,table.mx td.sticky-l2{position:sticky;left:200px;z-index:3;width:112px;min-width:112px;text-align:left;box-shadow:1px 0 0 var(--border)}
+table.mx th.sticky-r,table.mx td.sticky-r{position:sticky;right:0;z-index:3;width:116px;min-width:116px;box-shadow:none}
+table.mx th.sticky-r2,table.mx td.sticky-r2{position:sticky;right:116px;z-index:3;width:104px;min-width:104px;box-shadow:none}
+table.mx th.sticky-r3,table.mx td.sticky-r3{position:sticky;right:220px;z-index:3;width:104px;min-width:104px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-l,table.mx thead th.sticky-l2,table.mx thead th.sticky-r,table.mx thead th.sticky-r2,table.mx thead th.sticky-r3{background:var(--surface2);z-index:4}
+.line .sticky-l,.line .sticky-l2,.line .sticky-r,.line .sticky-r2,.line .sticky-r3{background:#fff}
+.mod-row .sticky-l,.mod-row .sticky-l2,.mod-row .sticky-r,.mod-row .sticky-r2,.mod-row .sticky-r3{background:var(--surface2)}
+.tot-row .sticky-l,.tot-row .sticky-l2,.tot-row .sticky-r,.tot-row .sticky-r2,.tot-row .sticky-r3{background:var(--primary);color:#fff}
+
+</style><style>
+.kstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.kpic{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:12px 14px;box-shadow:var(--shadow)}
+.kpic .lab{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-weight:600}
+.kpic .val{font-family:'IBM Plex Mono';font-size:17px;font-weight:600;margin-top:6px;letter-spacing:-.5px}
+.kpic .dl{font-size:10.5px;margin-top:5px;font-weight:600}
+.up{color:var(--green)}.down{color:var(--red)}.neu{color:var(--ink3);font-weight:500}
+.kpic.hi{background:linear-gradient(150deg,#0d9488,#14b8a6);border-color:#0d9488}.kpic.hi .lab{color:#bfeae5}.kpic.hi .val{color:#fff}.kpic.hi .dl{color:#d2f1ed}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.cgrid3{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.cgrid .card,.cgrid3 .card{margin:0}
+.fchip{font-size:11px;font-weight:600;color:var(--ink2);background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:5px 10px}
+.mrow{display:flex;align-items:center;gap:11px;padding:5px 0}
+.mlab{width:128px;flex-shrink:0;font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mtrack{position:relative;height:15px;background:var(--surface3);border-radius:4px;flex-shrink:0}
+.mfc{position:absolute;left:0;top:0;height:15px;border-radius:4px}
+.mtick{position:absolute;top:-3px;width:2px;height:21px;background:var(--ink)}
+.negnub{position:absolute;left:-6px;top:0;width:6px;height:15px;background:var(--red);border-radius:4px 0 0 4px}
+.mval{font-family:'IBM Plex Mono';font-size:11.5px;white-space:nowrap}
+.rvrow{display:flex;align-items:center;gap:11px;padding:5px 0}
+.rvbar{display:flex;flex-shrink:0;height:15px}.rseg{height:15px}.rseg.rec{background:var(--teal);border-radius:4px 0 0 4px}.rseg.bk{background:#dfe3ea;border-radius:0 4px 4px 0}
+.rvval{font-family:'IBM Plex Mono';font-size:10.8px;white-space:nowrap}.mvs{color:var(--ink3);margin-left:4px}
+.hdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.pn{font-weight:600;font-size:12.2px}.pc2{font-size:10.2px;color:var(--ink3);margin-top:1px}
+.flag{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--surface3)}.flag:last-child{border-bottom:0}
+.fsev{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.ft{font-size:11.7px;font-weight:600}.fp{color:var(--ink3);font-weight:500;font-size:10.5px}.fd{font-size:10.7px;color:var(--ink2);margin-top:2px;line-height:1.4}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo"><div class="logomark"></div><div><div class="name"><b>PRISM</b></div><div class="sub">Project Revenue &amp; Margin</div></div></div>
+  <div class="tb-spacer"></div>
+  <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input placeholder="Search projects, customers, codes…"/></div>
+  <div class="period"><span class="lab">FY</span> 2025–26 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b94a4" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+  <div class="iconbtn"><span class="badge"></span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+  <div class="user"><div class="avatar" style="background:linear-gradient(140deg,#0d9488,#14b8a6)">RI</div><div class="who"><div class="n">R. Iyer</div><div class="r" style="color:var(--teal)">Portfolio Director</div></div></div>
+</div>
+<div class="shell">
+  <nav class="nav">
+    <div class="grp">Insights</div>
+    <a href="#" class="on"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="8"/><rect x="10" y="7" width="4" height="13"/><rect x="17" y="3" width="4" height="17"/></svg>Portfolio Dashboard</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg>QC Exceptions <span class="ct">5</span></a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg>Margin analysis</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Billing &amp; collections</a>
+    <div class="grp">Delivery</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Projects <span class="ct">6</span></a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Approvals</a>
+    <div class="grp">Finance</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Month-end Summary</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>Reports</a>
+  </nav>
+  <main class="main">
+    <div class="crumb"><b>Insights</b><span class="sep">/</span>Portfolio Dashboard<span class="sep">/</span><b>Sep 2025</b></div>
+    <div class="pagehead">
+      <div><h1>Portfolio Dashboard</h1><div class="meta"><span class="fchip">Region: All</span><span class="fchip">BU: All</span><span class="fchip">FY 2025–26 · as at Sep</span></div></div>
+      <div class="headactions"><button class="btn ghost">Export</button><button class="btn">QC exceptions (5)</button></div>
+    </div>
+
+    <div class="kstrip">
+      <div class="kpic"><div class="lab">Portfolio TCV</div><div class="val">$6,820,000</div><div class="dl neu">6 active projects</div></div>
+      <div class="kpic"><div class="lab">YTD recognised</div><div class="val">$3,425,027</div><div class="dl neu">50.2% of TCV</div></div>
+      <div class="kpic"><div class="lab">Recognised — Sep</div><div class="val">$463,300</div><div class="dl down">$90,000 held</div></div>
+      <div class="kpic hi"><div class="lab">Forecast margin</div><div class="val">24.8%</div><div class="dl">▼ 5.5 pp vs sold</div></div>
+      <div class="kpic"><div class="lab">Backlog</div><div class="val">$3,394,973</div><div class="dl neu">to recognise</div></div>
+      <div class="kpic"><div class="lab">AR outstanding</div><div class="val">$965,500</div><div class="dl neu">70% collected</div></div>
+      <div class="kpic"><div class="lab">At-risk projects</div><div class="val" style="color:var(--red)">1 + 3</div><div class="dl down">onerous · watch</div></div>
+      <div class="kpic"><div class="lab">Avg POC</div><div class="val">50.2%</div><div class="dl neu">cost basis</div></div>
+    </div>
+
+    <div class="cgrid">
+      <div class="card"><div class="ch"><div><h3>Revenue trajectory</h3><div class="desc">Cumulative recognised + forecast vs TCV</div></div></div><div class="cb"><svg viewBox="0 0 400 228" width="100%" style="display:block"><line x1="46" y1="200.0" x2="384" y2="200.0" stroke="#eceef3"/><text x="40" y="203.0" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">0M</text><line x1="46" y1="148.88888888888889" x2="384" y2="148.88888888888889" stroke="#eceef3"/><text x="40" y="151.88888888888889" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">2M</text><line x1="46" y1="97.77777777777777" x2="384" y2="97.77777777777777" stroke="#eceef3"/><text x="40" y="100.77777777777777" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">4M</text><line x1="46" y1="46.66666666666666" x2="384" y2="46.66666666666666" stroke="#eceef3"/><text x="40" y="49.66666666666666" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">6M</text><text x="46.0" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">A</text><text x="76.72727272727272" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">M</text><text x="107.45454545454545" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">J</text><text x="138.1818181818182" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">J</text><text x="168.9090909090909" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">A</text><text x="199.63636363636363" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">S</text><text x="230.36363636363635" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">O</text><text x="261.0909090909091" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">N</text><text x="291.8181818181818" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">D</text><text x="322.54545454545456" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">J</text><text x="353.27272727272725" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">F</text><text x="384.0" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">M</text>
+    <line x1="46" y1="-174088.88888888888" x2="384" y2="-174088.88888888888" stroke="#8b94a4" stroke-width="1" stroke-dasharray="4 3"/><text x="384" y="-174092.88888888888" text-anchor="end" font-size="8.5" fill="#8b94a4">TCV $6.82M</text>
+    <polygon points="46.0,200.0 46.0,-11811.11111111111 76.72727272727272,-25560.0 107.45454545454545,-40637.77777777778 138.1818181818182,-56635.55555555556 168.9090909090909,-73195.55555555556 199.63636363636363,-87327.77777777778 199.63636363636363,200.0" fill="#0d9488" opacity="0.10"/>
+    <polyline points="46.0,-11811.11111111111 76.72727272727272,-25560.0 107.45454545454545,-40637.77777777778 138.1818181818182,-56635.55555555556 168.9090909090909,-73195.55555555556 199.63636363636363,-87327.77777777778" fill="none" stroke="#0d9488" stroke-width="2.4"/>
+    <polyline points="199.63636363636363,-87327.77777777778 230.36363636363635,-100284.44444444444 261.0909090909091,-113241.11111111112 291.8181818181818,-126172.22222222222 322.54545454545456,-137544.44444444444 353.27272727272725,-148916.66666666666 384.0,-160263.33333333334" fill="none" stroke="#0d9488" stroke-width="2.2" stroke-dasharray="5 4" opacity="0.7"/>
+    <circle cx="199.63636363636363" cy="-87327.77777777778" r="3.4" fill="#0d9488"/><text x="199.63636363636363" y="-87335.77777777778" text-anchor="middle" font-size="9" font-weight="700" fill="#0d9488" font-family="IBM Plex Mono">$3.43M</text>
+    <circle cx="384.0" cy="-160263.33333333334" r="3" fill="#0d9488" opacity="0.7"/><text x="384.0" y="-160270.33333333334" text-anchor="end" font-size="8.5" fill="#0d9488">fc $6.28M</text></svg><div class="legend" style="margin-top:4px"><span><i style="background:#0d9488"></i>Recognised</span><span><i style="background:#0d9488;opacity:.6"></i>Forecast</span></div></div></div>
+      <div class="card"><div class="ch"><div><h3>Margin erosion</h3><div class="desc">Portfolio forecast margin vs sold</div></div></div><div class="cb"><svg viewBox="0 0 400 228" width="100%" style="display:block"><line x1="40" y1="200.0" x2="384" y2="200.0" stroke="#eceef3"/><text x="34" y="203.0" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">20%</text><line x1="40" y1="138.66666666666669" x2="384" y2="138.66666666666669" stroke="#eceef3"/><text x="34" y="141.66666666666669" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">24%</text><line x1="40" y1="77.33333333333334" x2="384" y2="77.33333333333334" stroke="#eceef3"/><text x="34" y="80.33333333333334" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">28%</text><line x1="40" y1="16.0" x2="384" y2="16.0" stroke="#eceef3"/><text x="34" y="19.0" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">32%</text><text x="40.0" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">A</text><text x="71.27272727272728" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">M</text><text x="102.54545454545455" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">J</text><text x="133.8181818181818" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">J</text><text x="165.0909090909091" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">A</text><text x="196.36363636363635" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">S</text><text x="227.63636363636363" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">O</text><text x="258.9090909090909" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">N</text><text x="290.1818181818182" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">D</text><text x="321.4545454545455" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">J</text><text x="352.7272727272727" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">F</text><text x="384.0" y="219" text-anchor="middle" font-size="8" fill="#8b94a4">M</text>
+    <line x1="40" y1="42.066666666666656" x2="384" y2="42.066666666666656" stroke="#1a8a52" stroke-width="1" stroke-dasharray="4 3"/><text x="384" y="38.066666666666656" text-anchor="end" font-size="8.5" fill="#1a8a52">sold 30.3%</text>
+    <polyline points="40.0,46.66666666666666 71.27272727272728,55.86666666666669 102.54545454545455,75.79999999999997 133.8181818181818,94.20000000000003 165.0909090909091,114.13333333333331 196.36363636363635,126.39999999999998" fill="none" stroke="#cb4634" stroke-width="2.4"/>
+    <polyline points="196.36363636363635,126.39999999999998 227.63636363636363,124.86666666666669 258.9090909090909,121.8 290.1818181818182,118.73333333333333 321.4545454545455,117.2 352.7272727272727,115.66666666666669 384.0,114.13333333333331" fill="none" stroke="#b9791a" stroke-width="2.2" stroke-dasharray="5 4"/>
+    <circle cx="196.36363636363635" cy="126.39999999999998" r="3.4" fill="#cb4634"/><text x="196.36363636363635" y="141.39999999999998" text-anchor="middle" font-size="9" font-weight="700" fill="#cb4634" font-family="IBM Plex Mono">24.8%</text></svg><div class="legend" style="margin-top:4px"><span><i style="background:#cb4634"></i>Actual</span><span><i style="background:#b9791a"></i>Forecast</span><span><i style="background:#1a8a52"></i>Sold</span></div></div></div>
+    </div>
+
+    <div class="card">
+      <div class="ch"><div><h3>Project positioning — POC vs forecast margin</h3><div class="desc">Bubble size = TCV · colour = RAG · below the dashed line = forecast loss</div></div></div>
+      <div class="cb"><svg viewBox="0 0 820 348" width="100%" style="display:block"><line x1="52.0" y1="20" x2="52.0" y2="308" stroke="#eceef3"/><text x="52.0" y="334" text-anchor="middle" font-size="9" fill="#8b94a4">0%</text><line x1="239.5" y1="20" x2="239.5" y2="308" stroke="#eceef3"/><text x="239.5" y="334" text-anchor="middle" font-size="9" fill="#8b94a4">25%</text><line x1="427.0" y1="20" x2="427.0" y2="308" stroke="#eceef3"/><text x="427.0" y="334" text-anchor="middle" font-size="9" fill="#8b94a4">50%</text><line x1="614.5" y1="20" x2="614.5" y2="308" stroke="#eceef3"/><text x="614.5" y="334" text-anchor="middle" font-size="9" fill="#8b94a4">75%</text><line x1="802.0" y1="20" x2="802.0" y2="308" stroke="#eceef3"/><text x="802.0" y="334" text-anchor="middle" font-size="9" fill="#8b94a4">100%</text><line x1="52" y1="268.72727272727275" x2="802" y2="268.72727272727275" stroke="#eceef3"/><text x="45" y="271.72727272727275" text-anchor="end" font-size="9" fill="#8b94a4" font-family="IBM Plex Mono">0%</text><line x1="52" y1="203.27272727272728" x2="802" y2="203.27272727272728" stroke="#eceef3"/><text x="45" y="206.27272727272728" text-anchor="end" font-size="9" fill="#8b94a4" font-family="IBM Plex Mono">10%</text><line x1="52" y1="137.8181818181818" x2="802" y2="137.8181818181818" stroke="#eceef3"/><text x="45" y="140.8181818181818" text-anchor="end" font-size="9" fill="#8b94a4" font-family="IBM Plex Mono">20%</text><line x1="52" y1="72.36363636363635" x2="802" y2="72.36363636363635" stroke="#eceef3"/><text x="45" y="75.36363636363635" text-anchor="end" font-size="9" fill="#8b94a4" font-family="IBM Plex Mono">30%</text><rect x="52" y="268.72727272727275" width="750" height="39.27272727272725" fill="#cb4634" opacity="0.05"/><line x1="52" y1="268.72727272727275" x2="802" y2="268.72727272727275" stroke="#cb4634" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><text x="57" y="281.72727272727275" font-size="8.5" fill="#cb4634">loss zone</text><line x1="52" y1="70.4" x2="802" y2="70.4" stroke="#1a8a52" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/><text x="802" y="66.4" text-anchor="end" font-size="8.5" fill="#1a8a52">portfolio sold 30.3%</text><circle cx="486.4328238133548" cy="53.96560196560199" r="26" fill="#b9791a" opacity="0.22"/><circle cx="486.4328238133548" cy="53.96560196560199" r="26" fill="none" stroke="#b9791a" stroke-width="1.6"/><text x="486.4328238133548" y="57.46560196560199" text-anchor="middle" font-size="10" font-weight="700" fill="#b9791a">NL</text><text x="486.4328238133548" y="23.96560196560199" text-anchor="middle" font-size="8.5" fill="#4b5468">Nordwind · $1,850k</text><circle cx="592.0" cy="94.86363636363635" r="15" fill="#1a8a52" opacity="0.22"/><circle cx="592.0" cy="94.86363636363635" r="15" fill="none" stroke="#1a8a52" stroke-width="1.6"/><text x="592.0" y="98.36363636363635" text-anchor="middle" font-size="10" font-weight="700" fill="#1a8a52">HP</text><text x="592.0" y="75.86363636363635" text-anchor="middle" font-size="8.5" fill="#4b5468">Helvetia · $640k</text><circle cx="359.5" cy="75.09090909090912" r="30" fill="#1a8a52" opacity="0.22"/><circle cx="359.5" cy="75.09090909090912" r="30" fill="none" stroke="#1a8a52" stroke-width="1.6"/><text x="359.5" y="78.59090909090912" text-anchor="middle" font-size="10" font-weight="700" fill="#1a8a52">MF</text><text x="359.5" y="41.09090909090912" text-anchor="middle" font-size="8.5" fill="#4b5468">Meridian · $2,400k</text><circle cx="616.3564356435644" cy="288.7643784786642" r="19" fill="#cb4634" opacity="0.22"/><circle cx="616.3564356435644" cy="288.7643784786642" r="19" fill="none" stroke="#cb4634" stroke-width="1.6"/><text x="616.3564356435644" y="292.2643784786642" text-anchor="middle" font-size="10" font-weight="700" fill="#cb4634">PU</text><text x="616.3564356435644" y="265.7643784786642" text-anchor="middle" font-size="8.5" fill="#4b5468">Pacific · $980k</text><circle cx="224.5" cy="107.6083916083916" r="14" fill="#1a8a52" opacity="0.22"/><circle cx="224.5" cy="107.6083916083916" r="14" fill="none" stroke="#1a8a52" stroke-width="1.6"/><text x="224.5" y="111.1083916083916" text-anchor="middle" font-size="10" font-weight="700" fill="#1a8a52">LR</text><text x="224.5" y="89.6083916083916" text-anchor="middle" font-size="8.5" fill="#4b5468">Lotus · $520k</text><circle cx="142.0" cy="104.32980972515855" r="13" fill="#1a8a52" opacity="0.22"/><circle cx="142.0" cy="104.32980972515855" r="13" fill="none" stroke="#1a8a52" stroke-width="1.6"/><text x="142.0" y="107.82980972515855" text-anchor="middle" font-size="10" font-weight="700" fill="#1a8a52">SI</text><text x="142.0" y="87.32980972515855" text-anchor="middle" font-size="8.5" fill="#4b5468">Surya · $430k</text>
+    <text x="427.0" y="346" text-anchor="middle" font-size="9" fill="#8b94a4">POC (cost basis) →</text></svg></div>
+    </div>
+
+    <div class="cgrid">
+      <div class="card"><div class="ch"><div><h3>Backlog by quarter</h3><div class="desc">Revenue still to recognise</div></div></div><div class="cb"><svg viewBox="0 0 390 210" width="100%" style="display:block"><line x1="40" y1="170.0" x2="376" y2="170.0" stroke="#eceef3"/><text x="34" y="173.0" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">0M</text><line x1="40" y1="124.11764705882352" x2="376" y2="124.11764705882352" stroke="#eceef3"/><text x="34" y="127.11764705882352" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">0M</text><line x1="40" y1="78.23529411764706" x2="376" y2="78.23529411764706" stroke="#eceef3"/><text x="34" y="81.23529411764706" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">1M</text><line x1="40" y1="32.352941176470594" x2="376" y2="32.352941176470594" stroke="#eceef3"/><text x="34" y="35.352941176470594" text-anchor="end" font-size="8.5" fill="#8b94a4" font-family="IBM Plex Mono">1M</text><rect x="63.0" y="30.50479999999999" width="66" height="139.4952" rx="4" fill="#2b3a8c"/><text x="96.0" y="25.50479999999999" text-anchor="middle" font-size="9.5" font-weight="700" fill="#2b3a8c" font-family="IBM Plex Mono">$1,520k</text><text x="96.0" y="197" text-anchor="middle" font-size="9" fill="#8b94a4">Oct–Dec 25</text><rect x="175.0" y="47.58790117647058" width="66" height="122.41209882352942" rx="4" fill="#2b3a8c"/><text x="208.0" y="42.58790117647058" text-anchor="middle" font-size="9.5" font-weight="700" fill="#2b3a8c" font-family="IBM Plex Mono">$1,334k</text><text x="208.0" y="197" text-anchor="middle" font-size="9" fill="#8b94a4">Jan–Mar 26</text><rect x="287.0" y="120.3686" width="66" height="49.6314" rx="4" fill="#2b3a8c"/><text x="320.0" y="115.3686" text-anchor="middle" font-size="9.5" font-weight="700" fill="#2b3a8c" font-family="IBM Plex Mono">$541k</text><text x="320.0" y="197" text-anchor="middle" font-size="9" fill="#8b94a4">FY27+</text></svg></div></div>
+      <div class="card"><div class="ch"><div><h3>Recognised revenue by BU</h3><div class="desc">YTD · by SAP line</div></div></div><div class="cb"><svg viewBox="0 0 390 172" width="100%" style="display:block"><text x="0" y="23" font-size="10.5" fill="#3a4254" font-weight="600">SAP Finance</text><rect x="128" y="13" width="204.0" height="15" rx="3" fill="#0d9488"/><text x="337.0" y="25" font-size="9.5" fill="#4b5468" font-family="IBM Plex Mono">$1,072k</text><text x="0" y="49" font-size="10.5" fill="#3a4254" font-weight="600">SAP S/4HANA</text><rect x="128" y="39" width="187.32345341223086" height="15" rx="3" fill="#0d9488"/><text x="320.32345341223083" y="51" font-size="9.5" fill="#4b5468" font-family="IBM Plex Mono">$984k</text><text x="0" y="75" font-size="10.5" fill="#3a4254" font-weight="600">SAP BTP</text><rect x="128" y="65" width="140.38331804468268" height="15" rx="3" fill="#0d9488"/><text x="273.3833180446827" y="77" font-size="9.5" fill="#4b5468" font-family="IBM Plex Mono">$737k</text><text x="0" y="101" font-size="10.5" fill="#3a4254" font-weight="600">SAP SuccessFactors</text><rect x="128" y="91" width="87.7222025735325" height="15" rx="3" fill="#0d9488"/><text x="220.7222025735325" y="103" font-size="9.5" fill="#4b5468" font-family="IBM Plex Mono">$461k</text><text x="0" y="127" font-size="10.5" fill="#3a4254" font-weight="600">SAP Analytics</text><rect x="128" y="117" width="22.768175841567896" height="15" rx="3" fill="#0d9488"/><text x="155.76817584156788" y="129" font-size="9.5" fill="#4b5468" font-family="IBM Plex Mono">$120k</text><text x="0" y="153" font-size="10.5" fill="#3a4254" font-weight="600">SAP Ariba</text><rect x="128" y="143" width="9.823059142348692" height="15" rx="3" fill="#0d9488"/><text x="142.82305914234868" y="155" font-size="9.5" fill="#4b5468" font-family="IBM Plex Mono">$52k</text></svg></div></div>
+    </div>
+
+    <div class="cgrid">
+      <div class="card"><div class="ch"><div><h3>Margin — forecast vs sold</h3><div class="desc">Bar = forecast · tick = sold</div></div></div><div class="cb"><div class="mrow"><div class="mlab">Nordwind Logistics AG</div><div class="mtrack" style="width:240px"><div class="mfc" style="width:197px;background:#b9791a"></div><div class="mtick" style="left:217px"></div></div><div class="mval"><span style="color:#b9791a;font-weight:700">32.8%</span></div></div><div class="mrow"><div class="mlab">Helvetia Pharma</div><div class="mtrack" style="width:240px"><div class="mfc" style="width:159px;background:#1a8a52"></div><div class="mtick" style="left:169px"></div></div><div class="mval"><span style="color:#1a8a52;font-weight:700">26.6%</span></div></div><div class="mrow"><div class="mlab">Meridian Foods</div><div class="mtrack" style="width:240px"><div class="mfc" style="width:178px;background:#1a8a52"></div><div class="mtick" style="left:180px"></div></div><div class="mval"><span style="color:#1a8a52;font-weight:700">29.6%</span></div></div><div class="mrow"><div class="mlab">Pacific Utilities</div><div class="mtrack" style="width:240px"><div class="negnub"></div><div class="mfc" style="width:4px;background:#cb4634"></div><div class="mtick" style="left:153px"></div></div><div class="mval"><span style="color:#cb4634;font-weight:700">−3.1%</span></div></div><div class="mrow"><div class="mlab">Lotus Retail</div><div class="mtrack" style="width:240px"><div class="mfc" style="width:148px;background:#1a8a52"></div><div class="mtick" style="left:157px"></div></div><div class="mval"><span style="color:#1a8a52;font-weight:700">24.6%</span></div></div><div class="mrow"><div class="mlab">Surya Industries</div><div class="mtrack" style="width:240px"><div class="mfc" style="width:151px;background:#1a8a52"></div><div class="mtick" style="left:153px"></div></div><div class="mval"><span style="color:#1a8a52;font-weight:700">25.1%</span></div></div><div class="legend" style="margin-top:8px"><span><i style="background:#1a8a52"></i>On track</span><span><i style="background:#b9791a"></i>Watch</span><span><i style="background:#cb4634"></i>At risk</span></div></div></div>
+      <div class="card"><div class="ch"><div><h3>Recognised vs backlog</h3><div class="desc">By project</div></div></div><div class="cb"><div class="rvrow"><div class="mlab">Nordwind Logistics AG</div><div class="rvbar"><div class="rseg rec" style="width:94px"></div><div class="rseg bk" style="width:68px"></div></div><div class="rvval">$1,072k<span class="mvs">+$778k</span></div></div><div class="rvrow"><div class="mlab">Helvetia Pharma</div><div class="rvbar"><div class="rseg rec" style="width:40px"></div><div class="rseg bk" style="width:16px"></div></div><div class="rvval">$461k<span class="mvs">+$179k</span></div></div><div class="rvrow"><div class="mlab">Meridian Foods</div><div class="rvbar"><div class="rseg rec" style="width:86px"></div><div class="rseg bk" style="width:124px"></div></div><div class="rvval">$984k<span class="mvs">+$1,416k</span></div></div><div class="rvrow"><div class="mlab">Pacific Utilities</div><div class="rvbar"><div class="rseg rec" style="width:65px"></div><div class="rseg bk" style="width:21px"></div></div><div class="rvval">$737k<span class="mvs">+$243k</span></div></div><div class="rvrow"><div class="mlab">Lotus Retail</div><div class="rvbar"><div class="rseg rec" style="width:10px"></div><div class="rseg bk" style="width:35px"></div></div><div class="rvval">$120k<span class="mvs">+$400k</span></div></div><div class="rvrow"><div class="mlab">Surya Industries</div><div class="rvbar"><div class="rseg rec" style="width:5px"></div><div class="rseg bk" style="width:33px"></div></div><div class="rvval">$52k<span class="mvs">+$378k</span></div></div><div class="legend" style="margin-top:8px"><span><i style="background:#0d9488"></i>Recognised</span><span><i style="background:#dfe3ea"></i>Backlog</span></div></div></div>
+    </div>
+
+    <div class="card">
+      <div class="ch"><div><h3>Project health</h3><div class="desc">RAG by forecast margin · AR ageing · QC flag</div></div></div>
+      <table>
+        <thead><tr><th>Project</th><th class="num">TCV</th><th class="num">POC</th><th class="num">Recognised</th><th class="num">EAC</th><th>Fc margin</th><th>AR</th><th>QC flag</th></tr></thead>
+        <tbody><tr class="line"><td><div class="pn">Nordwind Logistics AG</div><div class="pc2">SAP Finance · EMEA · Germany</div></td>
+      <td class="num">$1,850,000</td><td class="num">57.9%</td><td class="num">$1,071,601</td><td class="num">$1,243,000</td>
+      <td><span class="hdot" style="background:#b9791a"></span><span style="color:#b9791a;font-weight:600">32.8%</span></td>
+      <td><span class="hdot" style="background:#cb4634"></span><span class="mono">$462,500</span></td>
+      <td><span style="color:#b9791a;font-weight:600">Watch</span></td></tr><tr class="line"><td><div class="pn">Helvetia Pharma</div><div class="pc2">SAP SuccessFactors · EMEA · Switzerland</div></td>
+      <td class="num">$640,000</td><td class="num">72.0%</td><td class="num">$460,800</td><td class="num">$470,000</td>
+      <td><span class="hdot" style="background:#1a8a52"></span><span style="color:#1a8a52;font-weight:600">26.6%</span></td>
+      <td><span class="hdot" style="background:#b9791a"></span><span class="mono">$80,000</span></td>
+      <td><span style="color:#8b94a4;font-weight:600">—</span></td></tr><tr class="line"><td><div class="pn">Meridian Foods</div><div class="pc2">SAP S/4HANA · APAC · Singapore</div></td>
+      <td class="num">$2,400,000</td><td class="num">41.0%</td><td class="num">$984,000</td><td class="num">$1,690,000</td>
+      <td><span class="hdot" style="background:#1a8a52"></span><span style="color:#1a8a52;font-weight:600">29.6%</span></td>
+      <td><span class="hdot" style="background:#cb4634"></span><span class="mono">$200,000</span></td>
+      <td><span style="color:#8b94a4;font-weight:600">—</span></td></tr><tr class="line"><td><div class="pn">Pacific Utilities</div><div class="pc2">SAP BTP · APAC · Australia</div></td>
+      <td class="num">$980,000</td><td class="num">75.2%</td><td class="num">$737,426</td><td class="num">$1,010,000</td>
+      <td><span class="hdot" style="background:#cb4634"></span><span style="color:#cb4634;font-weight:600">−3.1%</span></td>
+      <td><span class="hdot" style="background:#cb4634"></span><span class="mono">$180,000</span></td>
+      <td><span style="color:#cb4634;font-weight:600">Onerous</span></td></tr><tr class="line"><td><div class="pn">Lotus Retail</div><div class="pc2">SAP Analytics · APAC · Thailand</div></td>
+      <td class="num">$520,000</td><td class="num">23.0%</td><td class="num">$119,600</td><td class="num">$392,000</td>
+      <td><span class="hdot" style="background:#1a8a52"></span><span style="color:#1a8a52;font-weight:600">24.6%</span></td>
+      <td><span class="hdot" style="background:#1a8a52"></span><span class="mono">$0</span></td>
+      <td><span style="color:#8b94a4;font-weight:600">—</span></td></tr><tr class="line"><td><div class="pn">Surya Industries</div><div class="pc2">SAP Ariba · India</div></td>
+      <td class="num">$430,000</td><td class="num">12.0%</td><td class="num">$51,600</td><td class="num">$322,000</td>
+      <td><span class="hdot" style="background:#1a8a52"></span><span style="color:#1a8a52;font-weight:600">25.1%</span></td>
+      <td><span class="hdot" style="background:#b9791a"></span><span class="mono">$43,000</span></td>
+      <td><span style="color:#b9791a;font-weight:600">Pending PD</span></td></tr>
+          <tr class="tot-row" style="background:var(--primary)"><td style="border-radius:0 0 0 11px">Portfolio</td><td class="num">$6,820,000</td><td class="num">50.2%</td><td class="num">$3,425,027</td><td class="num">$5,127,000</td><td>24.8%</td><td class="mono">$965,500</td><td style="border-radius:0 0 11px 0"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cgrid3">
+      <div class="card"><div class="ch"><div><h3>QC red flags</h3></div><div class="right"><span class="pill" style="color:var(--red);background:var(--red-soft)">5 open</span></div></div><div class="cb" style="padding-top:6px"><div class="flag"><span class="fsev" style="background:#cb4634"></span><div><div class="ft">Onerous contract <span class="fp">· Pacific Utilities</span></div><div class="fd">EAC $1,010,000 &gt; TCV — loss −3.1%.</div></div></div><div class="flag"><span class="fsev" style="background:#cb4634"></span><div><div class="ft">Margin erosion <span class="fp">· Pacific Utilities</span></div><div class="fd">28.6 pp below sold (&gt;5pp).</div></div></div><div class="flag"><span class="fsev" style="background:#b9791a"></span><div><div class="ft">Approval overdue <span class="fp">· Surya Industries</span></div><div class="fd">Sep pending PD 6 days.</div></div></div><div class="flag"><span class="fsev" style="background:#b9791a"></span><div><div class="ft">AR ageing <span class="fp">· Pacific Utilities</span></div><div class="fd">$180,000 beyond terms.</div></div></div><div class="flag"><span class="fsev" style="background:#b9791a"></span><div><div class="ft">Margin watch <span class="fp">· Nordwind Logistics</span></div><div class="fd">−3.4 pp vs sold.</div></div></div></div></div>
+      <div class="card"><div class="ch"><div><h3>Delivery cost mix</h3><div class="desc">EAC $5,127,000</div></div></div><div class="cb">
+        <div class="mixbar"><i style="width:67.9%;background:#2b3a8c"></i><i style="width:20.9%;background:#0d9488"></i><i style="width:11.3%;background:#b9791a"></i></div>
+        <div class="mixleg"><div class="ml"><span class="dot" style="background:#2b3a8c"></span>Internal<span class="mv">$3,480,000 · 68%</span></div><div class="ml"><span class="dot" style="background:#0d9488"></span>Freelancer<span class="mv">$1,069,000 · 21%</span></div><div class="ml"><span class="dot" style="background:#b9791a"></span>Subcontractor<span class="mv">$578,000 · 11%</span></div></div></div></div>
+      <div class="card"><div class="ch"><div><h3>Billing &amp; collections</h3></div></div><div class="cb">
+        <div class="orow"><span class="k">Invoiced</span><span class="v">$3,252,000</span></div>
+        <div class="orow"><span class="k">Collected</span><span class="v" style="color:var(--green)">$2,286,500</span></div>
+        <div class="orow"><span class="k">AR outstanding</span><span class="v" style="color:var(--red)">$965,500</span></div>
+        <div class="scaption">Collection rate</div>
+        <div class="mixbar"><i style="width:70.3%;background:#1a8a52"></i><i style="width:29.7%;background:#e6b8af"></i></div>
+        <div class="mixleg"><div class="ml"><span class="dot" style="background:#1a8a52"></span>Collected<span class="mv">70%</span></div><div class="ml"><span class="dot" style="background:#e6b8af"></span>Outstanding<span class="mv">30%</span></div></div></div></div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

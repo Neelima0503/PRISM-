@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>PRISM · Scope Document v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#2b3a8c;--primary2:#222e72;--primary-soft:#edf0fb;
+  --teal:#0d9488;--teal-soft:#e2f4f1;
+  --amber:#b9791a;--amber-soft:#f8eedb;
+  --green:#1a8a52;--green-soft:#e2f3ea;
+  --red:#cb4634;--red-soft:#fae6e2;
+  --indigo:#4654b0;--indigo-soft:#ebe9f7;
+  --ink:#171c26;--ink2:#5b6472;--ink3:#8b94a4;
+  --border:#e3e6ec;--surface2:#f8f9fb;--surface3:#f2f4f7;
+}
+*{box-sizing:border-box}
+html{background:#f0f2f6;-webkit-font-smoothing:antialiased}
+body{margin:0;font-family:'Hanken Grotesk',sans-serif;font-size:13.5px;line-height:1.6;color:var(--ink);background:#f0f2f6}
+.page{max-width:900px;margin:0 auto;background:#fff;box-shadow:0 2px 24px rgba(20,30,60,.08);min-height:100vh}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+/* cover */
+.cover{background:linear-gradient(150deg,#1a2468,#2b3a8c 50%,#3a47a0);color:#fff;padding:60px 56px 48px;position:relative;overflow:hidden}
+.cover:before{content:"";position:absolute;right:-40px;top:-40px;width:320px;height:320px;border-radius:50%;border:2px solid rgba(255,255,255,.08)}
+.cover:after{content:"";position:absolute;right:30px;top:40px;width:180px;height:180px;border-radius:50%;border:2px solid rgba(255,255,255,.06)}
+.cover .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:28px}
+.cover .badge .dot{width:6px;height:6px;border-radius:50%;background:#4ade80}
+.cover h1{font-size:42px;font-weight:700;letter-spacing:-1px;margin:0 0 6px;line-height:1.1}
+.cover h1 b{color:#93c5fd}
+.cover .subtitle{font-size:18px;opacity:.8;margin-bottom:40px;font-weight:400}
+.cover .meta{display:flex;gap:36px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.15);padding-top:24px}
+.cover .meta .m{display:flex;flex-direction:column;gap:3px}
+.cover .meta .mk{font-size:10px;text-transform:uppercase;letter-spacing:.1em;opacity:.6;font-weight:600}
+.cover .meta .mv{font-size:13.5px;font-weight:600}
+
+/* doc body */
+.doc{padding:40px 56px 80px}
+
+/* section headings */
+.sec{margin-bottom:40px}
+.sec h2{font-size:20px;font-weight:700;letter-spacing:-.3px;margin:0 0 4px;color:var(--primary);display:flex;align-items:center;gap:12px;padding-bottom:10px;border-bottom:2px solid var(--primary-soft)}
+.sec h2 .sn{font-family:'IBM Plex Mono';font-size:11px;font-weight:600;background:var(--primary);color:#fff;border-radius:5px;padding:2px 8px;letter-spacing:.04em}
+.sec h3{font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px}
+.sec h4{font-size:13px;font-weight:700;color:var(--ink2);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.06em}
+.sec p{margin:0 0 12px;color:var(--ink2);line-height:1.65}
+.sec ul,.sec ol{margin:0 0 14px;padding-left:20px;color:var(--ink2)}
+.sec li{margin-bottom:5px;line-height:1.6}
+.sec li b{color:var(--ink);font-weight:600}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;margin-bottom:18px;border-radius:11px;border:1px solid var(--border);box-shadow:0 1px 4px rgba(20,30,60,.04)}
+table{width:100%;border-collapse:collapse;font-size:12.7px}
+thead th{text-align:left;background:var(--surface2);color:var(--ink3);font-weight:600;font-size:10.3px;letter-spacing:.08em;text-transform:uppercase;padding:9px 14px;border-bottom:1px solid var(--border);white-space:nowrap}
+tbody td{padding:9px 14px;border-bottom:1px solid #f0f2f6;vertical-align:top;line-height:1.5}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--surface2)}
+td code{font-family:'IBM Plex Mono';font-size:11.5px;background:var(--surface3);border:1px solid var(--border);border-radius:4px;padding:1px 6px;color:var(--ink)}
+
+/* pill / badge */
+.pill{font-size:10.5px;font-weight:700;border-radius:20px;padding:3px 9px;white-space:nowrap}
+.pill.g{background:var(--green-soft);color:var(--green)}
+.pill.a{background:var(--amber-soft);color:var(--amber)}
+.pill.r{background:var(--red-soft);color:var(--red)}
+.pill.b{background:var(--primary-soft);color:var(--primary2)}
+.pill.i{background:var(--indigo-soft);color:var(--indigo)}
+.pill.t{background:var(--teal-soft);color:var(--teal)}
+
+/* callout box */
+.callout{border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:12.7px;color:var(--primary2)}
+.callout.warn{border-color:var(--amber);background:var(--amber-soft);color:#7a4e0a}
+.callout.red{border-color:var(--red);background:var(--red-soft);color:#8a2a1a}
+
+/* formula box */
+.formula{background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:13px 18px;margin:12px 0;font-family:'IBM Plex Mono';font-size:12.5px;color:var(--ink)}
+.formula .name{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);font-weight:600;font-family:'Hanken Grotesk';margin-bottom:5px}
+
+/* toc */
+.toc{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:36px}
+.toc h3{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);font-weight:600;margin:0 0 12px}
+.toc ol{margin:0;padding-left:18px;list-style:decimal}
+.toc li{color:var(--ink2);font-size:13px;padding:3px 0}
+.toc li a{color:var(--primary2);text-decoration:none;font-weight:500}
+.toc li a:hover{text-decoration:underline}
+.toc .toc-sub{padding-left:16px;font-size:12px;color:var(--ink3)}
+
+/* footer */
+.footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--ink3)}
+.footer b{color:var(--primary);font-weight:700}
+
+/* print */
+@media print{
+  html{background:#fff}
+  .page{box-shadow:none;max-width:none}
+  .cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="badge"><span class="dot"></span>Functional Scope Document</div>
+    <h1><b>PRISM</b></h1>
+    <div class="subtitle">Projects InSights and Revenues Management<br>Fixed-Bid SAP Project Financial Tracker</div>
+    <div class="meta">
+      <div class="m"><div class="mk">Version</div><div class="mv">1.0</div></div>
+      <div class="m"><div class="mk">Date</div><div class="mv">Oct 2025</div></div>
+      <div class="m"><div class="mk">Prepared by</div><div class="mv">Raviteja Kolla · Finance, NTT DATA</div></div>
+      <div class="m"><div class="mk">Classification</div><div class="mv">Internal Use Only</div></div>
+      <div class="m"><div class="mk">Status</div><div class="mv">Draft for Review</div></div>
+    </div>
+  </div>
+
+  <!-- DOC BODY -->
+  <div class="doc">
+
+    <!-- TOC -->
+    <div class="toc">
+      <h3>Table of Contents</h3>
+      <ol>
+        <li><a href="#s1">Executive Summary</a></li>
+        <li><a href="#s2">System Overview &amp; Purpose</a></li>
+        <li><a href="#s3">Screen Inventory</a></li>
+        <li><a href="#s4">User Roles &amp; Permissions</a></li>
+        <li><a href="#s5">Core Business Rules &amp; Formulas</a>
+          <div class="toc-sub">5.1 Revenue Recognition · 5.2 EAC · 5.3 Period States · 5.4 Submission Workflow</div>
+        </li>
+        <li><a href="#s6">Currency &amp; FX Rules</a></li>
+        <li><a href="#s7">Data Model Overview</a></li>
+        <li><a href="#s8">Constraints &amp; Assumptions</a></li>
+        <li><a href="#s9">Out of Scope</a></li>
+        <li><a href="#s10">Glossary</a></li>
+        <li><a href="#s11">Standard Reports</a></li>
+        <li><a href="#s12">Design Decisions &amp; Resolved Open Points</a></li>
+        <li><a href="#s13">Implementation Phases</a></li>
+      </ol>
+    </div>
+
+    <!-- S1 -->
+    <div class="sec" id="s1">
+      <h2><span class="sn">01</span>Executive Summary</h2>
+      <p>PRISM is a <b>standalone, browser-based financial tracking system</b> purpose-built for NTT DATA's fixed-bid SAP delivery portfolio. It replaces manual spreadsheet reconciliation with a structured month-end workflow covering project baseline capture, monthly effort submission by PMs, PD approval, Finance lock-down, and IFRS 15 percentage-of-completion revenue recognition.</p>
+      <p>PRISM is fully self-contained — it has no real-time integration with SAP, ERP systems, or external time-tracking tools. All monetary values are stored in <b>local currency (THB)</b>; USD is a display-only computed value. The system covers 6 active projects across EMEA and APAC as of October 2025.</p>
+      <div class="callout">Core purpose: Ensure every recognised revenue figure is traceable to an approved EAC, a locked period, and a signed-off POC% — eliminating the risk of unreviewed month-end postings.</div>
+    </div>
+
+    <!-- S2 -->
+    <div class="sec" id="s2">
+      <h2><span class="sn">02</span>System Overview &amp; Purpose</h2>
+      <h3>What PRISM Manages</h3>
+      <ul>
+        <li><b>Project baselines</b> — TCV, sold margin, phase Gantt, milestone invoicing plan, resource mix</li>
+        <li><b>Monthly EAC updates</b> — PM enters revised ETC each period; system computes EAC and POC%</li>
+        <li><b>Revenue recognition</b> — Percentage-of-completion method per IFRS 15; revenue = TCV × POC% − frozen prior YTD</li>
+        <li><b>Approval workflow</b> — PM submits → Project Director approves → Finance locks</li>
+        <li><b>Portfolio analytics</b> — Margin erosion, project health, backlog, AR ageing across 6 projects</li>
+        <li><b>Freelancer invoice reconciliation</b> — Match system-booked days to received invoices before Finance close</li>
+        <li><b>Rate masters</b> — FY-versioned L1–L7 internal cost rates + freelancer bands</li>
+        <li><b>Admin</b> — Period calendar, countries &amp; FX rates, user access management</li>
+      </ul>
+      <h3>Architecture Principles</h3>
+      <ul>
+        <li>Fully standalone — no SAP, ERP, or external API connections</li>
+        <li>Browser-based HTML/CSS/JS; no backend framework in prototype phase</li>
+        <li>All monetary fields stored in local currency (LC); USD computed at runtime via latest FX rate</li>
+        <li>Exceptions are system auto-generated based on configurable business rules (not manual flagging)</li>
+        <li>Immutable frozen periods — once a Finance lock is applied, no field in that period may be edited without an Admin reopen + full re-approval cycle</li>
+      </ul>
+    </div>
+
+    <!-- S3 -->
+    <div class="sec" id="s3">
+      <h2><span class="sn">03</span>Screen Inventory</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>File</th><th>Screen Name</th><th>Primary Role</th><th>Purpose</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><code>prism-00</code></td><td>Home / Navigation Index</td><td>All</td><td>Central launch pad linking all modules</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-01</code></td><td>Period Selector</td><td>All</td><td>Select active working period; see period state</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-01b</code></td><td>Baseline &amp; Deal Closure Setup</td><td>Finance / PM</td><td>Capture TCV, baseline effort matrix, phases, milestones</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-02</code></td><td>Portfolio Home</td><td>PD / Finance</td><td>Portfolio KPIs, RAG status, period navigation</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-03</code></td><td>Project Detail</td><td>PM / PD / Finance</td><td>Monthly resource actuals, EAC, POC%, three analytics charts</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-04</code></td><td>PM Submission</td><td>PM</td><td>Enter ETC, update subcon %, submit for PD review; analytics</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-05</code></td><td>PD Review &amp; Approval</td><td>Project Director</td><td>Review PM submission, approve / hold / reject; analytics</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-06</code></td><td>Finance Month-end</td><td>Finance</td><td>Lock recognition after PD approval; dual-currency view</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-07</code></td><td>Finance Reports</td><td>Finance</td><td>Exportable reports by project, BU, period</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-08</code></td><td>Portfolio Dashboard</td><td>Portfolio Director</td><td>8-KPI strip, bubble chart, health table, margin charts</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-09</code></td><td>QC Exceptions</td><td>Finance / PD</td><td>Auto-generated exceptions — onerous contracts, overdue approvals, AR ageing</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-10</code></td><td>Admin — Rate Masters</td><td>Administrator</td><td>FY-versioned L1–L7 internal rates + freelancer bands</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-11</code></td><td>Freelancer Invoice Reconciliation</td><td>Finance</td><td>Match system-booked days to actual invoices; approve matched</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-12</code></td><td>Period History &amp; Frozen Periods</td><td>Finance</td><td>Full FY period timeline, frozen dates, locked revenue per period</td><td><span class="pill g">Live</span></td></tr>
+            <tr><td><code>prism-13</code></td><td>Countries Master &amp; User Management</td><td>Administrator</td><td>FX rates per country; user roles &amp; project-scoped access</td><td><span class="pill g">Live</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- S4 -->
+    <div class="sec" id="s4">
+      <h2><span class="sn">04</span>User Roles &amp; Permissions</h2>
+
+      <h3>4.1 Role Definitions</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Role</th><th>Scope Type</th><th>Project Access</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="pill t">PM</span></td>
+              <td><span class="pill g">Local</span></td>
+              <td>Own assigned projects only</td>
+              <td>Enters monthly actuals and ETC; submits to PD for approval</td>
+            </tr>
+            <tr>
+              <td><span class="pill t">PD / Director</span></td>
+              <td><span class="pill g">Local</span></td>
+              <td>Own assigned projects only</td>
+              <td>Reviews PM submissions; approves, holds, or rejects per project</td>
+            </tr>
+            <tr>
+              <td><span class="pill b">Finance Admin</span></td>
+              <td><span class="pill a">Country</span></td>
+              <td>All projects within country</td>
+              <td>Edits baselines, overrides submissions, locks month-end, manages periods, freelancer recon, rate masters</td>
+            </tr>
+            <tr>
+              <td><span class="pill a">CEO / CFO</span></td>
+              <td><span class="pill a">Country</span></td>
+              <td>All projects within country (read)</td>
+              <td>Read-only access to portfolio dashboards and finance reports; no edit or approval actions</td>
+            </tr>
+            <tr>
+              <td><span class="pill r">QC Reviewer</span></td>
+              <td><span class="pill" style="background:var(--indigo-soft);color:var(--indigo)">Assigned</span></td>
+              <td>Explicitly assigned projects</td>
+              <td>Reviews QC exceptions, portfolio health, and finance reports on assigned projects; read-only</td>
+            </tr>
+            <tr>
+              <td><span class="pill b">Group Finance</span></td>
+              <td><span class="pill" style="background:var(--indigo-soft);color:var(--indigo)">Assigned</span></td>
+              <td>Explicitly assigned projects</td>
+              <td>Read access to portfolio, QC exceptions, and finance reports on assigned projects</td>
+            </tr>
+            <tr>
+              <td><span class="pill i">Global Admin</span></td>
+              <td><span class="pill r">Global</span></td>
+              <td>All projects — all countries</td>
+              <td>Full system access: all screens, all countries, user management, Countries master</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4.2 Screen-by-Screen Access Matrix</h3>
+      <p>Access values: <b>✓</b> = full access · <b>edit</b> = can modify · <b>read</b> = read-only · <b>override</b> = can override PM/PD action · <b>own / country / assigned / all</b> = data scope · <b>local</b> = own country only · <b>—</b> = no access</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Screen</th>
+              <th><span class="pill t">PM</span></th>
+              <th><span class="pill t">PD / Director</span></th>
+              <th><span class="pill b">Finance Admin</span></th>
+              <th><span class="pill a">CEO / CFO</span></th>
+              <th><span class="pill r">QC Reviewer</span></th>
+              <th><span class="pill b">Group Finance</span></th>
+              <th><span class="pill i">Global Admin</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Period Selector</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+            <tr><td>Portfolio Home</td><td>own</td><td>own</td><td>country</td><td>country</td><td>assigned</td><td>assigned</td><td>all</td></tr>
+            <tr><td>Portfolio Dashboard</td><td>own</td><td>own</td><td>country</td><td>country</td><td>assigned</td><td>assigned</td><td>all</td></tr>
+            <tr><td>QC Exceptions</td><td>own</td><td>own</td><td>country</td><td>country</td><td>assigned</td><td>assigned</td><td>all</td></tr>
+            <tr><td>History &amp; Frozen</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+            <tr><td>Baseline Setup</td><td>read</td><td>read</td><td>edit</td><td>read</td><td>read</td><td>read</td><td>read</td></tr>
+            <tr><td>Revenue Recognition</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+            <tr><td>Milestones &amp; Billing</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+            <tr><td>PM Submission</td><td>edit</td><td>read</td><td>override</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>PD Review</td><td>—</td><td>edit</td><td>override</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Finance Month-End</td><td>—</td><td>—</td><td>✓</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Finance Reports</td><td>—</td><td>—</td><td>✓</td><td>read</td><td>read</td><td>read</td><td>read</td></tr>
+            <tr><td>Period Admin</td><td>—</td><td>—</td><td>✓</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Freelancer Recon</td><td>—</td><td>—</td><td>✓</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Rate Masters</td><td>—</td><td>—</td><td>✓</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Countries / Users</td><td>—</td><td>—</td><td>local</td><td>—</td><td>—</td><td>—</td><td>✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4.3 Scope Hierarchy</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Scope Type</th><th>Roles</th><th>Data Boundary</th><th>Determined By</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pill g">Local</span></td><td>PM, PD / Director</td><td>Only projects in <code>project_user_access</code> where their user_id appears</td><td><code>project_user_access</code> table</td></tr>
+            <tr><td><span class="pill a">Country</span></td><td>Finance Admin, CEO / CFO</td><td>All projects linked to their country (projects.country_id)</td><td><code>users.country_id</code> field</td></tr>
+            <tr><td><span class="pill" style="background:var(--indigo-soft);color:var(--indigo)">Assigned</span></td><td>QC Reviewer, Group Finance</td><td>Only projects explicitly granted in <code>project_user_access</code></td><td><code>project_user_access</code> table</td></tr>
+            <tr><td><span class="pill r">Global</span></td><td>Global Admin</td><td>All projects across all countries; no restriction</td><td><code>users.role = 'GlobalAdmin'</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn">Finance Admin manages Countries / Users only for their own country (<b>local</b> scope). Only Global Admin can create users, assign roles, or edit FX rates across all countries.</div>
+    </div>
+
+    <!-- S5 -->
+    <div class="sec" id="s5">
+      <h2><span class="sn">05</span>Core Business Rules &amp; Formulas</h2>
+
+      <h3>5.1 Revenue Recognition (IFRS 15 — Percentage of Completion)</h3>
+      <div class="formula"><div class="name">POC %</div>POC% = Actuals to Date (LC) ÷ EAC (LC)</div>
+      <div class="formula"><div class="name">Revenue This Period</div>Revenue = (TCV_LC × POC%) − Frozen Prior YTD_LC</div>
+      <ul>
+        <li><b>Actuals to Date</b> — cumulative cost of all booked resources (own FTE + freelancers + fixed subcon) from project start through end of current period</li>
+        <li><b>Frozen Prior YTD</b> — the locked cumulative recognised revenue from all prior closed &amp; frozen periods; immutable once frozen</li>
+        <li><b>TCV</b> — Total Contract Value, stored in local currency; set at baseline and never changed without a new baseline version</li>
+      </ul>
+
+      <h3>5.2 EAC (Estimate at Completion)</h3>
+      <div class="formula"><div class="name">EAC</div>EAC = Actuals to Date + ETC (Estimate to Complete)</div>
+      <ul>
+        <li><b>ETC</b> is entered by the PM during monthly submission for Own FTE and Freelancer resources (remaining days × rate)</li>
+        <li>Fixed Subcontractor ETC is computed from <code>fixed_price × (1 − completion_%)</code>; PM enters completion % only</li>
+        <li>EAC is locked per period once Finance closes; prior EAC values are preserved in the recognition history</li>
+      </ul>
+
+      <h3>5.3 Period States</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>State</th><th>Who Sets It</th><th>PM Can Submit</th><th>PD Can Approve</th><th>Finance Can Lock</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pill" style="background:var(--surface3);color:var(--ink3)">Not Yet Opened</span></td><td>Admin (calendar)</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td><span class="pill a">Open</span></td><td>Admin opens on 1st of month</td><td>✓</td><td>✓ (if submitted)</td><td>✓ (if approved)</td></tr>
+            <tr><td><span class="pill g">Closed &amp; Frozen</span></td><td>Finance locks</td><td>✗ Read-only</td><td>✗ Read-only</td><td>Immutable</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5.4 Submission Workflow</h3>
+      <ol>
+        <li>Admin opens the period (sets status → Open)</li>
+        <li>PM enters ETC and subcon completion %, system computes EAC and POC%, saves as Draft</li>
+        <li>PM reviews figures and clicks <b>Submit</b> — status → Submitted</li>
+        <li>Project Director reviews on prism-05; can <b>Approve</b>, <b>Hold with comment</b>, or <b>Reject</b></li>
+        <li>If Rejected: PM must revise and re-submit</li>
+        <li>If Approved: Finance sees submission on prism-06 and can <b>Lock</b> the recognition</li>
+        <li>Finance lock: period status → Closed &amp; Frozen; revenue figure posted to history</li>
+      </ol>
+      <div class="callout red">No alert() popups at any step. All validation feedback is inline within the screen.</div>
+
+      <h3>5.5 Exception Auto-generation</h3>
+      <p>QC Exceptions are system-generated (Option A) based on the following triggers — never manually created by users:</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Exception Type</th><th>Trigger Condition</th><th>Severity</th></tr></thead>
+          <tbody>
+            <tr><td>Onerous contract</td><td>EAC &gt; TCV (forecast loss)</td><td><span class="pill r">Red</span></td></tr>
+            <tr><td>Margin erosion</td><td>Forecast margin &lt; Sold margin − 5pp</td><td><span class="pill r">Red</span></td></tr>
+            <tr><td>Approval overdue</td><td>Submission pending PD &gt; 3 business days</td><td><span class="pill a">Amber</span></td></tr>
+            <tr><td>AR ageing</td><td>Outstanding invoice &gt; payment terms (60 days)</td><td><span class="pill a">Amber</span></td></tr>
+            <tr><td>Missing submission</td><td>Period Open &gt; 5 days with no PM draft started</td><td><span class="pill a">Amber</span></td></tr>
+            <tr><td>POC regression</td><td>Current POC% &lt; prior period POC% (cost cost reversal)</td><td><span class="pill r">Red</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5.6 Billing &amp; Receivables Formulas</h3>
+      <p>The following metrics are tracked on the portfolio dashboard and are available for Finance reporting:</p>
+      <div class="formula"><div class="name">Unbilled Revenue</div>Unbilled Revenue = Cumulative Recognised Revenue − Total Invoiced Amount</div>
+      <div class="formula"><div class="name">Accounts Receivable (AR)</div>AR = Total Invoiced Amount − Collections Received</div>
+      <ul>
+        <li><b>Invoice data</b> — entered manually by Finance against each project milestone; no SAP AR integration</li>
+        <li><b>Collection data</b> — manually recorded when payment is confirmed by Finance</li>
+        <li><b>AR ageing exception</b> — auto-raised when any open invoice exceeds 60 days without confirmed collection</li>
+        <li><b>Invoicing plan vs actual</b> — milestone screen tracks planned invoice date &amp; amount vs actual invoice date &amp; amount vs forecast; variance is flagged in portfolio dashboard</li>
+      </ul>
+    </div>
+
+    <!-- S6 -->
+    <div class="sec" id="s6">
+      <h2><span class="sn">06</span>Currency &amp; FX Rules</h2>
+      <ul>
+        <li><b>Storage currency</b> — All monetary values are stored in <b>local currency (LC)</b> only. For the Thailand portfolio, LC = THB.</li>
+        <li><b>USD display</b> — USD values are computed at runtime as <code>LC ÷ latest effective FX rate</code> and shown as display-only (never stored).</li>
+        <li><b>FX rate</b> — Entered manually by Finance per country per month. Effective date is set explicitly. Current rate: <code>1 USD = 36.50 THB</code> (effective 01 Oct 2025).</li>
+        <li><b>FX history</b> — All prior FX rates are retained. Frozen periods are never restated — the USD display for a frozen period uses the <em>current</em> FX rate, not the rate at time of freeze.</li>
+        <li><b>TCV</b> — Always in local currency. The "USD TCV" shown on screens is a display convenience only.</li>
+        <li><b>Rate masters</b> — L1–L7 and freelancer day rates are stored in USD. On-screen and on-project cost calculations convert to LC using the effective FX rate at the time of baseline creation.</li>
+      </ul>
+      <div class="formula"><div class="name">Display USD (any amount)</div>USD_display = LC_amount ÷ countries.fx_rate_per_usd (current effective)</div>
+    </div>
+
+    <!-- S7 -->
+    <div class="sec" id="s7">
+      <h2><span class="sn">07</span>Data Model Overview</h2>
+      <p>PRISM uses 20 logical entities across 5 domains. Full field definitions are in the accompanying <b>Database Flow Diagram</b> document (prism-db-diagram.html).</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Domain</th><th>Entities</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pill i">Master Data</span></td><td>users, countries, fx_history, rate_masters, internal_rates, freelancer_rates</td><td>Reference data used across all projects</td></tr>
+            <tr><td><span class="pill t">Project Setup</span></td><td>projects, baselines, phases, milestones, resources, project_user_access</td><td>Project configuration and baseline structure</td></tr>
+            <tr><td><span class="pill a">Period &amp; Effort</span></td><td>periods, effort_plan</td><td>Calendar control and monthly resource bookings</td></tr>
+            <tr><td><span class="pill b">Submissions</span></td><td>submissions, approvals</td><td>Monthly PM → PD workflow records</td></tr>
+            <tr><td><span class="pill g">Outcomes</span></td><td>revenue_recognition, freelancer_invoices, exceptions, audit_log</td><td>Locked recognition, invoice matching, QC flags, change trail</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- S8 -->
+    <div class="sec" id="s8">
+      <h2><span class="sn">08</span>Constraints &amp; Assumptions</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Constraint</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr><td>C-01</td><td>No ERP/SAP integration</td><td>Fully standalone. All data entered manually by users. No real-time sync with SAP timesheets, billing, or FI modules.</td></tr>
+            <tr><td>C-02</td><td>No alert() popups</td><td>All user notifications, validations, and errors are rendered inline on the screen. No browser-native alert/confirm/prompt dialogs.</td></tr>
+            <tr><td>C-03</td><td>Local currency storage</td><td>All monetary fields persisted in LC (THB). USD is computed at display time only.</td></tr>
+            <tr><td>C-04</td><td>Immutable frozen periods</td><td>Once Finance locks a period, no submission, approval, or recognition field in that period may change without Admin reopen + full re-approval.</td></tr>
+            <tr><td>C-05</td><td>Rate master versioning</td><td>Baselines reference the rate master version active at baseline creation. Changing a rate master does not retroactively affect existing baselines or EAC computations.</td></tr>
+            <tr><td>C-06</td><td>Revenue method</td><td>Percentage of completion (cost basis) per IFRS 15. No other recognition method is supported.</td></tr>
+            <tr><td>C-07</td><td>Resource types</td><td>Three types only: Own FTE (L1–L7, daily cost rate × days), Freelancer (band day rate × days), Fixed Subcon (fixed price, PM enters % complete only).</td></tr>
+            <tr><td>C-08</td><td>Exception generation</td><td>Exceptions are auto-generated by the system (Option A). Users cannot manually create, edit, or delete exception rules.</td></tr>
+            <tr><td>C-09</td><td>Analytics scope</td><td>Three analytics sections (cost roll-up, effort variance, EAC effort trend vs baseline) appear on project-level screens (prism-03/04/05) only — not on portfolio, finance, admin, or QC screens.</td></tr>
+            <tr><td>C-10</td><td>Single active FX rate</td><td>One effective FX rate per country at any time. History is retained but only the latest effective rate is used for live USD display.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- S9 -->
+    <div class="sec" id="s9">
+      <h2><span class="sn">09</span>Out of Scope</h2>
+      <ul>
+        <li>Real-time SAP integration (timesheets, FI postings, billing, AR)</li>
+        <li>Multi-currency contract TCV (TCV is always a single LC amount)</li>
+        <li>Time &amp; Materials (T&amp;M) project types — fixed-bid only</li>
+        <li>Resource forecasting beyond ETC (no resource availability / capacity planning)</li>
+        <li>Client portal or external access</li>
+        <li>Mobile-native application</li>
+        <li>Automated invoice generation (milestones trigger manual invoicing only)</li>
+        <li>GL / journal entry posting to any accounting system</li>
+        <li>Multi-company / inter-company consolidation</li>
+        <li>Tax calculation (VAT / WHT)</li>
+        <li>Payroll or HR integration</li>
+        <li><b>Excel upload for PM submissions</b> — PRISM uses direct browser UI for all ETC and actuals entry. Excel upload templates are not in scope for v1; all data is entered through structured screen forms.</li>
+        <li><b>Freelancer fixed-cost engagement mode</b> — Freelancers are tracked on a day-rate (T&amp;M) basis only. Fixed-price freelancer contracts are not supported in v1.</li>
+        <li><b>SAP module-wise cost tracking</b> — Cost and effort are tracked at project and resource-category level (Own FTE / Freelancer / Fixed Subcon). Per-module or per-workstream cost breakdown is not implemented in v1.</li>
+        <li>Automated email / push notifications (approval reminders, overdue submission alerts)</li>
+        <li>Scheduled automated report exports (timed PDF or Excel generation)</li>
+        <li>Detailed task-level project planning (issue, risk, or change request management)</li>
+      </ul>
+    </div>
+
+    <!-- S10 -->
+    <div class="sec" id="s10">
+      <h2><span class="sn">10</span>Glossary</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+          <tbody>
+            <tr><td><b>TCV</b></td><td>Total Contract Value — the total fixed-bid project revenue agreed with the client, in local currency</td></tr>
+            <tr><td><b>EAC</b></td><td>Estimate at Completion — total expected delivery cost (Actuals to Date + ETC)</td></tr>
+            <tr><td><b>ETC</b></td><td>Estimate to Complete — PM's revised forecast of remaining cost for the period ahead</td></tr>
+            <tr><td><b>POC%</b></td><td>Percentage of Completion — Actuals ÷ EAC; drives revenue recognition</td></tr>
+            <tr><td><b>Frozen Prior YTD</b></td><td>Cumulative recognised revenue from all prior closed &amp; frozen periods; immutable</td></tr>
+            <tr><td><b>Revenue This Period</b></td><td>(TCV × POC%) − Frozen Prior YTD; the incremental revenue to recognise in the current period</td></tr>
+            <tr><td><b>LC</b></td><td>Local Currency — THB (Thai Baht) for the Thailand portfolio</td></tr>
+            <tr><td><b>FX Rate</b></td><td>Exchange rate: how many LC units equal 1 USD. Current: 36.50 THB/USD (effective Oct 2025)</td></tr>
+            <tr><td><b>Own FTE</b></td><td>Internal NTT DATA resource billed at a grade-level daily cost rate (L1–L7)</td></tr>
+            <tr><td><b>Freelancer</b></td><td>External individual resource billed at a negotiated daily rate (4 bands)</td></tr>
+            <tr><td><b>Fixed Subcon</b></td><td>External firm on a fixed-price work package; no day rate — PM tracks by completion %</td></tr>
+            <tr><td><b>RAG</b></td><td>Red / Amber / Green — project health status indicator</td></tr>
+            <tr><td><b>Sold Margin</b></td><td>(TCV − Baseline Cost) ÷ TCV; agreed at deal closure, used as the benchmark</td></tr>
+            <tr><td><b>Forecast Margin</b></td><td>(TCV − EAC) ÷ TCV; current best estimate of final margin</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- S11 -->
+    <div class="sec" id="s11">
+      <h2><span class="sn">11</span>Standard Reports</h2>
+      <p>The following reports are available in PRISM via the Finance Reports screen (prism-07). All reports can be exported. Period, project, and BU filters apply across all report types.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Report Name</th><th>Primary Consumer</th><th>Screen</th></tr></thead>
+          <tbody>
+            <tr><td>R-01</td><td>Project Baseline Cost &amp; Sold Margin</td><td>Finance, Portfolio Director</td><td>prism-07</td></tr>
+            <tr><td>R-02</td><td>Monthly POC &amp; Recognised Revenue</td><td>Finance</td><td>prism-07</td></tr>
+            <tr><td>R-03</td><td>Current Month Finance Submission Summary</td><td>Finance</td><td>prism-06</td></tr>
+            <tr><td>R-04</td><td>Project Cost Incurred vs ETC vs EAC</td><td>PM, PD, Finance</td><td>prism-03 / prism-07</td></tr>
+            <tr><td>R-05</td><td>Margin Variance Report (Sold vs Forecast)</td><td>Portfolio Director, Finance</td><td>prism-07 / prism-08</td></tr>
+            <tr><td>R-06</td><td>Project-wise Backlog Report</td><td>Portfolio Director</td><td>prism-08</td></tr>
+            <tr><td>R-07</td><td>Future Monthly Revenue Forecast from Backlog</td><td>Finance, Portfolio Director</td><td>prism-08</td></tr>
+            <tr><td>R-08</td><td>Milestone Plan vs Actual vs Forecast</td><td>PM, Finance</td><td>prism-03 / prism-07</td></tr>
+            <tr><td>R-09</td><td>Unbilled Revenue Report</td><td>Finance</td><td>prism-07</td></tr>
+            <tr><td>R-10</td><td>Accounts Receivable &amp; Ageing Report</td><td>Finance</td><td>prism-07</td></tr>
+            <tr><td>R-11</td><td>Subcontractor Completion &amp; Cost Report</td><td>PM, Finance</td><td>prism-07</td></tr>
+            <tr><td>R-12</td><td>Portfolio Summary Dashboard Report</td><td>Portfolio Director, Leadership</td><td>prism-08</td></tr>
+            <tr><td>R-13</td><td>Freelancer Invoice Reconciliation Report</td><td>Finance</td><td>prism-11</td></tr>
+            <tr><td>R-14</td><td>Period History &amp; Frozen Revenue Ledger</td><td>Finance, Audit</td><td>prism-12</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn">Export to Excel is supported on all reports. PDF export is planned for v2. Scheduled automated exports are out of scope for v1.</div>
+    </div>
+
+    <!-- S12 -->
+    <div class="sec" id="s12">
+      <h2><span class="sn">12</span>Design Decisions &amp; Resolved Open Points</h2>
+      <p>The following questions were open in the initial scope draft. All have been resolved and are binding design decisions for PRISM v1:</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Open Point</th><th>Decision</th><th>Rationale</th></tr></thead>
+          <tbody>
+            <tr><td>Will invoice, collection, and AR data be manually entered or integrated from ERP?</td><td><span class="pill a">Manual entry</span></td><td>No SAP/ERP integration in scope. Finance enters invoice and collection amounts directly via milestone screens.</td></tr>
+            <tr><td>Should the tool support multiple currencies?</td><td><span class="pill b">Single LC per project</span></td><td>All amounts stored in local currency (THB). USD is display-only. Multi-currency TCV is out of scope.</td></tr>
+            <tr><td>Should one project support multiple contracts / change requests?</td><td><span class="pill b">One baseline per version</span></td><td>Each change request creates a new baseline version. Projects table references the active baseline. Prior versions retained for audit.</td></tr>
+            <tr><td>Should project costs be tracked by SAP module and phase in reporting?</td><td><span class="pill a">Phase only in v1</span></td><td>Phase Gantt is tracked. Module-wise breakdown is out of scope for v1; can be added in v2.</td></tr>
+            <tr><td>Are actuals entered at named-resource level or only by category/level?</td><td><span class="pill g">Named-resource level</span></td><td>Each resource is a named row (e.g., "Arjun Mehta — Functional Freelancer"). Effort plan rows are per resource per period.</td></tr>
+            <tr><td>For freelancer fixed-cost engagements, what recognition logic applies?</td><td><span class="pill r">Out of scope v1</span></td><td>Freelancers are day-rate (T&amp;M) only in v1. Fixed-price freelancer mode deferred to v2.</td></tr>
+            <tr><td>Is month-end approval workflow required, and who are the approvers?</td><td><span class="pill g">Confirmed</span></td><td>3-step: PM submits → Project Director approves → Finance locks. No bypass allowed.</td></tr>
+            <tr><td>Should audit trail and version history be maintained for all revisions?</td><td><span class="pill g">Confirmed — full audit</span></td><td>audit_log entity records every INSERT/UPDATE/DELETE across all 20 entities. Finance-locked records are immutable.</td></tr>
+            <tr><td>Are dashboards only in-app or also downloadable scheduled reports?</td><td><span class="pill b">In-app + manual export</span></td><td>All dashboard data is viewable in-app. Manual export to Excel is supported. Scheduled/automated report generation is v2.</td></tr>
+            <tr><td>Should PM actuals input use Excel upload or browser UI?</td><td><span class="pill b">Browser UI only</span></td><td>PRISM is a fully browser-based tool. All ETC, actuals, and subcon % inputs are via structured screen forms. No Excel upload in v1.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- S13 -->
+    <div class="sec" id="s13">
+      <h2><span class="sn">13</span>Implementation Phases</h2>
+      <h3>Phase 1 — Core System (Current: v1)</h3>
+      <p>All 15 screens (prism-00 through prism-13) covering the full month-end recognition cycle:</p>
+      <ul>
+        <li>Project master &amp; baseline setup (TCV, phases, milestones, resource mix)</li>
+        <li>FY-versioned rate masters (L1–L7 internal rates, freelancer bands)</li>
+        <li>Monthly effort submission by PM (ETC entry, subcon % completion)</li>
+        <li>Cost-based POC calculation and revenue recognition per IFRS 15</li>
+        <li>PD approval and Finance lock-down workflow</li>
+        <li>Milestone and invoicing plan tracking (plan vs actual vs forecast)</li>
+        <li>Freelancer invoice reconciliation (expected vs invoiced, matched / disputed)</li>
+        <li>Portfolio dashboard, margin analysis, QC exception auto-generation</li>
+        <li>Period history, frozen period ledger</li>
+        <li>Countries master, FX rate management, user &amp; role management</li>
+        <li>Full audit trail across all entities</li>
+      </ul>
+      <h3>Phase 2 — Enhancements (Planned)</h3>
+      <ul>
+        <li>SAP / ERP integration for AR, billing, and collection data</li>
+        <li>Freelancer fixed-cost engagement mode</li>
+        <li>SAP module-wise and workstream-level cost tracking</li>
+        <li>Excel upload framework for bulk baseline and actuals entry</li>
+        <li>Automated email notifications (submission reminders, approval alerts)</li>
+        <li>Scheduled PDF report exports</li>
+        <li>Advanced analytics: drill-down, forecasting, trend analysis</li>
+        <li>Multi-project rollup for inter-company or multi-BU portfolios</li>
+      </ul>
+      <div class="callout">Phase 2 scope requires explicit change request and re-estimation. No Phase 2 item should be assumed in the Phase 1 delivery.</div>
+    </div>
+
+    <div class="footer">
+      <div><b>PRISM</b> · Scope Document v1.0 · NTT DATA Business Solutions AG</div>
+      <div>Internal Use Only · Oct 2025</div>
+    </div>
+
+  </div><!-- /doc -->
+</div><!-- /page -->
+</body>
+</html>

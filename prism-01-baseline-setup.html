@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PRISM · Baseline & Deal Closure Setup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef0f4; --surface:#ffffff; --surface2:#f8f9fb; --surface3:#f2f4f7;
+  --border:#e3e6ec; --border2:#d3d8e0;
+  --ink:#171c26; --ink2:#5b6472; --ink3:#8b94a4;
+  --primary:#2b3a8c; --primary2:#222e72; --primary-soft:#edf0fb; --primary-soft2:#e2e7f8;
+  --teal:#0d9488; --teal-soft:#e2f4f1;
+  --amber:#b9791a; --amber-soft:#f8eedb;
+  --green:#1a8a52; --green-soft:#e2f3ea;
+  --red:#cb4634; --red-soft:#fae6e2;
+  --indigo:#4654b0;
+  --shadow:0 1px 2px rgba(20,30,60,.06),0 4px 16px rgba(20,30,60,.05);
+  --shadow2:0 8px 30px rgba(20,30,60,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+button{font-family:inherit;cursor:pointer}
+input,select{font-family:inherit;font-size:13px;color:var(--ink)}
+
+/* ---- top bar ---- */
+.topbar{height:58px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:18px;position:sticky;top:0;z-index:30}
+.logo{display:flex;align-items:center;gap:11px}
+.logomark{width:30px;height:30px;border-radius:8px;background:linear-gradient(140deg,var(--primary),var(--indigo));position:relative;box-shadow:0 2px 6px rgba(43,58,140,.35)}
+.logomark:after{content:"";position:absolute;inset:8px;border:2px solid #fff;border-radius:3px;opacity:.9}
+.logomark:before{content:"";position:absolute;left:8px;top:14px;width:14px;height:2px;background:#fff;opacity:.9}
+.logo .name{font-weight:700;letter-spacing:.4px;font-size:16px}
+.logo .name b{color:var(--primary)}
+.logo .sub{font-size:10px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-top:-2px}
+.tb-spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:7px 11px;width:300px;color:var(--ink3)}
+.search input{border:0;background:transparent;outline:none;width:100%;color:var(--ink)}
+.period{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:9px;padding:7px 11px;background:var(--surface);font-weight:500}
+.period .lab{color:var(--ink3);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.iconbtn{width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--ink2);position:relative}
+.iconbtn .badge{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--red);border-radius:50%;border:1.5px solid #fff}
+.user{display:flex;align-items:center;gap:9px;padding-left:6px}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(140deg,#2b3a8c,#4654b0);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px}
+.user .who{line-height:1.15}
+.user .who .n{font-weight:600;font-size:12.5px}
+.user .who .r{font-size:10.5px;color:var(--primary);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+
+/* ---- shell ---- */
+.shell{display:flex;min-height:calc(100vh - 58px)}
+.nav{width:230px;background:var(--surface);border-right:1px solid var(--border);padding:14px 12px;flex-shrink:0;position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto}
+.nav .grp{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin:14px 10px 7px}
+.nav .grp:first-child{margin-top:2px}
+.nav a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;color:var(--ink2);text-decoration:none;font-weight:500;font-size:12.7px;margin-bottom:2px;position:relative}
+.nav a:hover{background:var(--surface3);color:var(--ink)}
+.nav a.on{background:var(--primary-soft);color:var(--primary2);font-weight:600}
+.nav a.on:before{content:"";position:absolute;left:-12px;top:8px;bottom:8px;width:3px;background:var(--primary);border-radius:0 3px 3px 0}
+.nav a .ico{width:16px;height:16px;flex-shrink:0;opacity:.85}
+.nav a .ct{margin-left:auto;font-size:10.5px;background:var(--surface3);border:1px solid var(--border);border-radius:20px;padding:0 7px;color:var(--ink2);font-weight:600}
+.nav a.on .ct{background:#fff}
+
+/* ---- main ---- */
+.main{flex:1;padding:22px 26px 60px;min-width:0}
+.crumb{display:flex;align-items:center;gap:7px;color:var(--ink3);font-size:11.5px;margin-bottom:10px}
+.crumb b{color:var(--ink2);font-weight:600}
+.crumb .sep{opacity:.5}
+.pagehead{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.pagehead h1{font-size:22px;font-weight:700;margin:0;letter-spacing:-.2px}
+.pagehead .meta{display:flex;align-items:center;gap:10px;margin-top:7px;flex-wrap:wrap}
+.chipcode{font-family:'IBM Plex Mono';font-size:11.5px;background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:3px 8px;color:var(--ink2);font-weight:500}
+.pill{font-size:11px;font-weight:600;border-radius:20px;padding:3px 10px;letter-spacing:.02em;display:inline-flex;align-items:center;gap:6px}
+.pill .d{width:6px;height:6px;border-radius:50%}
+.pill.active{background:var(--green-soft);color:var(--green)}
+.pill.draft{background:var(--amber-soft);color:var(--amber)}
+.headactions{margin-left:auto;display:flex;gap:9px}
+.btn{border:1px solid var(--primary);background:var(--primary);color:#fff;border-radius:9px;padding:9px 16px;font-weight:600;font-size:12.7px;display:inline-flex;align-items:center;gap:7px;box-shadow:0 1px 2px rgba(43,58,140,.2)}
+.btn:hover{background:var(--primary2)}
+.btn.ghost{background:#fff;color:var(--ink);border-color:var(--border2)}
+.btn.ghost:hover{background:var(--surface3)}
+
+.cols{display:grid;grid-template-columns:1fr 332px;gap:18px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+.card .ch{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.card .ch h3{font-size:14px;font-weight:700;margin:0}
+.card .ch .desc{font-size:11.5px;color:var(--ink3);margin-top:1px}
+.card .ch .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.card .cb{padding:18px}
+.card+.card{margin-top:18px}
+
+/* field grid */
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 18px}
+.f{display:flex;flex-direction:column;gap:6px}
+.f label{font-size:10.5px;color:var(--ink3);letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.f .box{border:1px solid var(--border2);background:#fff;border-radius:9px;padding:9px 11px;font-weight:500;display:flex;align-items:center;gap:8px;min-height:38px}
+.f .box.ro{background:var(--surface3);color:var(--ink2);border-style:dashed}
+.f .box.calc{background:var(--primary-soft);border-color:var(--primary-soft2);color:var(--primary2);font-weight:600}
+.f .box .mono{font-weight:600}
+.f .box .unit{color:var(--ink3);font-size:11px;margin-left:auto}
+.f .box select,.f .box input{border:0;outline:none;background:transparent;width:100%;font-weight:500}
+.f .box .caret{color:var(--ink3);margin-left:auto}
+
+/* segmented */
+.seg{display:inline-flex;background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--ink2);padding:6px 13px;border-radius:6px;font-weight:600;font-size:12px}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+
+/* matrix table */
+table{width:100%;border-collapse:collapse;font-size:12.6px}
+thead th{text-align:left;color:var(--ink3);font-weight:600;font-size:10.3px;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap}
+th.num,td.num{text-align:right;font-family:'IBM Plex Mono';font-variant-numeric:tabular-nums}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--surface3)}
+.mod-row td{background:var(--surface2);font-weight:700;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.mod-row .mname{display:flex;align-items:center;gap:9px}
+.mod-row .micon{width:7px;height:18px;border-radius:3px;background:var(--primary)}
+.line td:first-child{padding-left:30px}
+.sub-row td{font-weight:700;background:#fff;border-bottom:1px solid var(--border)}
+.tot-row td{background:var(--primary);color:#fff;font-weight:700;border:0}
+.tot-row td:first-child{border-radius:0 0 0 11px}
+.tot-row td:last-child{border-radius:0 0 11px 0}
+.rtag{font-size:10px;font-weight:600;border-radius:6px;padding:2px 8px;letter-spacing:.02em}
+.rtag.int{background:var(--primary-soft);color:var(--primary2)}
+.rtag.fl{background:var(--amber-soft);color:var(--amber)}
+.rtag.sub{background:var(--teal-soft);color:var(--teal)}
+.lvl{font-family:'IBM Plex Mono';font-weight:600;color:var(--ink);background:var(--surface3);border:1px solid var(--border);border-radius:6px;padding:1px 7px;font-size:11px;margin-right:8px}
+.editcell{color:var(--ink);position:relative}
+.editcell:after{content:"";position:absolute;right:8px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-right:1.5px solid var(--ink3);border-bottom:1.5px solid var(--ink3);transform:translateY(-60%) rotate(45deg);opacity:0}
+tbody tr.line:hover td{background:var(--primary-soft)}
+
+/* phases / gantt */
+.gantt{display:flex;flex-direction:column;gap:10px}
+.gmonths{display:grid;grid-template-columns:170px repeat(12,1fr);font-size:9.5px;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.gmonths span{text-align:center;padding-bottom:6px}
+.gmonths span:first-child{text-align:left}
+.grow{display:grid;grid-template-columns:170px repeat(12,1fr);align-items:center;height:30px}
+.grow .gname{font-weight:600;font-size:12.3px}
+.gtrack{grid-column:2 / span 12;position:relative;height:30px}
+.gbar{position:absolute;top:7px;height:16px;border-radius:6px;display:flex;align-items:center;padding:0 9px;color:#fff;font-size:10.5px;font-weight:600;white-space:nowrap;box-shadow:0 1px 3px rgba(20,30,60,.18)}
+
+/* right rail */
+.rail{position:sticky;top:80px}
+.outcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.outhead{padding:15px 18px 14px;background:linear-gradient(150deg,#2b3a8c,#3a47a0);color:#fff}
+.outhead .t{font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.85;font-weight:600}
+.outhead .marg{display:flex;align-items:baseline;gap:10px;margin-top:8px}
+.outhead .marg .pc{font-family:'IBM Plex Mono';font-size:34px;font-weight:600;letter-spacing:-1px}
+.outhead .marg .ab{font-family:'IBM Plex Mono';font-size:14px;opacity:.85}
+.outhead .lab2{font-size:11px;opacity:.8;margin-top:3px}
+.outbody{padding:16px 18px}
+.orow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border)}
+.orow:last-of-type{border-bottom:0}
+.orow .k{color:var(--ink2);font-size:12px}
+.orow .v{font-family:'IBM Plex Mono';font-weight:600}
+.mixbar{height:12px;border-radius:7px;overflow:hidden;display:flex;margin:14px 0 9px;border:1px solid var(--border)}
+.mixbar i{height:100%}
+.mixleg{display:flex;flex-direction:column;gap:7px;font-size:11.5px}
+.mixleg .ml{display:flex;align-items:center;gap:8px}
+.mixleg .ml .dot{width:9px;height:9px;border-radius:3px}
+.mixleg .ml .mv{margin-left:auto;font-family:'IBM Plex Mono';color:var(--ink2);font-weight:600}
+.scaption{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin:16px 0 6px}
+.note{background:var(--primary-soft);border:1px solid var(--primary-soft2);border-radius:10px;padding:11px 13px;color:var(--primary2);font-size:11.7px;line-height:1.5}
+.audit{font-size:11px;color:var(--ink3);margin-top:16px;display:flex;align-items:center;gap:8px}
+.divlabel{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+.divlabel .ln{flex:1;height:1px;background:var(--border)}
+.divlabel .tx{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+.legend{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink2)}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:middle}
+.smallnote{font-size:11px;color:var(--ink3);margin-top:10px}
+.addline{display:inline-flex;align-items:center;gap:7px;color:var(--primary);font-weight:600;font-size:12px;margin-top:12px;cursor:pointer}
+
+/* month-wise matrix */
+.unitcap{font-size:11.5px;color:var(--ink3);font-weight:500}.unitcap b{color:var(--ink2)}
+.matrix-wrap{overflow-x:auto;border-bottom:1px solid var(--border)}
+table.mx{min-width:1080px;border-collapse:separate;border-spacing:0}
+table.mx th,table.mx td{border-bottom:1px solid var(--surface3)}
+table.mx thead th{border-bottom:1px solid var(--border)}
+.mcol{width:54px;min-width:54px}
+table.mx th.sticky-l,table.mx td.sticky-l{position:sticky;left:0;z-index:3;width:236px;min-width:236px;text-align:left;box-shadow:1px 0 0 var(--border)}
+table.mx th.sticky-r,table.mx td.sticky-r{position:sticky;right:0;z-index:3;width:104px;min-width:104px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-l,table.mx thead th.sticky-r{background:var(--surface2);z-index:4}
+.line .sticky-l,.line .sticky-r{background:#fff}
+.mod-row .sticky-l,.mod-row .sticky-r{background:var(--surface2)}
+.tot-row .sticky-l,.tot-row .sticky-r{background:var(--primary);color:#fff}
+table.mx td.line-name{font-weight:500}
+table.mx tbody td{padding:8px 12px}
+table.mx .mod-row td{background:var(--surface2)}
+table.mx .tot-row td{background:var(--primary);color:#fff}
+table.mx .line td.num{color:var(--ink2)}
+table.mx .mod-row td.num{color:var(--ink);font-weight:700}
+table.mx .tot-row td.num{color:#fff;font-weight:700}
+.mx.collapsed .mcol{display:none}
+.mx.collapsed{min-width:0}
+
+
+/* combined effort+cost · second sticky-right column */
+table.mx th.sticky-r,table.mx td.sticky-r{right:0;width:120px;min-width:120px}
+table.mx th.sticky-r2,table.mx td.sticky-r2{position:sticky;right:120px;z-index:3;width:96px;min-width:96px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-r2{background:var(--surface2);z-index:4}
+.line .sticky-r2{background:#fff}
+.mod-row .sticky-r2{background:var(--surface2)}
+.tot-row .sticky-r2{background:var(--primary);color:#fff}
+table.mx{min-width:1100px}
+
+
+/* type column + man-day rate + cost, frozen left (line,type) & right (effort,rate,cost) */
+table.mx{min-width:1280px;border-collapse:separate;border-spacing:0}
+.mx.collapsed{min-width:0}
+.mcol{width:54px;min-width:54px}
+table.mx th.sticky-l,table.mx td.sticky-l{position:sticky;left:0;z-index:3;width:200px;min-width:200px;text-align:left;box-shadow:none}
+table.mx th.sticky-l2,table.mx td.sticky-l2{position:sticky;left:200px;z-index:3;width:112px;min-width:112px;text-align:left;box-shadow:1px 0 0 var(--border)}
+table.mx th.sticky-r,table.mx td.sticky-r{position:sticky;right:0;z-index:3;width:116px;min-width:116px;box-shadow:none}
+table.mx th.sticky-r2,table.mx td.sticky-r2{position:sticky;right:116px;z-index:3;width:104px;min-width:104px;box-shadow:none}
+table.mx th.sticky-r3,table.mx td.sticky-r3{position:sticky;right:220px;z-index:3;width:104px;min-width:104px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-l,table.mx thead th.sticky-l2,table.mx thead th.sticky-r,table.mx thead th.sticky-r2,table.mx thead th.sticky-r3{background:var(--surface2);z-index:4}
+.line .sticky-l,.line .sticky-l2,.line .sticky-r,.line .sticky-r2,.line .sticky-r3{background:#fff}
+.mod-row .sticky-l,.mod-row .sticky-l2,.mod-row .sticky-r,.mod-row .sticky-r2,.mod-row .sticky-r3{background:var(--surface2)}
+.tot-row .sticky-l,.tot-row .sticky-l2,.tot-row .sticky-r,.tot-row .sticky-r2,.tot-row .sticky-r3{background:var(--primary);color:#fff}
+
+</style>
+<style>
+.okbadge{font-size:11px;font-weight:600;color:var(--green);background:var(--green-soft);border:1px solid #bfe3cd;border-radius:20px;padding:4px 11px;white-space:nowrap}
+.bchip{font-size:10.5px;font-weight:700;border-radius:6px;padding:2px 8px}
+.bchip.pct{background:var(--primary-soft);color:var(--primary2)}
+.bchip.val{background:var(--amber-soft);color:var(--amber)}
+td.calc{color:var(--ink3);background:var(--surface2)}
+.tot-row td.calc{color:#fff;background:var(--primary)}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="logo">
+    <div class="logomark"></div>
+    <div>
+      <div class="name"><b>PRISM</b></div>
+      <div class="sub">Project Revenue &amp; Margin</div>
+    </div>
+  </div>
+  <div class="tb-spacer"></div>
+  <div class="search">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input placeholder="Search projects, customers, codes…"/>
+  </div>
+  <div class="period"><span class="lab">FY</span> 2025–26
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b94a4" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="iconbtn"><span class="badge"></span>
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+  </div>
+  <div class="user">
+    <div class="avatar">SR</div>
+    <div class="who"><div class="n">Sai R.</div><div class="r">Finance</div></div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- LEFT NAV -->
+  <nav class="nav">
+    <div class="grp">Delivery</div>
+    <a href="#" class="on"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Projects <span class="ct">12</span></a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v6H4zM4 14h10v6H4z"/></svg>Baselines</a>
+
+    <div class="grp">Finance</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg>Revenue Recognition</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Milestones &amp; Billing</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Receivables</a>
+
+    <div class="grp">Submissions</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0-12l-4 4m4-4l4 4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Monthly Actuals</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M8 21H3v-5M3 21l7-7"/></svg>Subcontractor Progress</a>
+
+    <div class="grp">Insights</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="8"/><rect x="10" y="7" width="4" height="13"/><rect x="17" y="3" width="4" height="17"/></svg>Dashboards</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg>Exceptions</a>
+
+    <div class="grp">Admin</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>Rate Masters</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Periods</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0M16 11h5M18.5 8.5v5"/></svg>Users &amp; Roles</a>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="crumb"><b>Projects</b><span class="sep">/</span>S/4HANA Finance Transformation<span class="sep">/</span><b>Baseline Setup</b></div>
+
+    <div class="pagehead">
+      <div>
+        <h1>Baseline &amp; Deal Closure Setup</h1>
+        <div class="meta">
+          <span class="chipcode">PRJ-2025-0418</span>
+          <span class="pill draft"><span class="d" style="background:var(--amber)"></span>Baseline · Draft</span>
+          <span style="color:var(--ink3);font-size:12px">Last saved 2 min ago by Sai R.</span>
+        </div>
+      </div>
+      <div class="headactions">
+        <button class="btn ghost">Import baseline (Excel)</button>
+        <button class="btn ghost">Save draft</button>
+        <button class="btn">Lock baseline ↓</button>
+      </div>
+    </div>
+
+    <div class="cols">
+      <!-- LEFT COLUMN -->
+      <div>
+        <!-- PROJECT MASTER -->
+        <div class="card">
+          <div class="ch">
+            <div><h3>Project master</h3><div class="desc">Commercial record captured at deal closure</div></div>
+          </div>
+          <div class="cb">
+            <div class="fgrid">
+              <div class="f"><label>Project ID / Code</label><div class="box ro"><span class="mono">PRJ-2025-0418</span></div></div>
+              <div class="f" style="grid-column:span 2"><label>Project name</label><div class="box">S/4HANA Finance Transformation</div></div>
+
+              <div class="f"><label>Customer</label><div class="box">Nordwind Logistics AG</div></div>
+              <div class="f"><label>Business unit / account</label><div class="box">SAP Finance — EMEA <span class="caret">▾</span></div></div>
+              <div class="f"><label>Project status</label><div class="box">Active <span class="caret">▾</span></div></div>
+
+              <div class="f"><label>Contract value (sold revenue)</label><div class="box"><span class="mono">1,850,000</span><span class="unit">USD</span></div></div>
+              <div class="f"><label>Billing model</label><div class="box">Fixed Price — Milestone <span class="caret">▾</span></div></div>
+              <div class="f"><label>Financial year</label><div class="box">FY 2025–26 (Apr–Mar) <span class="caret">▾</span></div></div>
+
+              <div class="f"><label>Project start</label><div class="box">01 Apr 2025</div></div>
+              <div class="f"><label>Planned end</label><div class="box">31 Mar 2026</div></div>
+              <div class="f"><label>Duration</label><div class="box ro"><span class="mono">12 months</span></div></div>
+
+              <div class="f"><label>Project manager</label><div class="box"><span class="avatar" style="width:22px;height:22px;font-size:9px">AR</span>Anita Rao</div></div>
+              <div class="f"><label>Delivery owner</label><div class="box"><span class="avatar" style="width:22px;height:22px;font-size:9px;background:linear-gradient(140deg,#0d9488,#13b3a3)">MS</span>M. Schäfer</div></div>
+              <div class="f"><label>Accounting period link</label><div class="box ro">SAP CO · PC&nbsp;EMEA-FIN</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BASELINE ESTIMATION -->
+        <div class="card">
+          <div class="ch">
+            <div><h3>Baseline estimation</h3><div class="desc">Module × L-level resource plan · effort, man-day rate &amp; cost together · expand to phase by month</div></div>
+            <div class="right">
+              <span class="unitcap">Effort in <b>man-days</b> · rate &amp; cost in <b>USD</b></span>
+              <button id="collapseBtn" class="btn ghost" style="padding:6px 11px;font-size:11.5px">Show months</button>
+            </div>
+          </div>
+          <div class="matrix-wrap">
+            <table class="mx collapsed">
+              <thead>
+                <tr>
+                  <th class="sticky-l">Module / resource line</th>
+                  <th class="sticky-l2">Type</th>
+                  <th class="num mcol">Apr</th><th class="num mcol">May</th><th class="num mcol">Jun</th><th class="num mcol">Jul</th><th class="num mcol">Aug</th><th class="num mcol">Sep</th><th class="num mcol">Oct</th><th class="num mcol">Nov</th><th class="num mcol">Dec</th><th class="num mcol">Jan</th><th class="num mcol">Feb</th><th class="num mcol">Mar</th>
+                  <th class="num sticky-r3">Total effort (md)</th>
+                  <th class="num sticky-r2">Rate / day ($)</th>
+                  <th class="num sticky-r">Planned cost ($)</th>
+                </tr>
+              </thead>
+              <tbody>
+<tr class="mod-row"><td class="sticky-l"><span class="mname"><span class="micon"></span>FI / GL & Closing</span></td><td class="sticky-l2"></td><td class="num mcol">18</td><td class="num mcol">36</td><td class="num mcol">54</td><td class="num mcol">53</td><td class="num mcol">53</td><td class="num mcol">44</td><td class="num mcol">44</td><td class="num mcol">17</td><td class="num mcol">17</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">336</td><td class="num sticky-r2">—</td><td class="num sticky-r">193,632</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L6</span>Solution architect</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">40</td><td class="num sticky-r2">960</td><td class="num sticky-r">38,400</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L5</span>Senior consultant</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol">10</td><td class="num mcol">10</td><td class="num mcol">10</td><td class="num mcol">10</td><td class="num mcol">10</td><td class="num mcol">9</td><td class="num mcol">9</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">68</td><td class="num sticky-r2">768</td><td class="num sticky-r">52,224</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L3</span>Consultant</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">18</td><td class="num mcol">18</td><td class="num mcol">17</td><td class="num mcol">17</td><td class="num mcol">17</td><td class="num mcol">17</td><td class="num mcol">17</td><td class="num mcol">17</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">138</td><td class="num sticky-r2">496</td><td class="num sticky-r">68,448</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L2</span>Associate</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">18</td><td class="num mcol">18</td><td class="num mcol">18</td><td class="num mcol">18</td><td class="num mcol">18</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">90</td><td class="num sticky-r2">384</td><td class="num sticky-r">34,560</td></tr>
+<tr class="mod-row"><td class="sticky-l"><span class="mname"><span class="micon"></span>CO / Profitability</span></td><td class="sticky-l2"></td><td class="num mcol">8</td><td class="num mcol">26</td><td class="num mcol">48</td><td class="num mcol">47</td><td class="num mcol">46</td><td class="num mcol">46</td><td class="num mcol">38</td><td class="num mcol">38</td><td class="num mcol">21</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">318</td><td class="num sticky-r2">—</td><td class="num sticky-r">205,088</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L6</span>Solution architect</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">48</td><td class="num sticky-r2">960</td><td class="num sticky-r">46,080</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L4</span>Senior consultant</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">18</td><td class="num mcol">18</td><td class="num mcol">18</td><td class="num mcol">17</td><td class="num mcol">17</td><td class="num mcol">17</td><td class="num mcol">17</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">122</td><td class="num sticky-r2">624</td><td class="num sticky-r">76,128</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">—</span>CO specialist (T&M)</td><td class="sticky-l2"><span class="rtag fl">Freelancer</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">22</td><td class="num mcol">21</td><td class="num mcol">21</td><td class="num mcol">21</td><td class="num mcol">21</td><td class="num mcol">21</td><td class="num mcol">21</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">148</td><td class="num sticky-r2">560</td><td class="num sticky-r">82,880</td></tr>
+<tr class="mod-row"><td class="sticky-l"><span class="mname"><span class="micon"></span>Treasury & Cash Mgmt</span></td><td class="sticky-l2"></td><td class="num mcol">8</td><td class="num mcol">22</td><td class="num mcol">35</td><td class="num mcol">33</td><td class="num mcol">33</td><td class="num mcol">26</td><td class="num mcol">26</td><td class="num mcol">13</td><td class="num mcol">12</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">208</td><td class="num sticky-r2">—</td><td class="num sticky-r">123,744</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L5</span>Senior consultant</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol">7</td><td class="num mcol">7</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">38</td><td class="num sticky-r2">768</td><td class="num sticky-r">29,184</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L4</span>Consultant</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">14</td><td class="num mcol">14</td><td class="num mcol">13</td><td class="num mcol">13</td><td class="num mcol">13</td><td class="num mcol">13</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">80</td><td class="num sticky-r2">624</td><td class="num sticky-r">49,920</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L3</span>Consultant</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">13</td><td class="num mcol">13</td><td class="num mcol">13</td><td class="num mcol">13</td><td class="num mcol">13</td><td class="num mcol">13</td><td class="num mcol">12</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">90</td><td class="num sticky-r2">496</td><td class="num sticky-r">44,640</td></tr>
+<tr class="mod-row"><td class="sticky-l"><span class="mname"><span class="micon"></span>Data Migration & Cutover</span></td><td class="sticky-l2"></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">9</td><td class="num mcol">46</td><td class="num mcol">46</td><td class="num mcol">46</td><td class="num mcol">45</td><td class="num mcol">45</td><td class="num mcol">43</td><td class="num mcol">43</td><td class="num sticky-r3">323</td><td class="num sticky-r2">—</td><td class="num sticky-r">178,192</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L4</span>Migration lead</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">9</td><td class="num mcol">9</td><td class="num mcol">9</td><td class="num mcol">9</td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num mcol">8</td><td class="num sticky-r3">68</td><td class="num sticky-r2">624</td><td class="num sticky-r">42,432</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L3</span>Consultant</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">16</td><td class="num mcol">16</td><td class="num mcol">16</td><td class="num mcol">16</td><td class="num mcol">16</td><td class="num mcol">15</td><td class="num mcol">15</td><td class="num sticky-r3">110</td><td class="num sticky-r2">496</td><td class="num sticky-r">54,560</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">—</span>ETL specialist (T&M)</td><td class="sticky-l2"><span class="rtag fl">Freelancer</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">21</td><td class="num mcol">21</td><td class="num mcol">21</td><td class="num mcol">21</td><td class="num mcol">21</td><td class="num mcol">20</td><td class="num mcol">20</td><td class="num sticky-r3">145</td><td class="num sticky-r2">560</td><td class="num sticky-r">81,200</td></tr>
+<tr class="mod-row"><td class="sticky-l"><span class="mname"><span class="micon"></span>SD/MM Integration & Localization</span></td><td class="sticky-l2"></td><td class="num mcol">6</td><td class="num mcol">18</td><td class="num mcol">78</td><td class="num mcol">77</td><td class="num mcol">77</td><td class="num mcol">77</td><td class="num mcol">77</td><td class="num mcol">70</td><td class="num mcol">59</td><td class="num mcol">25</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">564</td><td class="num sticky-r2">—</td><td class="num sticky-r">331,376</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L6</span>Solution architect</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol">6</td><td class="num mcol">6</td><td class="num mcol">6</td><td class="num mcol">5</td><td class="num mcol">5</td><td class="num mcol">5</td><td class="num mcol">5</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">38</td><td class="num sticky-r2">960</td><td class="num sticky-r">36,480</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L5</span>Senior consultant</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">12</td><td class="num mcol">11</td><td class="num mcol">11</td><td class="num mcol">11</td><td class="num mcol">11</td><td class="num mcol">11</td><td class="num mcol">11</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">78</td><td class="num sticky-r2">768</td><td class="num sticky-r">59,904</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L4</span>Consultant</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">16</td><td class="num mcol">16</td><td class="num mcol">16</td><td class="num mcol">16</td><td class="num mcol">16</td><td class="num mcol">16</td><td class="num mcol">16</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">112</td><td class="num sticky-r2">624</td><td class="num sticky-r">69,888</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">L2</span>Associate</td><td class="sticky-l2"><span class="rtag int">Internal</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">19</td><td class="num mcol">19</td><td class="num mcol">19</td><td class="num mcol">19</td><td class="num mcol">19</td><td class="num mcol">18</td><td class="num mcol">18</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">131</td><td class="num sticky-r2">384</td><td class="num sticky-r">50,304</td></tr>
+<tr class="line"><td class="sticky-l line-name"><span class="lvl">—</span>Integration dev (T&M)</td><td class="sticky-l2"><span class="rtag fl">Freelancer</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol">26</td><td class="num mcol">26</td><td class="num mcol">26</td><td class="num mcol">26</td><td class="num mcol">26</td><td class="num mcol">25</td><td class="num mcol">25</td><td class="num mcol">25</td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num mcol"><span style="color:#9aa3b5;opacity:.6">·</span></td><td class="num sticky-r3">205</td><td class="num sticky-r2">560</td><td class="num sticky-r">114,800</td></tr>
+<tr class="tot-row"><td class="sticky-l">Total — internal + freelancer</td><td class="sticky-l2"></td><td class="num mcol">40</td><td class="num mcol">102</td><td class="num mcol">215</td><td class="num mcol">210</td><td class="num mcol">218</td><td class="num mcol">239</td><td class="num mcol">231</td><td class="num mcol">184</td><td class="num mcol">154</td><td class="num mcol">70</td><td class="num mcol">43</td><td class="num mcol">43</td><td class="num sticky-r3">1,749</td><td class="num sticky-r2">—</td><td class="num sticky-r">1,032,032</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cb" style="border-top:1px solid var(--border)">
+            <div class="divlabel"><span class="tx">Fixed-cost subcontract work packages</span><span class="ln"></span></div>
+            <table>
+              <thead><tr><th>Outsourced work package</th><th>Vendor</th><th>Recognition basis</th><th class="num">Planned completion window</th><th class="num">Fixed cost ($)</th></tr></thead>
+              <tbody>
+                <tr class="line"><td style="padding-left:14px"><span class="rtag sub">Subcontractor</span>&nbsp; BTP Integration &amp; Fiori build</td><td>Cobalt Systems GmbH</td><td>Completion %</td><td class="num">Jul–Dec 2025</td><td class="num">92,000</td></tr>
+                <tr class="line"><td style="padding-left:14px"><span class="rtag sub">Subcontractor</span>&nbsp; Basis &amp; cutover support</td><td>Cobalt Systems GmbH</td><td>Completion %</td><td class="num">Dec 2025–Mar 2026</td><td class="num">56,000</td></tr>
+                <tr class="sub-row"><td colspan="4">Subcontract total</td><td class="num">148,000</td></tr>
+              </tbody>
+            </table>
+            <span class="addline">+ Add resource line / work package</span>
+            <div class="smallnote">Subcontract packages are fixed cost recognised on PM-entered completion %, so they carry a planned completion window rather than month-wise effort. They roll into the planned cost and the POC denominator.</div>
+          </div>
+        </div>
+
+        <!-- PHASE TIMELINE -->
+        <div class="card">
+          <div class="ch"><div><h3>Baseline phase timeline</h3><div class="desc">Sold delivery plan · FY 2025–26</div></div></div>
+          <div class="cb">
+            <div class="gantt">
+              <div class="gmonths"><span>Phase</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span></div>
+              <div class="grow"><div class="gname">Explore / Blueprint</div><div class="gtrack"><div class="gbar" style="left:0%;width:16.6%;background:linear-gradient(90deg,#2b3a8c,#4654b0)">Apr–May</div></div></div>
+              <div class="grow"><div class="gname">Realize — Build</div><div class="gtrack"><div class="gbar" style="left:16.6%;width:41.6%;background:linear-gradient(90deg,#3a47a0,#5563c0)">Jun–Oct</div></div></div>
+              <div class="grow"><div class="gname">Test &amp; Integration</div><div class="gtrack"><div class="gbar" style="left:41.6%;width:33.3%;background:linear-gradient(90deg,#0d9488,#16b3a3)">Sep–Dec</div></div></div>
+              <div class="grow"><div class="gname">Deploy / Cutover</div><div class="gtrack"><div class="gbar" style="left:75%;width:25%;background:linear-gradient(90deg,#b9791a,#d99427)">Jan–Mar</div></div></div>
+            </div>
+            <div class="legend"><span><i style="background:#2b3a8c"></i>Build phases</span><span><i style="background:#0d9488"></i>Test</span><span><i style="background:#b9791a"></i>Cutover</span></div>
+          </div>
+        </div>
+        <!-- MILESTONE PLAN -->
+        <div class="card">
+          <div class="ch">
+            <div><h3>Milestone &amp; invoicing plan</h3><div class="desc">Baseline billing schedule · enter each milestone as % of contract or fixed value · must foot to TCV</div></div>
+            <div class="right">
+              <div class="seg" id="basisseg"><button data-b="pct">% of contract</button><button data-b="val">Fixed value</button><button class="on" data-b="mix">Mixed</button></div>
+              <span class="okbadge">Σ $1,850,000 · 100% ✓</span>
+            </div>
+          </div>
+          <table>
+            <thead><tr><th>#</th><th>Milestone</th><th>Trigger</th><th>Planned billing date</th><th>Basis</th><th class="num">% of contract</th><th class="num">Invoice value ($)</th><th class="num">Cumulative %</th></tr></thead>
+            <tbody>
+              <tr class="line"><td class="num">1</td><td>Mobilization &amp; kickoff</td><td>Contract signing</td><td class="mono">15 Apr 2025</td><td><span class="bchip pct">%</span></td><td class="num">10.0%</td><td class="num calc">185,000</td><td class="num">10%</td></tr>
+              <tr class="line"><td class="num">2</td><td>Blueprint sign-off</td><td>Explore / Blueprint</td><td class="mono">30 May 2025</td><td><span class="bchip pct">%</span></td><td class="num">15.0%</td><td class="num calc">277,500</td><td class="num">25%</td></tr>
+              <tr class="line"><td class="num">3</td><td>Build complete (configuration)</td><td>Realize – Build</td><td class="mono">31 Aug 2025</td><td><span class="bchip pct">%</span></td><td class="num">25.0%</td><td class="num calc">462,500</td><td class="num">50%</td></tr>
+              <tr class="line"><td class="num">4</td><td>Integration test sign-off</td><td>Test &amp; Integration</td><td class="mono">15 Nov 2025</td><td><span class="bchip val">Value</span></td><td class="num calc">20.0%</td><td class="num">370,000</td><td class="num">70%</td></tr>
+              <tr class="line"><td class="num">5</td><td>UAT / go-live readiness</td><td>Test &amp; Integration</td><td class="mono">31 Jan 2026</td><td><span class="bchip pct">%</span></td><td class="num">15.0%</td><td class="num calc">277,500</td><td class="num">85%</td></tr>
+              <tr class="line"><td class="num">6</td><td>Go-live &amp; cutover</td><td>Deploy / Cutover</td><td class="mono">15 Mar 2026</td><td><span class="bchip val">Value</span></td><td class="num calc">12.0%</td><td class="num">222,000</td><td class="num">97%</td></tr>
+              <tr class="line"><td class="num">7</td><td>Final acceptance / hypercare exit</td><td>Deploy / Cutover</td><td class="mono">31 Mar 2026</td><td><span class="bchip pct">%</span></td><td class="num">3.0%</td><td class="num calc">55,500</td><td class="num">100%</td></tr>
+              <tr class="tot-row" style="background:var(--primary)"><td style="border-radius:0 0 0 11px"></td><td>Total — billing plan</td><td></td><td></td><td></td><td class="num">100.0%</td><td class="num">1,850,000</td><td class="num" style="border-radius:0 0 11px 0">100%</td></tr>
+            </tbody>
+          </table>
+          <div class="cb"><div class="smallnote">Each milestone is entered as either a <b>% of contract</b> (invoice value derived, shaded cell) or a <b>fixed value</b> (% derived). The plan must total the contract value (<b>$1,850,000 / 100%</b>) before the baseline can be locked. Forecast revisions to dates/values are made later by the PM under PM/PD sign-off; actual invoicing &amp; AR are tracked on the Milestones &amp; Billing screen.</div></div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT RAIL -->
+      <div class="rail">
+        <div class="outcard">
+          <div class="outhead">
+            <div class="t">Sold margin at baseline</div>
+            <div class="marg"><span class="pc">36.2%</span><span class="ab">$669,968</span></div>
+            <div class="lab2">Contract value $1,850,000 − planned cost $1,180,032</div>
+          </div>
+          <div class="outbody">
+            <div class="orow"><span class="k">Contract value</span><span class="v">$1,850,000</span></div>
+            <div class="orow"><span class="k">Planned cost (EAC baseline)</span><span class="v">$1,180,032</span></div>
+            <div class="orow"><span class="k">Sold margin</span><span class="v" style="color:var(--green)">$669,968</span></div>
+            <div class="orow"><span class="k">Planned effort</span><span class="v">1,749 md</span></div>
+
+            <div class="scaption">Cost composition</div>
+            <div class="mixbar">
+              <i style="width:63.8%;background:#2b3a8c" title="Internal"></i>
+              <i style="width:23.6%;background:#b9791a" title="Freelancer"></i>
+              <i style="width:12.5%;background:#0d9488" title="Subcontractor"></i>
+            </div>
+            <div class="mixleg">
+              <div class="ml"><span class="dot" style="background:#2b3a8c"></span>Internal (L1–L7)<span class="mv">$753,152 · 63.8%</span></div>
+              <div class="ml"><span class="dot" style="background:#b9791a"></span>Freelancer (T&amp;M)<span class="mv">$278,880 · 23.6%</span></div>
+              <div class="ml"><span class="dot" style="background:#0d9488"></span>Subcontractor (fixed)<span class="mv">$148,000 · 12.5%</span></div>
+            </div>
+
+            <div class="scaption">Baseline backlog</div>
+            <div class="orow" style="border:0;padding-top:2px"><span class="k">Unrecognised revenue at start</span><span class="v">$1,850,000</span></div>
+            <div style="height:7px;border-radius:6px;background:var(--surface3);overflow:hidden;margin-top:6px"><div style="width:100%;height:100%;background:linear-gradient(90deg,#2b3a8c,#4654b0)"></div></div>
+            <div class="smallnote">100% of contract value in backlog at deal closure.</div>
+
+            <div class="scaption">Baseline revenue realization</div>
+            <svg viewBox="0 0 280 70" width="100%" height="70" style="margin-top:2px">
+              <defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2b3a8c" stop-opacity=".22"/><stop offset="1" stop-color="#2b3a8c" stop-opacity="0"/></linearGradient></defs>
+              <path d="M4,64 C60,60 90,44 140,30 C190,17 230,9 276,6 L276,68 L4,68 Z" fill="url(#g)"/>
+              <path d="M4,64 C60,60 90,44 140,30 C190,17 230,9 276,6" fill="none" stroke="#2b3a8c" stroke-width="2"/>
+              <circle cx="276" cy="6" r="3" fill="#2b3a8c"/>
+            </svg>
+            <div class="smallnote">Planned S-curve · cost-weighted POC, Apr 2025 → Mar 2026.</div>
+
+                        <div class="scaption">Baseline invoicing plan</div>
+            <svg viewBox="0 0 280 60" width="100%" height="60" style="margin-top:2px">
+              <defs><linearGradient id="gb" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#0d9488" stop-opacity=".20"/><stop offset="1" stop-color="#0d9488" stop-opacity="0"/></linearGradient></defs>
+              <path d="M6,49.2 L50.7,42 L95.3,30 L140,20.4 L184.7,13.2 L229.3,7.4 L274,6 L274,58 L6,58 Z" fill="url(#gb)"/>
+              <polyline points="6,49.2 50.7,42 95.3,30 140,20.4 184.7,13.2 229.3,7.4 274,6" fill="none" stroke="#0d9488" stroke-width="2"/>
+              <circle cx="274" cy="6" r="3" fill="#0d9488"/>
+            </svg>
+            <div class="smallnote">7 milestones · first bill 15 Apr 2025 · final 31 Mar 2026 · cumulative billing to TCV.</div>
+            <div class="note" style="margin-top:16px">Revenue is recognised on <b>cost-based POC</b> from the next screen: <span class="mono">POC = actual cost ÷ (actual + ETC cost)</span>. This baseline is the comparison anchor for every monthly forecast.</div>
+
+            <div class="audit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Created 18 Apr 2025 · v1.0 · audit trail on</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const cbtn=document.getElementById('collapseBtn'), mx=document.querySelector('table.mx');
+cbtn.addEventListener('click',()=>{
+  mx.classList.toggle('collapsed');
+  cbtn.textContent = mx.classList.contains('collapsed')?'Show months':'Collapse to totals';
+});
+</script>
+</body>
+</html>

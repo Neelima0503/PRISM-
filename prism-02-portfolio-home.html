@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM — Portfolio Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#eef0f4; --surface:#ffffff; --surface2:#f8f9fb; --surface3:#f2f4f7;
+      --border:#e3e6ec; --border2:#d3d8e0;
+      --ink:#171c26; --ink2:#5b6472; --ink3:#8b94a4;
+      --primary:#2b3a8c; --primary2:#222e72; --primary-soft:#edf0fb; --primary-soft2:#e2e7f8;
+      --teal:#0d9488; --teal-soft:#e2f4f1;
+      --amber:#b9791a; --amber-soft:#f8eedb;
+      --green:#1a8a52; --green-soft:#e2f3ea;
+      --red:#cb4634; --red-soft:#fae6e2;
+      --indigo:#4654b0;
+      --shadow:0 1px 2px rgba(20,30,60,.06),0 4px 16px rgba(20,30,60,.05);
+      --shadow-sm:0 1px 3px rgba(20,30,60,.08);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Hanken Grotesk',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;}
+    .mono{font-family:'IBM Plex Mono',monospace;}
+
+    /* ── HEADER ── */
+    .header{background:var(--primary);color:white;padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;box-shadow:0 2px 8px rgba(20,30,60,.2);gap:16px;}
+    .header-brand{display:flex;align-items:center;gap:11px;flex-shrink:0;}
+    .brand-logo{width:36px;height:36px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+    .brand-name{font-size:15px;font-weight:700;letter-spacing:-.3px;}
+    .brand-tagline{font-size:10px;opacity:.55;margin-top:1px;}
+    .header-center{display:flex;align-items:center;gap:10px;flex:1;justify-content:center;}
+    .period-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:6px 14px;cursor:pointer;transition:background .15s;}
+    .period-pill:hover{background:rgba(255,255,255,.16);}
+    .period-pill-month{font-size:13px;font-weight:700;}
+    .period-pill-fy{font-size:11px;opacity:.65;}
+    .period-pill-status{font-size:10px;background:rgba(13,148,136,.3);color:#6ee7b7;padding:2px 8px;border-radius:10px;font-weight:600;}
+    .period-pill-caret{font-size:10px;opacity:.6;}
+    .currency-toggle{display:flex;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:7px;overflow:hidden;}
+    .cur-btn{background:transparent;border:none;color:rgba(255,255,255,.6);padding:5px 12px;font-size:12px;font-family:inherit;font-weight:600;cursor:pointer;transition:all .15s;}
+    .cur-btn.active{background:rgba(255,255,255,.18);color:white;}
+    .header-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+    .user-chip{display:flex;align-items:center;gap:8px;}
+    .user-avatar{width:32px;height:32px;background:rgba(255,255,255,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;}
+    .user-info-hdr{text-align:right;}
+    .user-name-hdr{font-size:12px;font-weight:600;}
+    .user-role-hdr{font-size:10px;opacity:.6;margin-top:1px;}
+    .btn-signout{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:5px 12px;border-radius:6px;font-size:11px;font-family:inherit;cursor:pointer;}
+    .btn-signout:hover{background:rgba(255,255,255,.14);}
+
+    /* ── TAB NAV ── */
+    .tab-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:stretch;gap:0;flex-shrink:0;overflow-x:auto;}
+    .tab-nav::-webkit-scrollbar{display:none;}
+    .tab-item{display:flex;align-items:center;gap:7px;padding:0 18px;height:44px;font-size:13px;font-weight:500;color:var(--ink2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;text-decoration:none;flex-shrink:0;}
+    .tab-item:hover{color:var(--ink);background:var(--surface2);}
+    .tab-item.active{color:var(--primary);border-bottom-color:var(--primary);font-weight:600;}
+    .tab-item .tab-icon{font-size:14px;}
+    .tab-sep{width:1px;background:var(--border);margin:10px 0;flex-shrink:0;}
+    .tab-badge{background:var(--red-soft);color:var(--red);font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;min-width:18px;text-align:center;}
+
+    /* ── CONTENT ── */
+    .content{flex:1;padding:24px 28px 32px;overflow:auto;}
+
+    /* Page header */
+    .page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:16px;}
+    .page-hdr-left{}
+    .page-title{font-size:18px;font-weight:700;letter-spacing:-.3px;margin-bottom:3px;}
+    .page-subtitle{font-size:12.5px;color:var(--ink3);}
+    .fx-note{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink3);background:var(--surface2);border:1px solid var(--border);padding:4px 10px;border-radius:6px;margin-top:6px;}
+    .fx-note strong{color:var(--ink2);font-weight:600;}
+    .page-hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+    .btn-export{background:var(--surface);border:1px solid var(--border);color:var(--ink2);padding:8px 16px;border-radius:8px;font-size:13px;font-family:inherit;cursor:pointer;font-weight:500;display:flex;align-items:center;gap:6px;transition:all .15s;}
+    .btn-export:hover{border-color:var(--primary);color:var(--primary);}
+
+    /* ── KPI STRIP ── */
+    .kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:20px;}
+    .kpi-tile{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 16px 14px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+    .kpi-tile::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+    .kpi-tile.c-blue::before{background:var(--primary);}
+    .kpi-tile.c-teal::before{background:var(--teal);}
+    .kpi-tile.c-green::before{background:var(--green);}
+    .kpi-tile.c-amber::before{background:var(--amber);}
+    .kpi-tile.c-red::before{background:var(--red);}
+    .kpi-tile.c-indigo::before{background:var(--indigo);}
+    .kpi-label{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:8px;}
+    .kpi-value{font-size:18px;font-weight:700;letter-spacing:-.5px;color:var(--ink);font-family:'IBM Plex Mono',monospace;line-height:1.1;margin-bottom:4px;}
+    .kpi-value.large{font-size:16px;}
+    .kpi-sub{font-size:11px;color:var(--ink3);}
+    .kpi-delta{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:2px 6px;border-radius:4px;margin-top:2px;}
+    .kpi-delta.pos{background:var(--green-soft);color:var(--green);}
+    .kpi-delta.neg{background:var(--red-soft);color:var(--red);}
+    .kpi-delta.neutral{background:var(--surface3);color:var(--ink3);}
+
+    /* ── FILTER BAR ── */
+    .table-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;}
+    .filter-bar{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+    .filter-bar-title{font-size:14px;font-weight:700;color:var(--ink);flex-shrink:0;margin-right:4px;}
+    .filter-bar-count{font-size:12px;color:var(--ink3);background:var(--surface3);padding:2px 8px;border-radius:10px;}
+    .filter-spacer{flex:1;}
+    .search-box{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;min-width:200px;}
+    .search-box input{border:none;background:transparent;font-size:13px;font-family:inherit;color:var(--ink);outline:none;width:100%;}
+    .search-box input::placeholder{color:var(--ink3);}
+    .filter-select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:12.5px;font-family:inherit;color:var(--ink2);cursor:pointer;outline:none;}
+
+    /* ── TABLE ── */
+    .proj-table{width:100%;border-collapse:collapse;}
+    .proj-table thead th{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap;}
+    .proj-table thead th.num{text-align:right;}
+    .proj-table tbody tr{border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer;}
+    .proj-table tbody tr:last-child{border-bottom:none;}
+    .proj-table tbody tr:hover{background:var(--primary-soft);}
+    .proj-table tbody td{padding:14px 14px;vertical-align:middle;font-size:13px;}
+    .proj-table tbody td.num{text-align:right;font-family:'IBM Plex Mono',monospace;font-size:12.5px;}
+
+    /* RAG */
+    .rag-cell{display:flex;align-items:center;justify-content:center;}
+    .rag-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+    .rag-dot.green{background:var(--green);box-shadow:0 0 0 3px rgba(26,138,82,.15);}
+    .rag-dot.amber{background:var(--amber);box-shadow:0 0 0 3px rgba(185,121,26,.15);}
+    .rag-dot.red{background:var(--red);box-shadow:0 0 0 3px rgba(203,70,52,.15);}
+
+    /* Project name cell */
+    .proj-name{font-weight:700;color:var(--ink);font-size:13.5px;margin-bottom:2px;}
+    .proj-wbs{font-size:11px;color:var(--ink3);font-family:'IBM Plex Mono',monospace;}
+    .proj-client{font-size:11.5px;color:var(--ink2);margin-top:1px;}
+
+    /* Period cell */
+    .period-cell{font-size:12px;color:var(--ink2);}
+    .period-fy{font-size:10.5px;color:var(--ink3);margin-top:2px;}
+
+    /* Margin cell */
+    .margin-main{font-weight:600;}
+    .margin-delta{font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:2px;}
+    .margin-delta.neg{color:var(--red);}
+    .margin-delta.pos{color:var(--green);}
+    .margin-delta.flat{color:var(--ink3);}
+
+    /* EAC cell */
+    .eac-main{font-weight:600;}
+    .eac-delta{font-size:11px;color:var(--red);font-weight:600;}
+    .eac-delta.ok{color:var(--ink3);}
+
+    /* Status badge */
+    .status-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+    .status-badge.approved{background:var(--green-soft);color:var(--green);}
+    .status-badge.submitted{background:var(--primary-soft);color:var(--primary);}
+    .status-badge.draft{background:var(--amber-soft);color:var(--amber);}
+    .status-badge.overdue{background:var(--red-soft);color:var(--red);}
+    .status-badge.pending-pd{background:var(--primary-soft);color:var(--indigo);}
+    .status-badge.not-started{background:var(--surface3);color:var(--ink3);}
+
+    /* Exception badge + tooltip */
+    .exc-wrap{position:relative;display:inline-flex;justify-content:center;}
+    .exc-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:10px;cursor:default;}
+    .exc-badge.has-exc{background:var(--red-soft);color:var(--red);}
+    .exc-badge.no-exc{background:var(--green-soft);color:var(--green);}
+    .exc-tooltip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);width:280px;background:var(--ink);color:#fff;border-radius:10px;padding:12px 14px;font-size:12px;z-index:100;box-shadow:0 8px 24px rgba(20,30,60,.25);pointer-events:none;}
+    .exc-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--ink);}
+    .exc-wrap:hover .exc-tooltip{display:block;}
+    .exc-tooltip-title{font-size:10px;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:8px;}
+    .exc-item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+    .exc-item:last-child{border-bottom:none;padding-bottom:0;}
+    .exc-item-dot{width:7px;height:7px;border-radius:50%;background:var(--red-soft);flex-shrink:0;margin-top:3px;}
+    .exc-item-body{flex:1;}
+    .exc-item-name{font-weight:600;font-size:12px;}
+    .exc-item-detail{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px;}
+    .exc-footer{margin-top:8px;font-size:10.5px;color:rgba(255,255,255,.4);}
+
+    /* Action btn */
+    .btn-view{background:var(--primary-soft);color:var(--primary);border:1px solid var(--primary-soft2);padding:6px 14px;border-radius:7px;font-size:12px;font-family:inherit;cursor:pointer;font-weight:600;transition:all .15s;white-space:nowrap;}
+    .btn-view:hover{background:var(--primary);color:white;}
+
+    /* Table footer */
+    .table-footer{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-top:1px solid var(--border);background:var(--surface2);}
+    .table-footer-info{font-size:12px;color:var(--ink3);}
+
+    /* Onerous warning banner */
+    .warning-banner{display:flex;align-items:center;gap:12px;background:var(--amber-soft);border:1px solid var(--amber);border-radius:10px;padding:12px 18px;margin-bottom:16px;font-size:13px;color:var(--amber);}
+    .warning-banner strong{font-weight:700;}
+
+    /* Selected row */
+    .proj-table tbody tr.row-selected{background:var(--primary-soft2) !important;}
+
+    /* Responsive */
+    @media(max-width:1200px){.kpi-strip{grid-template-columns:repeat(3,1fr);}}
+    @media(max-width:900px){.kpi-strip{grid-template-columns:repeat(2,1fr);}table{font-size:12px;}.header-center{display:none;}}
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════ HEADER ════════════════════════ -->
+<header class="header">
+  <div class="header-brand">
+    <div class="brand-logo">P</div>
+    <div>
+      <div class="brand-name">PRISM</div>
+      <div class="brand-tagline">Project Revenue &amp; Margin Intelligence</div>
+    </div>
+  </div>
+
+  <div class="header-center">
+    <!-- Period pill -->
+    <div class="period-pill" onclick="window.location.href='prism-01-period-selector.html'">
+      <span class="period-pill-month">October 2025</span>
+      <span class="period-pill-fy">FY 2025–26</span>
+      <span class="period-pill-status">Open</span>
+      <span class="period-pill-caret">▾</span>
+    </div>
+
+    <!-- Currency toggle -->
+    <div class="currency-toggle">
+      <button class="cur-btn active" id="btnTHB" onclick="setCurrency('thb')">THB</button>
+      <button class="cur-btn" id="btnUSD" onclick="setCurrency('usd')">USD</button>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="user-chip">
+      <div class="user-info-hdr">
+        <div class="user-name-hdr">Ananya Chaisri</div>
+        <div class="user-role-hdr">Finance Admin · Thailand</div>
+      </div>
+      <div class="user-avatar">AC</div>
+    </div>
+    <button class="btn-signout">Sign out</button>
+  </div>
+</header>
+
+<!-- ════════════════════════ TAB NAV ════════════════════════ -->
+<nav class="tab-nav">
+  <a class="tab-item active" href="#">
+    <span class="tab-icon">🏠</span> Portfolio
+  </a>
+  <div class="tab-sep"></div>
+  <a class="tab-item" href="#">
+    <span class="tab-icon">📊</span> Revenue Recognition
+  </a>
+  <a class="tab-item" href="#">
+    <span class="tab-icon">🎯</span> Milestones &amp; Billing
+  </a>
+  <a class="tab-item" href="#">
+    <span class="tab-icon">🔐</span> Finance Close
+  </a>
+  <a class="tab-item" href="#">
+    <span class="tab-icon">📋</span> Finance Reports
+  </a>
+  <div class="tab-sep"></div>
+  <a class="tab-item" href="#">
+    <span class="tab-icon">📐</span> Baseline Setup
+  </a>
+  <a class="tab-item" href="#">
+    <span class="tab-icon">📝</span> PM Submission
+  </a>
+  <a class="tab-item" href="#">
+    <span class="tab-icon">✅</span> PD Approval
+  </a>
+  <div class="tab-sep"></div>
+  <a class="tab-item" href="#">
+    <span class="tab-icon">⚡</span> QC Exceptions <span class="tab-badge">2</span>
+  </a>
+  <a class="tab-item" href="#">
+    <span class="tab-icon">📅</span> History
+  </a>
+  <div class="tab-sep"></div>
+  <a class="tab-item" href="#">
+    <span class="tab-icon">⚙️</span> Period Admin
+  </a>
+  <a class="tab-item" href="#">
+    <span class="tab-icon">💰</span> Rate Masters
+  </a>
+</nav>
+
+<!-- ════════════════════════ CONTENT ════════════════════════ -->
+<div class="content">
+
+  <!-- Page header -->
+  <div class="page-hdr">
+    <div class="page-hdr-left">
+      <div class="page-title">Portfolio — October 2025</div>
+      <div class="page-subtitle">All active projects in Thailand · FY 2025–26 · PM submission deadline: 31 Oct 2025</div>
+      <div class="fx-note">🇹🇭 &nbsp;<strong>FX Rate:</strong> 1 USD = 36.50 THB &nbsp;·&nbsp; Effective since 01 Oct 2025 &nbsp;·&nbsp; USD values auto-converted at latest rate</div>
+    </div>
+    <div class="page-hdr-right">
+      <button class="btn-export" onclick="alert('Exports to Excel in current currency')">⬇ Export Excel</button>
+    </div>
+  </div>
+
+  <!-- Warning banner (margin erosion flag) -->
+  <div class="warning-banner">
+    ⚠&nbsp; <div><strong>1 project with QC exception:</strong> PTT Energy Analytics shows margin erosion of 6.1 pp vs baseline (31.1% → 25.0%). Review required before Finance Close.</div>
+  </div>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi-tile c-blue">
+      <div class="kpi-label">Total Portfolio TCV</div>
+      <div class="kpi-value large" id="k-tcv">฿73,700,000</div>
+      <div class="kpi-sub">2 active projects</div>
+    </div>
+    <div class="kpi-tile c-teal">
+      <div class="kpi-label">This Month Revenue</div>
+      <div class="kpi-value large" id="k-rev-month">฿4,806,700</div>
+      <div class="kpi-sub">Oct 2025 recognition</div>
+    </div>
+    <div class="kpi-tile c-teal">
+      <div class="kpi-label">YTD Revenue</div>
+      <div class="kpi-value large" id="k-ytd">฿16,662,700</div>
+      <div class="kpi-sub">Apr – Oct 2025</div>
+    </div>
+    <div class="kpi-tile c-green">
+      <div class="kpi-label">Wtd. Forecast Margin</div>
+      <div class="kpi-value" id="k-margin">29.0%</div>
+      <div class="kpi-delta neg" id="k-margin-delta">▼ 2.1 pp vs baseline</div>
+    </div>
+    <div class="kpi-tile c-amber">
+      <div class="kpi-label">Pending Submissions</div>
+      <div class="kpi-value">1 / 2</div>
+      <div class="kpi-sub">1 draft · deadline 31 Oct</div>
+    </div>
+    <div class="kpi-tile c-red">
+      <div class="kpi-label">Open QC Exceptions</div>
+      <div class="kpi-value">2</div>
+      <div class="kpi-sub">1 margin · 1 EAC spike</div>
+    </div>
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="table-card">
+
+    <!-- Filter bar -->
+    <div class="filter-bar">
+      <span class="filter-bar-title">Projects</span>
+      <span class="filter-bar-count">2 projects</span>
+      <div class="filter-spacer"></div>
+      <div class="search-box">
+        <span style="color:var(--ink3);font-size:13px;">🔍</span>
+        <input type="text" placeholder="Search projects, WBS, client…" oninput="filterTable(this.value)">
+      </div>
+      <select class="filter-select">
+        <option>All Statuses</option>
+        <option>Approved</option>
+        <option>Submitted</option>
+        <option>Draft</option>
+        <option>Overdue</option>
+      </select>
+      <select class="filter-select">
+        <option>All RAG</option>
+        <option>🟢 Green</option>
+        <option>🟡 Amber</option>
+        <option>🔴 Red</option>
+      </select>
+    </div>
+
+    <!-- Project table -->
+    <div style="overflow-x:auto;">
+      <table class="proj-table" id="projTable">
+        <thead>
+          <tr>
+            <th style="width:40px;text-align:center;">RAG</th>
+            <th style="min-width:220px;">Project / WBS</th>
+            <th style="min-width:110px;">Contract Period</th>
+            <th class="num" style="min-width:130px;" id="th-tcv">TCV (THB)</th>
+            <th class="num" style="min-width:80px;">POC %</th>
+            <th class="num" style="min-width:130px;">Forecast Margin</th>
+            <th class="num" style="min-width:140px;" id="th-eac">Current EAC (THB)</th>
+            <th class="num" style="min-width:130px;" id="th-rev">This Month (THB)</th>
+            <th class="num" style="min-width:130px;" id="th-ytd">YTD Revenue (THB)</th>
+            <th style="min-width:130px;">Oct 25 Status</th>
+            <th style="min-width:90px;text-align:center;">QC Exceptions<br><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;opacity:.7;">system auto-flagged</span></th>
+            <th style="min-width:80px;"></th>
+          </tr>
+        </thead>
+        <tbody id="projBody">
+
+          <!-- Project A: SCB Digital Finance -->
+          <tr onclick="selectRow(this)">
+            <td><div class="rag-cell"><div class="rag-dot green"></div></div></td>
+            <td>
+              <div class="proj-name">SCB Digital Finance Transformation</div>
+              <div class="proj-wbs">TH-FIN-2025-001</div>
+              <div class="proj-client">Siam Commercial Bank &nbsp;·&nbsp; S/4HANA Finance</div>
+            </td>
+            <td>
+              <div class="period-cell">Oct 2025 – Sep 2027</div>
+              <div class="period-fy">FY 2025–26 → FY 2026–27</div>
+            </td>
+            <td class="num" data-thb="42500000" data-usd="1164384">
+              <span class="cur-thb">฿42,500,000</span>
+              <span class="cur-usd" style="display:none;">$1,164,384</span>
+            </td>
+            <td class="num"><strong>8.3%</strong></td>
+            <td class="num">
+              <div class="margin-main">32.0%</div>
+              <div class="margin-delta flat">— vs baseline 32.0%</div>
+            </td>
+            <td class="num">
+              <div class="eac-main cur-thb">฿28,900,000</div>
+              <div class="eac-main cur-usd" style="display:none;">$791,781</div>
+              <div class="eac-delta ok">= Baseline</div>
+            </td>
+            <td class="num">
+              <span class="cur-thb">฿3,527,500</span>
+              <span class="cur-usd" style="display:none;">$96,644</span>
+            </td>
+            <td class="num">
+              <span class="cur-thb">฿3,527,500</span>
+              <span class="cur-usd" style="display:none;">$96,644</span>
+            </td>
+            <td>
+              <span class="status-badge approved">✓ PD Approved</span>
+            </td>
+            <td style="text-align:center;">
+              <div class="exc-wrap">
+                <span class="exc-badge no-exc">✓ Clear</span>
+              </div>
+            </td>
+            <td><button class="btn-view" onclick="event.stopPropagation();window.location.href='prism-03-project-detail.html?project=A'">View →</button></td>
+          </tr>
+
+          <!-- Project B: PTT Energy Analytics -->
+          <tr onclick="selectRow(this)">
+            <td><div class="rag-cell"><div class="rag-dot amber"></div></div></td>
+            <td>
+              <div class="proj-name">PTT Energy Analytics Platform</div>
+              <div class="proj-wbs">TH-ANA-2025-002</div>
+              <div class="proj-client">PTT Global Chemical &nbsp;·&nbsp; SAP Analytics Cloud</div>
+            </td>
+            <td>
+              <div class="period-cell">Apr 2025 – Jun 2027</div>
+              <div class="period-fy">FY 2025–26 → FY 2026–27</div>
+            </td>
+            <td class="num">
+              <span class="cur-thb">฿31,200,000</span>
+              <span class="cur-usd" style="display:none;">$854,795</span>
+            </td>
+            <td class="num"><strong>42.1%</strong></td>
+            <td class="num">
+              <div class="margin-main">25.0%</div>
+              <div class="margin-delta neg">▼ 6.1 pp vs baseline 31.1%</div>
+            </td>
+            <td class="num">
+              <div class="eac-main cur-thb">฿23,400,000</div>
+              <div class="eac-main cur-usd" style="display:none;">$641,096</div>
+              <div class="eac-delta">↑ +฿1,900,000 vs baseline</div>
+            </td>
+            <td class="num">
+              <span class="cur-thb">฿1,279,200</span>
+              <span class="cur-usd" style="display:none;">$35,046</span>
+            </td>
+            <td class="num">
+              <span class="cur-thb">฿13,135,200</span>
+              <span class="cur-usd" style="display:none;">$359,869</span>
+            </td>
+            <td>
+              <span class="status-badge draft">⏱ Draft — Not Submitted</span>
+            </td>
+            <td style="text-align:center;">
+              <div class="exc-wrap">
+                <span class="exc-badge has-exc">⚡ 2 open</span>
+                <div class="exc-tooltip">
+                  <div class="exc-tooltip-title">System Auto-Flagged · Oct 2025</div>
+                  <div class="exc-item">
+                    <div class="exc-item-dot"></div>
+                    <div class="exc-item-body">
+                      <div class="exc-item-name">Forecast margin erosion</div>
+                      <div class="exc-item-detail">Dropped −6.1 pp vs baseline · Threshold: &gt;5 pp · Baseline 31.1% → Forecast 25.0%</div>
+                    </div>
+                  </div>
+                  <div class="exc-item">
+                    <div class="exc-item-dot"></div>
+                    <div class="exc-item-body">
+                      <div class="exc-item-name">EAC overrun vs baseline</div>
+                      <div class="exc-item-detail">+฿1,900,000 (+8.8%) above baseline EAC · Threshold: &gt;5% · Baseline ฿21.5M → Current ฿23.4M</div>
+                    </div>
+                  </div>
+                  <div class="exc-footer">Raised automatically · Pending QC review</div>
+                </div>
+              </div>
+            </td>
+            <td><button class="btn-view" onclick="event.stopPropagation();window.location.href='prism-03-project-detail.html?project=B'">View →</button></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table footer -->
+    <div class="table-footer">
+      <span class="table-footer-info">Showing 2 of 2 projects · Thailand · October 2025 (Open)</span>
+      <span class="table-footer-info" id="fxFooter">FX: 1 USD = <strong>36.50 THB</strong> · Effective 01 Oct 2025 · All USD figures auto-converted at latest rate</span>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<script>
+  /* ── CURRENCY TOGGLE ── */
+  let activeCurrency = 'thb';
+
+  const KPI_DATA = {
+    thb: {
+      tcv:      '฿73,700,000',
+      revMonth: '฿4,806,700',
+      ytd:      '฿16,662,700',
+    },
+    usd: {
+      tcv:      '$2,019,178',
+      revMonth: '$131,690',
+      ytd:      '$456,512',
+    }
+  };
+
+  const TH_HEADERS = { tcv:'TCV (THB)', eac:'Current EAC (THB)', rev:'This Month (THB)', ytd:'YTD Revenue (THB)' };
+  const USD_HEADERS = { tcv:'TCV (USD)', eac:'Current EAC (USD)', rev:'This Month (USD)', ytd:'YTD Revenue (USD)' };
+
+  function setCurrency(cur) {
+    activeCurrency = cur;
+    document.getElementById('btnTHB').classList.toggle('active', cur === 'thb');
+    document.getElementById('btnUSD').classList.toggle('active', cur === 'usd');
+
+    // KPI tiles
+    document.getElementById('k-tcv').textContent      = KPI_DATA[cur].tcv;
+    document.getElementById('k-rev-month').textContent = KPI_DATA[cur].revMonth;
+    document.getElementById('k-ytd').textContent       = KPI_DATA[cur].ytd;
+
+    // Table column headers
+    const h = cur === 'thb' ? TH_HEADERS : USD_HEADERS;
+    document.getElementById('th-tcv').textContent = h.tcv;
+    document.getElementById('th-eac').textContent = h.eac;
+    document.getElementById('th-rev').textContent = h.rev;
+    document.getElementById('th-ytd').textContent = h.ytd;
+
+    // Table values
+    document.querySelectorAll('.cur-thb').forEach(el => el.style.display = cur === 'thb' ? '' : 'none');
+    document.querySelectorAll('.cur-usd').forEach(el => el.style.display = cur === 'usd' ? '' : 'none');
+  }
+
+  /* ── ROW SELECTION ── */
+  function selectRow(row) {
+    document.querySelectorAll('#projBody tr').forEach(r => r.classList.remove('row-selected'));
+    row.classList.add('row-selected');
+  }
+
+  /* ── SEARCH FILTER ── */
+  function filterTable(q) {
+    const rows = document.querySelectorAll('#projBody tr');
+    const term = q.toLowerCase();
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      row.style.display = text.includes(term) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

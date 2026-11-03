@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM — Period Selector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#eef0f4; --surface:#ffffff; --surface2:#f8f9fb; --surface3:#f2f4f7;
+      --border:#e3e6ec; --border2:#d3d8e0;
+      --ink:#171c26; --ink2:#5b6472; --ink3:#8b94a4;
+      --primary:#2b3a8c; --primary2:#222e72; --primary-soft:#edf0fb; --primary-soft2:#e2e7f8;
+      --teal:#0d9488; --teal-soft:#e2f4f1; --teal-soft2:#c9ede9;
+      --amber:#b9791a; --amber-soft:#f8eedb;
+      --green:#1a8a52; --green-soft:#e2f3ea;
+      --red:#cb4634; --red-soft:#fae6e2;
+      --indigo:#4654b0;
+      --shadow:0 1px 2px rgba(20,30,60,.06),0 4px 16px rgba(20,30,60,.05);
+      --shadow-lg:0 4px 6px rgba(20,30,60,.07),0 10px 40px rgba(20,30,60,.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hanken Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--primary);
+      color: white;
+      padding: 0 32px;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(20,30,60,.2);
+    }
+
+    .header-brand { display: flex; align-items: center; gap: 12px; }
+
+    .brand-logo {
+      width: 38px; height: 38px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 15px; letter-spacing: -0.5px;
+    }
+
+    .brand-name { font-size: 16px; font-weight: 700; letter-spacing: -.3px; }
+    .brand-tagline { font-size: 10.5px; opacity: .6; margin-top: 1px; letter-spacing: .1px; }
+
+    .header-right { display: flex; align-items: center; gap: 20px; }
+
+    .header-context {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 12px;
+    }
+
+    .context-flag { font-size: 16px; }
+    .context-text { line-height: 1.3; }
+    .context-country { font-weight: 600; font-size: 12px; }
+    .context-currency { font-size: 10.5px; opacity: .7; }
+
+    .header-user { display: flex; align-items: center; gap: 10px; }
+
+    .user-info { text-align: right; }
+    .user-name { font-size: 13px; font-weight: 600; }
+    .user-role { font-size: 11px; opacity: .65; margin-top: 1px; }
+
+    .user-avatar {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.18);
+      border: 1.5px solid rgba(255,255,255,.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; letter-spacing: -.3px;
+    }
+
+    .btn-logout {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.18);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .15s;
+      font-weight: 500;
+    }
+    .btn-logout:hover { background: rgba(255,255,255,.16); }
+
+    /* ── MAIN ── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 44px 32px 40px;
+    }
+
+    .page-header { text-align: center; margin-bottom: 28px; }
+    .page-title { font-size: 22px; font-weight: 700; letter-spacing: -.4px; margin-bottom: 5px; }
+    .page-subtitle { font-size: 13.5px; color: var(--ink2); }
+
+    /* ── FY SELECTOR BAR ── */
+    .fy-bar {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+
+    .fy-segment {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+    }
+
+    .fy-segment + .fy-segment {
+      border-left: 1px solid var(--border);
+    }
+
+    .fy-seg-label { font-size: 11px; color: var(--ink3); text-transform: uppercase; letter-spacing: .5px; font-weight: 600; }
+
+    .fy-select {
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      padding-right: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232b3a8c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0 center;
+    }
+
+    .fy-stat {
+      display: flex; flex-direction: column;
+    }
+    .fy-stat-val { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .fy-stat-sub { font-size: 11px; color: var(--ink3); margin-top: 1px; }
+
+    .fy-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .fy-badge.active { background: var(--green-soft); color: var(--green); }
+    .fy-badge.historical { background: var(--surface3); color: var(--ink3); }
+
+    /* ── MONTH GRID ── */
+    .month-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      width: 100%;
+      max-width: 960px;
+      margin-bottom: 28px;
+    }
+
+    .month-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+      cursor: pointer;
+      transition: all .18s ease;
+      position: relative;
+      user-select: none;
+      box-shadow: var(--shadow);
+    }
+
+    /* States */
+    .month-card.state-frozen {
+      background: var(--primary-soft);
+      border-color: var(--primary-soft2);
+    }
+    .month-card.state-frozen:hover {
+      border-color: var(--indigo);
+      box-shadow: 0 4px 24px rgba(70,84,176,.18);
+      transform: translateY(-2px);
+    }
+
+    .month-card.state-open {
+      background: var(--surface);
+      border-color: var(--teal);
+      box-shadow: 0 0 0 1px var(--teal-soft2), var(--shadow);
+    }
+    .month-card.state-open:hover {
+      box-shadow: 0 4px 24px rgba(13,148,136,.2);
+      transform: translateY(-2px);
+    }
+
+    .month-card.state-not-opened {
+      background: var(--surface2);
+      border-color: var(--border);
+      border-style: dashed;
+      cursor: default;
+      opacity: .65;
+    }
+
+    /* Selected */
+    .month-card.is-selected {
+      border-color: var(--primary) !important;
+      border-style: solid !important;
+      box-shadow: 0 0 0 3px rgba(43,58,140,.12), 0 8px 32px rgba(43,58,140,.18) !important;
+      transform: translateY(-3px) !important;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .card-month-name { font-size: 16px; font-weight: 700; letter-spacing: -.3px; color: var(--ink); }
+    .card-month-year { font-size: 11px; color: var(--ink3); font-weight: 400; display: block; margin-top: 2px; }
+
+    .card-icon {
+      width: 34px; height: 34px;
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0;
+    }
+    .state-frozen .card-icon { background: var(--primary-soft2); }
+    .state-open   .card-icon { background: var(--teal-soft); }
+    .state-not-opened .card-icon { background: var(--surface3); }
+
+    .card-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .6px;
+      padding: 3px 8px; border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .state-frozen .card-badge { background: var(--primary-soft2); color: var(--primary); }
+    .state-open   .card-badge { background: var(--teal-soft); color: var(--teal); }
+    .state-not-opened .card-badge { background: var(--surface3); color: var(--ink3); }
+
+    .card-detail { font-size: 11.5px; color: var(--ink3); line-height: 1.6; }
+    .card-detail .val { color: var(--ink2); font-weight: 600; }
+    .card-detail .warn { color: var(--amber); font-weight: 600; }
+    .card-detail .muted { color: var(--ink3); }
+
+    .card-select-ring {
+      position: absolute;
+      top: 11px; right: 11px;
+      width: 22px; height: 22px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: none; align-items: center; justify-content: center;
+      color: white; font-size: 12px; font-weight: 700;
+    }
+    .is-selected .card-select-ring { display: flex; }
+
+    /* Today marker */
+    .today-dot {
+      position: absolute;
+      bottom: 12px; right: 14px;
+      font-size: 10px; font-weight: 600;
+      color: var(--teal);
+      background: var(--teal-soft);
+      padding: 2px 7px; border-radius: 10px;
+    }
+
+    /* ── ACTION BAR ── */
+    .action-bar {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      width: 100%;
+      max-width: 960px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .legend {
+      display: flex; align-items: center; gap: 20px; flex: 1;
+    }
+
+    .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--ink2); }
+
+    .legend-swatch {
+      width: 28px; height: 16px; border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .swatch-frozen { background: var(--primary-soft2); border: 1.5px solid var(--indigo); }
+    .swatch-open { background: var(--teal-soft); border: 1.5px solid var(--teal); }
+    .swatch-not-opened { background: var(--surface3); border: 1.5px dashed var(--border2); }
+
+    .action-divider { width: 1px; height: 40px; background: var(--border); flex-shrink: 0; }
+
+    .selected-info { text-align: right; min-width: 160px; }
+    .selected-info-label { font-size: 11px; color: var(--ink3); text-transform: uppercase; letter-spacing: .5px; }
+    .selected-info-val { font-size: 14px; font-weight: 700; color: var(--primary); margin-top: 2px; }
+    .selected-info-val.empty { color: var(--ink3); font-weight: 400; font-size: 13px; }
+
+    .btn-enter {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all .18s;
+      display: flex; align-items: center; gap: 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn-enter:hover:not(:disabled) {
+      background: var(--primary2);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(43,58,140,.35);
+    }
+    .btn-enter:disabled {
+      background: var(--border2); color: var(--ink3);
+      cursor: not-allowed; transform: none; box-shadow: none;
+    }
+    .btn-enter.view-mode { background: var(--indigo); }
+    .btn-enter.view-mode:hover:not(:disabled) { background: #3a48a0; }
+
+    /* ── TOAST WARNING ── */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: var(--amber-soft);
+      border: 1px solid var(--amber);
+      color: var(--amber);
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-size: 13px; font-weight: 500;
+      display: flex; align-items: center; gap: 8px;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      pointer-events: none;
+      transition: all .25s ease;
+      z-index: 200;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .month-grid { grid-template-columns: repeat(3, 1fr); }
+      .fy-segment:last-child { display: none; }
+    }
+    @media (max-width: 640px) {
+      .month-grid { grid-template-columns: repeat(2, 1fr); }
+      .header { padding: 0 16px; }
+      .header-context { display: none; }
+      .main { padding: 28px 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════ HEADER ══════════════════════════════════ -->
+<header class="header">
+  <div class="header-brand">
+    <div class="brand-logo">P</div>
+    <div>
+      <div class="brand-name">PRISM</div>
+      <div class="brand-tagline">Project Revenue &amp; Margin Intelligence System</div>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="header-context">
+      <span class="context-flag">🇹🇭</span>
+      <div class="context-text">
+        <div class="context-country">Thailand</div>
+        <div class="context-currency">THB · Apr–Mar FY</div>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-info">
+        <div class="user-name">Ananya Chaisri</div>
+        <div class="user-role">Finance Admin · Thailand</div>
+      </div>
+      <div class="user-avatar">AC</div>
+      <button class="btn-logout">Sign out</button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════ MAIN ══════════════════════════════════ -->
+<main class="main">
+
+  <div class="page-header">
+    <h1 class="page-title">Select a Reporting Period</h1>
+    <p class="page-subtitle">Choose the month you want to work in. Closed & frozen periods are available in read-only view.</p>
+  </div>
+
+  <!-- FY SELECTOR BAR -->
+  <div class="fy-bar">
+    <div class="fy-segment">
+      <div class="fy-seg-label">Financial Year</div>
+      <select class="fy-select" id="fySelect" onchange="changeFY(this.value)">
+        <option value="fy2526" selected>FY 2025–26</option>
+        <option value="fy2425">FY 2024–25</option>
+        <option value="fy2324">FY 2023–24</option>
+      </select>
+    </div>
+    <div class="fy-segment">
+      <div class="fy-stat">
+        <div class="fy-stat-val">Apr 2025 – Mar 2026</div>
+        <div class="fy-stat-sub">12 months · Thailand</div>
+      </div>
+    </div>
+    <div class="fy-segment">
+      <div class="fy-stat">
+        <div class="fy-stat-val">6 Closed &nbsp;·&nbsp; 1 Open &nbsp;·&nbsp; 5 Pending</div>
+        <div class="fy-stat-sub">Period status overview</div>
+      </div>
+    </div>
+    <div class="fy-segment">
+      <span class="fy-badge active" id="fyStatusBadge">● Active Year</span>
+    </div>
+  </div>
+
+  <!-- MONTH GRID -->
+  <div class="month-grid" id="monthGrid"></div>
+
+  <!-- ACTION BAR -->
+  <div class="action-bar">
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-swatch swatch-frozen"></div>
+        Closed &amp; Frozen
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch swatch-open"></div>
+        Open — data entry active
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch swatch-not-opened"></div>
+        Not Yet Opened
+      </div>
+    </div>
+
+    <div class="action-divider"></div>
+
+    <div class="selected-info">
+      <div class="selected-info-label">Selected period</div>
+      <div class="selected-info-val empty" id="selLabel">— none selected —</div>
+    </div>
+
+    <button class="btn-enter" id="enterBtn" disabled onclick="enterPeriod()">
+      Enter Period &nbsp;→
+    </button>
+  </div>
+
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast">⚠&nbsp; This period has not been opened by Finance Admin yet.</div>
+
+<!-- ══════════════════════════════════ SCRIPT ══════════════════════════════════ -->
+<script>
+  /* ── DATA ── */
+  const FY_DATA = {
+    fy2526: {
+      label: 'Apr 2025 – Mar 2026',
+      isActive: true,
+      statusLine: '6 Closed · 1 Open · 5 Pending',
+      months: [
+        { name:'April',    yr:2025, state:'frozen',     freezeDate:'02 May 2025',  projects:4, autoSelect:false },
+        { name:'May',      yr:2025, state:'frozen',     freezeDate:'02 Jun 2025',  projects:4, autoSelect:false },
+        { name:'June',     yr:2025, state:'frozen',     freezeDate:'01 Jul 2025',  projects:4, autoSelect:false },
+        { name:'July',     yr:2025, state:'frozen',     freezeDate:'01 Aug 2025',  projects:4, autoSelect:false },
+        { name:'August',   yr:2025, state:'frozen',     freezeDate:'02 Sep 2025',  projects:4, autoSelect:false },
+        { name:'September',yr:2025, state:'frozen',     freezeDate:'01 Oct 2025',  projects:4, autoSelect:false },
+        { name:'October',  yr:2025, state:'open',       deadline:'31 Oct 2025',    projects:4, autoSelect:true  },
+        { name:'November', yr:2025, state:'not-opened', autoSelect:false },
+        { name:'December', yr:2025, state:'not-opened', autoSelect:false },
+        { name:'January',  yr:2026, state:'not-opened', autoSelect:false },
+        { name:'February', yr:2026, state:'not-opened', autoSelect:false },
+        { name:'March',    yr:2026, state:'not-opened', autoSelect:false },
+      ]
+    },
+    fy2425: {
+      label: 'Apr 2024 – Mar 2025',
+      isActive: false,
+      statusLine: '12 Closed · All frozen',
+      months: [
+        { name:'April',    yr:2024, state:'frozen', freezeDate:'02 May 2024',  projects:3, autoSelect:true  },
+        { name:'May',      yr:2024, state:'frozen', freezeDate:'03 Jun 2024',  projects:3, autoSelect:false },
+        { name:'June',     yr:2024, state:'frozen', freezeDate:'01 Jul 2024',  projects:3, autoSelect:false },
+        { name:'July',     yr:2024, state:'frozen', freezeDate:'01 Aug 2024',  projects:3, autoSelect:false },
+        { name:'August',   yr:2024, state:'frozen', freezeDate:'02 Sep 2024',  projects:3, autoSelect:false },
+        { name:'September',yr:2024, state:'frozen', freezeDate:'01 Oct 2024',  projects:3, autoSelect:false },
+        { name:'October',  yr:2024, state:'frozen', freezeDate:'01 Nov 2024',  projects:3, autoSelect:false },
+        { name:'November', yr:2024, state:'frozen', freezeDate:'02 Dec 2024',  projects:3, autoSelect:false },
+        { name:'December', yr:2024, state:'frozen', freezeDate:'02 Jan 2025',  projects:3, autoSelect:false },
+        { name:'January',  yr:2025, state:'frozen', freezeDate:'03 Feb 2025',  projects:3, autoSelect:false },
+        { name:'February', yr:2025, state:'frozen', freezeDate:'03 Mar 2025',  projects:3, autoSelect:false },
+        { name:'March',    yr:2025, state:'frozen', freezeDate:'01 Apr 2025',  projects:3, autoSelect:false },
+      ]
+    },
+    fy2324: {
+      label: 'Apr 2023 – Mar 2024',
+      isActive: false,
+      statusLine: '12 Closed · All frozen',
+      months: [
+        { name:'April',    yr:2023, state:'frozen', freezeDate:'02 May 2023', projects:2, autoSelect:true },
+        { name:'May',      yr:2023, state:'frozen', freezeDate:'01 Jun 2023', projects:2, autoSelect:false },
+        { name:'June',     yr:2023, state:'frozen', freezeDate:'03 Jul 2023', projects:2, autoSelect:false },
+        { name:'July',     yr:2023, state:'frozen', freezeDate:'01 Aug 2023', projects:2, autoSelect:false },
+        { name:'August',   yr:2023, state:'frozen', freezeDate:'01 Sep 2023', projects:2, autoSelect:false },
+        { name:'September',yr:2023, state:'frozen', freezeDate:'02 Oct 2023', projects:2, autoSelect:false },
+        { name:'October',  yr:2023, state:'frozen', freezeDate:'01 Nov 2023', projects:2, autoSelect:false },
+        { name:'November', yr:2023, state:'frozen', freezeDate:'01 Dec 2023', projects:2, autoSelect:false },
+        { name:'December', yr:2023, state:'frozen', freezeDate:'02 Jan 2024', projects:2, autoSelect:false },
+        { name:'January',  yr:2024, state:'frozen', freezeDate:'01 Feb 2024', projects:2, autoSelect:false },
+        { name:'February', yr:2024, state:'frozen', freezeDate:'01 Mar 2024', projects:2, autoSelect:false },
+        { name:'March',    yr:2024, state:'frozen', freezeDate:'01 Apr 2024', projects:2, autoSelect:false },
+      ]
+    }
+  };
+
+  let currentFY = 'fy2526';
+  let selectedIdx = -1;
+
+  const STATE_ICONS  = { frozen:'🔒', open:'📂', 'not-opened':'⏳' };
+  const STATE_LABELS = { frozen:'Closed & Frozen', open:'Open', 'not-opened':'Not Yet Opened' };
+
+  /* ── BUILD GRID ── */
+  function buildGrid(fyKey) {
+    const fy = FY_DATA[fyKey];
+    const grid = document.getElementById('monthGrid');
+    grid.innerHTML = '';
+    selectedIdx = -1;
+    updateActionBar(null, false);
+
+    fy.months.forEach((m, i) => {
+      const card = document.createElement('div');
+      card.className = `month-card state-${m.state}`;
+      card.dataset.idx = i;
+
+      let detail = '';
+      if (m.state === 'frozen') {
+        detail = `<div>Frozen on <span class="val">${m.freezeDate}</span></div>
+                  <div class="muted">${m.projects} project${m.projects !== 1 ? 's' : ''} · View-only</div>`;
+      } else if (m.state === 'open') {
+        detail = `<div>PM deadline: <span class="warn">${m.deadline}</span></div>
+                  <div class="muted">${m.projects} project${m.projects !== 1 ? 's' : ''} · Active</div>`;
+      } else {
+        detail = `<div class="muted">Awaiting Finance Admin</div>
+                  <div class="muted">to open this period</div>`;
+      }
+
+      card.innerHTML = `
+        <div class="card-top">
+          <div>
+            <div class="card-month-name">${m.name}</div>
+            <span class="card-month-year">${m.yr}</span>
+          </div>
+          <div class="card-icon">${STATE_ICONS[m.state]}</div>
+        </div>
+        <div class="card-badge">${STATE_LABELS[m.state]}</div>
+        <div class="card-detail">${detail}</div>
+        <div class="card-select-ring">✓</div>
+        ${m.state === 'open' ? '<div class="today-dot">Current</div>' : ''}
+      `;
+
+      if (m.state !== 'not-opened') {
+        card.addEventListener('click', () => selectCard(i));
+      } else {
+        card.addEventListener('click', showToast);
+      }
+
+      grid.appendChild(card);
+    });
+
+    // Auto-select
+    const autoIdx = fy.months.findIndex(m => m.autoSelect);
+    if (autoIdx >= 0) selectCard(autoIdx, true);
+
+    // Update FY bar info
+    document.querySelector('.fy-stat-val').textContent = fy.label;
+    document.querySelector('.fy-stat-sub').textContent = '12 months · Thailand';
+    document.querySelector('.fy-stat-val + .fy-stat-sub').textContent = fy.label;
+
+    const fyStats = document.querySelectorAll('.fy-stat');
+    fyStats[0].querySelector('.fy-stat-val').textContent = fy.label;
+    fyStats[1].querySelector('.fy-stat-val').textContent = fy.statusLine;
+
+    const badge = document.getElementById('fyStatusBadge');
+    badge.textContent = fy.isActive ? '● Active Year' : '● Historical';
+    badge.className = `fy-badge ${fy.isActive ? 'active' : 'historical'}`;
+  }
+
+  /* ── SELECT CARD ── */
+  function selectCard(idx, silent = false) {
+    const fy = FY_DATA[currentFY];
+    const m = fy.months[idx];
+
+    document.querySelectorAll('.month-card').forEach(c => c.classList.remove('is-selected'));
+
+    const card = document.querySelector(`.month-card[data-idx="${idx}"]`);
+    if (!card) return;
+    card.classList.add('is-selected');
+    selectedIdx = idx;
+    updateActionBar(m, true);
+  }
+
+  /* ── ACTION BAR ── */
+  function updateActionBar(m, hasSelection) {
+    const label = document.getElementById('selLabel');
+    const btn   = document.getElementById('enterBtn');
+
+    if (!hasSelection || !m) {
+      label.textContent = '— none selected —';
+      label.className = 'selected-info-val empty';
+      btn.disabled = true;
+      btn.className = 'btn-enter';
+      btn.textContent = 'Enter Period  →';
+      return;
+    }
+
+    const tag = m.state === 'frozen' ? ' · View Only' : '';
+    label.textContent = `${m.name} ${m.yr}${tag}`;
+    label.className = 'selected-info-val';
+    btn.disabled = false;
+
+    if (m.state === 'frozen') {
+      btn.className = 'btn-enter view-mode';
+      btn.textContent = 'View Period  →';
+    } else {
+      btn.className = 'btn-enter';
+      btn.textContent = 'Enter Period  →';
+    }
+  }
+
+  /* ── ENTER PERIOD ── */
+  function enterPeriod() {
+    if (selectedIdx < 0) return;
+    window.location.href = 'prism-02-portfolio-home.html';
+  }
+
+  /* ── CHANGE FY ── */
+  function changeFY(val) {
+    currentFY = val;
+    buildGrid(val);
+  }
+
+  /* ── TOAST ── */
+  let toastTimer;
+  function showToast() {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+  }
+
+  /* ── INIT ── */
+  buildGrid(currentFY);
+</script>
+</body>
+</html>

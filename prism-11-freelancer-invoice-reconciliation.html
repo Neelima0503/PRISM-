@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PRISM · Freelancer Invoice Reconciliation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef0f4;--surface:#ffffff;--surface2:#f8f9fb;--surface3:#f2f4f7;
+  --border:#e3e6ec;--border2:#d3d8e0;
+  --ink:#171c26;--ink2:#5b6472;--ink3:#8b94a4;
+  --primary:#2b3a8c;--primary2:#222e72;--primary-soft:#edf0fb;--primary-soft2:#e2e7f8;
+  --teal:#0d9488;--teal-soft:#e2f4f1;
+  --amber:#b9791a;--amber-soft:#f8eedb;
+  --green:#1a8a52;--green-soft:#e2f3ea;
+  --red:#cb4634;--red-soft:#fae6e2;
+  --indigo:#4654b0;
+  --shadow:0 1px 2px rgba(20,30,60,.06),0 4px 16px rgba(20,30,60,.05);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+button{font-family:inherit;cursor:pointer}
+input,select{font-family:inherit;font-size:13px;color:var(--ink)}
+.topbar{height:58px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:18px;position:sticky;top:0;z-index:30}
+.logo{display:flex;align-items:center;gap:11px}
+.logomark{width:30px;height:30px;border-radius:8px;background:linear-gradient(140deg,var(--primary),var(--indigo));position:relative;box-shadow:0 2px 6px rgba(43,58,140,.35)}
+.logomark:after{content:"";position:absolute;inset:8px;border:2px solid #fff;border-radius:3px;opacity:.9}
+.logomark:before{content:"";position:absolute;left:8px;top:14px;width:14px;height:2px;background:#fff;opacity:.9}
+.logo .name{font-weight:700;letter-spacing:.4px;font-size:16px}.logo .name b{color:var(--primary)}
+.logo .sub{font-size:10px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-top:-2px}
+.tb-spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:7px 11px;width:300px;color:var(--ink3)}
+.search input{border:0;background:transparent;outline:none;width:100%;color:var(--ink)}
+.period{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:9px;padding:7px 11px;background:var(--surface);font-weight:500}
+.period .lab{color:var(--ink3);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.iconbtn{width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--ink2);position:relative}
+.iconbtn .badge{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--red);border-radius:50%;border:1.5px solid #fff}
+.user{display:flex;align-items:center;gap:9px;padding-left:6px}
+.avatar{width:34px;height:34px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px}
+.user .who .n{font-weight:600;font-size:12.5px}
+.user .who .r{font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.shell{display:flex;min-height:calc(100vh - 58px)}
+.nav{width:230px;background:var(--surface);border-right:1px solid var(--border);padding:14px 12px;flex-shrink:0;position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto}
+.nav .grp{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin:14px 10px 7px}.nav .grp:first-child{margin-top:2px}
+.nav a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;color:var(--ink2);text-decoration:none;font-weight:500;font-size:12.7px;margin-bottom:2px;position:relative}
+.nav a:hover{background:var(--surface3);color:var(--ink)}
+.nav a.on{background:var(--primary-soft);color:var(--primary2);font-weight:600}
+.nav a.on:before{content:"";position:absolute;left:-12px;top:8px;bottom:8px;width:3px;background:var(--primary);border-radius:0 3px 3px 0}
+.nav a .ico{width:16px;height:16px;flex-shrink:0;opacity:.85}
+.nav a .ct{margin-left:auto;font-size:10.5px;background:var(--surface3);border:1px solid var(--border);border-radius:20px;padding:0 7px;color:var(--ink2);font-weight:600}
+.nav a.on .ct{background:#fff}
+.main{flex:1;padding:22px 26px 60px;min-width:0}
+.crumb{display:flex;align-items:center;gap:7px;color:var(--ink3);font-size:11.5px;margin-bottom:10px}
+.crumb b{color:var(--ink2);font-weight:600}.crumb .sep{opacity:.5}
+.pagehead{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.pagehead h1{font-size:22px;font-weight:700;margin:0;letter-spacing:-.2px}
+.pagehead .meta{display:flex;align-items:center;gap:10px;margin-top:7px;flex-wrap:wrap}
+.headactions{margin-left:auto;display:flex;gap:9px}
+.btn{border:1px solid var(--primary);background:var(--primary);color:#fff;border-radius:9px;padding:9px 16px;font-weight:600;font-size:12.7px;display:inline-flex;align-items:center;gap:7px;box-shadow:0 1px 2px rgba(43,58,140,.2)}
+.btn:hover{background:var(--primary2)}
+.btn.ghost{background:#fff;color:var(--ink);border-color:var(--border2)}.btn.ghost:hover{background:var(--surface3)}
+.btn.green{background:var(--green);border-color:var(--green)}.btn.green:hover{filter:brightness(1.06)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+.card .ch{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.card .ch h3{font-size:14px;font-weight:700;margin:0}
+.card .ch .desc{font-size:11.5px;color:var(--ink3);margin-top:1px}
+.card .ch .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+table{width:100%;border-collapse:collapse;font-size:12.6px}
+thead th{text-align:left;color:var(--ink3);font-weight:600;font-size:10.3px;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap}
+th.num,td.num{text-align:right;font-family:'IBM Plex Mono';font-variant-numeric:tabular-nums}
+tbody td{padding:10px 14px;border-bottom:1px solid var(--surface3)}
+tbody tr:hover td{background:var(--primary-soft)}
+.tot-row td{background:var(--primary);color:#fff;font-weight:700;border:0}
+.tot-row td:first-child{border-radius:0 0 0 11px}.tot-row td:last-child{border-radius:0 0 11px 0}
+.pill{font-size:11px;font-weight:600;border-radius:20px;padding:3px 10px;letter-spacing:.02em;display:inline-flex;align-items:center;gap:6px}
+.pill .d{width:6px;height:6px;border-radius:50%}
+.fchip{font-size:11px;font-weight:600;color:var(--ink2);background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:5px 10px}
+.seg{display:inline-flex;background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--ink2);padding:6px 13px;border-radius:6px;font-weight:600;font-size:12px}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+</style>
+<style>
+.closebar{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:11px 16px;margin-bottom:18px;box-shadow:var(--shadow);font-size:12.5px;flex-wrap:wrap}
+.ci{display:flex;align-items:center;gap:7px;font-weight:600}.ci.muted{color:var(--ink3);font-weight:500;font-family:'IBM Plex Mono';font-size:11.5px}
+.cdiv{width:1px;height:20px;background:var(--border)}
+.hdot{display:inline-block;width:8px;height:8px;border-radius:50%}
+.kstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.kpic{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:14px 16px;box-shadow:var(--shadow)}
+.kpic .lab{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-weight:600}
+.kpic .val{font-family:'IBM Plex Mono';font-size:18px;font-weight:600;margin-top:6px;letter-spacing:-.5px}
+.kpic .sub{font-size:11px;color:var(--ink3);margin-top:4px}
+.kpic .sub b{font-weight:600}
+.kpic.hi{background:linear-gradient(150deg,#1a8a52,#22a864);border-color:#1a8a52}
+.kpic.hi .lab{color:#b8e8ce}.kpic.hi .val{color:#fff}.kpic.hi .sub{color:#cdf0de}
+.kpic.warn{background:linear-gradient(150deg,#b9791a,#d4921e);border-color:#b9791a}
+.kpic.warn .lab{color:#f8e8c8}.kpic.warn .val{color:#fff}.kpic.warn .sub{color:#f8e8c8}
+.filterrow{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.filterrow label{font-size:11px;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.filterrow select{border:1px solid var(--border2);background:#fff;border-radius:9px;padding:8px 12px;color:var(--ink);font-weight:500;outline:none}
+.rstat{font-size:11px;font-weight:700;border-radius:20px;padding:4px 11px;display:inline-flex;align-items:center;gap:6px;letter-spacing:.02em}
+.rstat.matched{background:var(--green-soft);color:var(--green)}
+.rstat.pending{background:var(--amber-soft);color:var(--amber)}
+.rstat.disputed{background:var(--red-soft);color:var(--red)}
+.rstat .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.rstat.matched .dot{background:var(--green)}
+.rstat.pending .dot{background:var(--amber)}
+.rstat.disputed .dot{background:var(--red)}
+.inv-no{font-family:'IBM Plex Mono';font-size:11.5px;color:var(--ink2)}
+.var-pos{color:var(--red);font-weight:700}
+.var-neg{color:var(--amber);font-weight:700}
+.var-zero{color:var(--green);font-weight:700}
+.actbtn{font-size:11.5px;font-weight:600;color:var(--primary);border:1px solid var(--primary-soft2);background:var(--primary-soft);border-radius:7px;padding:5px 11px}
+.actbtn:hover{background:var(--primary);color:#fff}
+.actbtn.dis{color:var(--ink3);border-color:var(--border);background:var(--surface3);cursor:default}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:11.5px;color:var(--ink2);margin-top:12px;padding:12px 14px;background:var(--surface2);border-radius:0 0 11px 11px;border-top:1px solid var(--border)}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
+.no-inv{color:var(--ink3);font-style:italic;font-size:11.5px}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo"><div class="logomark"></div><div><div class="name"><b>PRISM</b></div><div class="sub">Project Revenue &amp; Margin</div></div></div>
+  <div class="tb-spacer"></div>
+  <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input placeholder="Search freelancer, invoice number…"/></div>
+  <div class="period"><span class="lab">Period</span> Oct 2025 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b94a4" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+  <div class="iconbtn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+  <div class="user"><div class="avatar" style="background:linear-gradient(140deg,#2b3a8c,#4654b0)">SR</div><div class="who"><div class="n">Sai R.</div><div class="r" style="color:var(--primary)">Finance</div></div></div>
+</div>
+<div class="shell">
+  <nav class="nav">
+    <div class="grp">Finance</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg>Revenue Recognition</a>
+    <a href="#" class="on"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15h6"/></svg>Freelancer Invoices</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Milestones &amp; Billing</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Month-end Summary</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>Reports</a>
+    <div class="grp">Delivery</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Projects <span class="ct">6</span></a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Approvals</a>
+    <div class="grp">Insights</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="8"/><rect x="10" y="7" width="4" height="13"/><rect x="17" y="3" width="4" height="17"/></svg>Portfolio Dashboard</a>
+  </nav>
+  <main class="main">
+    <div class="crumb"><b>Finance</b><span class="sep">/</span>Freelancer Invoices<span class="sep">/</span><b>Oct 2025</b></div>
+    <div class="pagehead">
+      <div><h1>Freelancer Invoice Reconciliation</h1>
+        <div class="meta"><span class="fchip">Period: Oct 2025</span><span class="fchip">FX: 1 USD = THB 36.50</span></div>
+      </div>
+      <div class="headactions">
+        <button class="btn ghost">Export</button>
+        <button class="btn ghost">Import invoices</button>
+        <button class="btn green">Approve all matched</button>
+      </div>
+    </div>
+
+    <div class="closebar">
+      <div class="ci"><span class="hdot" style="background:var(--amber)"></span>Oct 2025 · Open</div><span class="cdiv"></span>
+      <div class="ci muted">5 freelancer bookings</div><span class="cdiv"></span>
+      <div class="ci"><span class="hdot" style="background:var(--green)"></span>2 matched</div><span class="cdiv"></span>
+      <div class="ci"><span class="hdot" style="background:var(--amber)"></span>2 pending invoice</div><span class="cdiv"></span>
+      <div class="ci"><span class="hdot" style="background:var(--red)"></span>1 disputed</div><span class="cdiv"></span>
+      <div class="ci muted">Unresolved: THB 454,840</div>
+    </div>
+
+    <div class="kstrip">
+      <div class="kpic"><div class="lab">Expected this period</div><div class="val">1,680,460</div><div class="sub"><b>THB</b> · $46,040 USD</div></div>
+      <div class="kpic"><div class="lab">Invoices received</div><div class="val">1,262,220</div><div class="sub"><b>THB</b> · 3 invoices</div></div>
+      <div class="kpic hi"><div class="lab">Matched &amp; approved</div><div class="val">849,720</div><div class="sub">2 invoices · zero variance</div></div>
+      <div class="kpic warn"><div class="lab">Unresolved amount</div><div class="val">454,840</div><div class="sub">2 pending · 1 disputed</div></div>
+    </div>
+
+    <div class="filterrow">
+      <label>Status</label>
+      <div class="seg">
+        <button class="on" onclick="filterTable('all',this)">All (5)</button>
+        <button onclick="filterTable('matched',this)">Matched (2)</button>
+        <button onclick="filterTable('pending',this)">Pending (2)</button>
+        <button onclick="filterTable('disputed',this)">Disputed (1)</button>
+      </div>
+      <label style="margin-left:8px">Project</label>
+      <select><option>All projects</option><option>Nordwind Logistics AG</option><option>Meridian Foods</option><option>Pacific Utilities</option></select>
+    </div>
+
+    <div class="card">
+      <div class="ch"><div><h3>Invoice reconciliation — Oct 2025</h3><div class="desc">System-booked days × rate vs actual invoices received · amounts in THB</div></div></div>
+      <table>
+        <thead>
+          <tr>
+            <th>Freelancer</th>
+            <th>Project</th>
+            <th>Band / Role</th>
+            <th class="num">Days</th>
+            <th class="num">Rate (THB/day)</th>
+            <th class="num">Expected (THB)</th>
+            <th>Invoice #</th>
+            <th class="num">Invoiced (THB)</th>
+            <th class="num">Variance (THB)</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-status="matched">
+            <td><div style="font-weight:600">Arjun Mehta</div><div style="font-size:10.5px;color:var(--ink3)">SAP Labs India</div></td>
+            <td>Nordwind Logistics AG</td>
+            <td><span class="fchip" style="font-size:10.5px;padding:3px 8px">Functional</span></td>
+            <td class="num">18</td>
+            <td class="num">20,440</td>
+            <td class="num">367,920</td>
+            <td><span class="inv-no">INV-SAP-2025-1042</span></td>
+            <td class="num">367,920</td>
+            <td class="num var-zero">—</td>
+            <td><span class="rstat matched"><span class="dot"></span>Matched</span></td>
+            <td><button class="actbtn">Approve</button></td>
+          </tr>
+          <tr data-status="matched">
+            <td><div style="font-weight:600">Priya Nair</div><div style="font-size:10.5px;color:var(--ink3)">TechBridge Consulting</div></td>
+            <td>Meridian Foods</td>
+            <td><span class="fchip" style="font-size:10.5px;padding:3px 8px">Technical</span></td>
+            <td class="num">22</td>
+            <td class="num">21,900</td>
+            <td class="num">481,800</td>
+            <td><span class="inv-no">INV-TB-OCT-089</span></td>
+            <td class="num">481,800</td>
+            <td class="num var-zero">—</td>
+            <td><span class="rstat matched"><span class="dot"></span>Matched</span></td>
+            <td><button class="actbtn">Approve</button></td>
+          </tr>
+          <tr data-status="disputed">
+            <td><div style="font-weight:600">Sunita Rao</div><div style="font-size:10.5px;color:var(--ink3)">DataCraft Solutions</div></td>
+            <td>Meridian Foods</td>
+            <td><span class="fchip" style="font-size:10.5px;padding:3px 8px">Data / ETL</span></td>
+            <td class="num">20</td>
+            <td class="num">19,710</td>
+            <td class="num">394,200</td>
+            <td><span class="inv-no">INV-DC-2025-0098</span></td>
+            <td class="num" style="color:var(--red)">412,500</td>
+            <td class="num var-pos">+18,300</td>
+            <td><span class="rstat disputed"><span class="dot"></span>Disputed</span></td>
+            <td><button class="actbtn">Review</button></td>
+          </tr>
+          <tr data-status="pending">
+            <td><div style="font-weight:600">Klaus Schmidt</div><div style="font-size:10.5px;color:var(--ink3)">Independent</div></td>
+            <td>Pacific Utilities</td>
+            <td><span class="fchip" style="font-size:10.5px;padding:3px 8px">Basis / Infra</span></td>
+            <td class="num">15</td>
+            <td class="num">18,980</td>
+            <td class="num">284,700</td>
+            <td><span class="no-inv">Not received</span></td>
+            <td class="num" style="color:var(--ink3)">—</td>
+            <td class="num var-neg">(284,700)</td>
+            <td><span class="rstat pending"><span class="dot"></span>Pending</span></td>
+            <td><button class="actbtn dis">Awaiting</button></td>
+          </tr>
+          <tr data-status="pending">
+            <td><div style="font-weight:600">Lee Jin-ho</div><div style="font-size:10.5px;color:var(--ink3)">ConnectAsia Pte Ltd</div></td>
+            <td>Pacific Utilities</td>
+            <td><span class="fchip" style="font-size:10.5px;padding:3px 8px">Basis / Infra</span></td>
+            <td class="num">8</td>
+            <td class="num">18,980</td>
+            <td class="num">151,840</td>
+            <td><span class="no-inv">Not received</span></td>
+            <td class="num" style="color:var(--ink3)">—</td>
+            <td class="num var-neg">(151,840)</td>
+            <td><span class="rstat pending"><span class="dot"></span>Pending</span></td>
+            <td><button class="actbtn dis">Awaiting</button></td>
+          </tr>
+          <tr class="tot-row">
+            <td colspan="5" style="border-radius:0 0 0 11px">Total · Oct 2025</td>
+            <td class="num">1,680,460</td>
+            <td></td>
+            <td class="num">1,262,220</td>
+            <td class="num" style="color:#fbbfb5">+18,300 disputed</td>
+            <td></td>
+            <td style="border-radius:0 0 11px 0"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="legend">
+        <span><i style="background:var(--green)"></i>Matched — invoice = expected; ready to approve</span>
+        <span><i style="background:var(--amber)"></i>Pending — no invoice received yet</span>
+        <span><i style="background:var(--red)"></i>Disputed — invoice amount differs from system booking</span>
+        <span style="margin-left:auto;color:var(--ink3);font-size:11px">Day rates: Functional $560 · Technical $600 · Basis $520 · Data/ETL $540 per USD · FX 36.50</span>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+function filterTable(status, btn){
+  document.querySelectorAll('.seg button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('tbody tr[data-status]').forEach(r=>{
+    r.style.display = (status==='all'||r.dataset.status===status)?'':'none';
+  });
+}
+</script>
+</body>
+</html>

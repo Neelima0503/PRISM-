@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PRISM · Rate Masters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef0f4; --surface:#ffffff; --surface2:#f8f9fb; --surface3:#f2f4f7;
+  --border:#e3e6ec; --border2:#d3d8e0;
+  --ink:#171c26; --ink2:#5b6472; --ink3:#8b94a4;
+  --primary:#2b3a8c; --primary2:#222e72; --primary-soft:#edf0fb; --primary-soft2:#e2e7f8;
+  --teal:#0d9488; --teal-soft:#e2f4f1;
+  --amber:#b9791a; --amber-soft:#f8eedb;
+  --green:#1a8a52; --green-soft:#e2f3ea;
+  --red:#cb4634; --red-soft:#fae6e2;
+  --indigo:#4654b0;
+  --shadow:0 1px 2px rgba(20,30,60,.06),0 4px 16px rgba(20,30,60,.05);
+  --shadow2:0 8px 30px rgba(20,30,60,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+button{font-family:inherit;cursor:pointer}
+input,select{font-family:inherit;font-size:13px;color:var(--ink)}
+
+/* ---- top bar ---- */
+.topbar{height:58px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:18px;position:sticky;top:0;z-index:30}
+.logo{display:flex;align-items:center;gap:11px}
+.logomark{width:30px;height:30px;border-radius:8px;background:linear-gradient(140deg,var(--primary),var(--indigo));position:relative;box-shadow:0 2px 6px rgba(43,58,140,.35)}
+.logomark:after{content:"";position:absolute;inset:8px;border:2px solid #fff;border-radius:3px;opacity:.9}
+.logomark:before{content:"";position:absolute;left:8px;top:14px;width:14px;height:2px;background:#fff;opacity:.9}
+.logo .name{font-weight:700;letter-spacing:.4px;font-size:16px}
+.logo .name b{color:var(--primary)}
+.logo .sub{font-size:10px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-top:-2px}
+.tb-spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:7px 11px;width:300px;color:var(--ink3)}
+.search input{border:0;background:transparent;outline:none;width:100%;color:var(--ink)}
+.period{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:9px;padding:7px 11px;background:var(--surface);font-weight:500}
+.period .lab{color:var(--ink3);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.iconbtn{width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--ink2);position:relative}
+.iconbtn .badge{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--red);border-radius:50%;border:1.5px solid #fff}
+.user{display:flex;align-items:center;gap:9px;padding-left:6px}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(140deg,#2b3a8c,#4654b0);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px}
+.user .who{line-height:1.15}
+.user .who .n{font-weight:600;font-size:12.5px}
+.user .who .r{font-size:10.5px;color:var(--primary);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+
+/* ---- shell ---- */
+.shell{display:flex;min-height:calc(100vh - 58px)}
+.nav{width:230px;background:var(--surface);border-right:1px solid var(--border);padding:14px 12px;flex-shrink:0;position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto}
+.nav .grp{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin:14px 10px 7px}
+.nav .grp:first-child{margin-top:2px}
+.nav a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;color:var(--ink2);text-decoration:none;font-weight:500;font-size:12.7px;margin-bottom:2px;position:relative}
+.nav a:hover{background:var(--surface3);color:var(--ink)}
+.nav a.on{background:var(--primary-soft);color:var(--primary2);font-weight:600}
+.nav a.on:before{content:"";position:absolute;left:-12px;top:8px;bottom:8px;width:3px;background:var(--primary);border-radius:0 3px 3px 0}
+.nav a .ico{width:16px;height:16px;flex-shrink:0;opacity:.85}
+.nav a .ct{margin-left:auto;font-size:10.5px;background:var(--surface3);border:1px solid var(--border);border-radius:20px;padding:0 7px;color:var(--ink2);font-weight:600}
+.nav a.on .ct{background:#fff}
+
+/* ---- main ---- */
+.main{flex:1;padding:22px 26px 60px;min-width:0}
+.crumb{display:flex;align-items:center;gap:7px;color:var(--ink3);font-size:11.5px;margin-bottom:10px}
+.crumb b{color:var(--ink2);font-weight:600}
+.crumb .sep{opacity:.5}
+.pagehead{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.pagehead h1{font-size:22px;font-weight:700;margin:0;letter-spacing:-.2px}
+.pagehead .meta{display:flex;align-items:center;gap:10px;margin-top:7px;flex-wrap:wrap}
+.chipcode{font-family:'IBM Plex Mono';font-size:11.5px;background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:3px 8px;color:var(--ink2);font-weight:500}
+.pill{font-size:11px;font-weight:600;border-radius:20px;padding:3px 10px;letter-spacing:.02em;display:inline-flex;align-items:center;gap:6px}
+.pill .d{width:6px;height:6px;border-radius:50%}
+.pill.active{background:var(--green-soft);color:var(--green)}
+.pill.draft{background:var(--amber-soft);color:var(--amber)}
+.headactions{margin-left:auto;display:flex;gap:9px}
+.btn{border:1px solid var(--primary);background:var(--primary);color:#fff;border-radius:9px;padding:9px 16px;font-weight:600;font-size:12.7px;display:inline-flex;align-items:center;gap:7px;box-shadow:0 1px 2px rgba(43,58,140,.2)}
+.btn:hover{background:var(--primary2)}
+.btn.ghost{background:#fff;color:var(--ink);border-color:var(--border2)}
+.btn.ghost:hover{background:var(--surface3)}
+
+.cols{display:grid;grid-template-columns:1fr 332px;gap:18px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+.card .ch{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.card .ch h3{font-size:14px;font-weight:700;margin:0}
+.card .ch .desc{font-size:11.5px;color:var(--ink3);margin-top:1px}
+.card .ch .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.card .cb{padding:18px}
+.card+.card{margin-top:18px}
+
+/* field grid */
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 18px}
+.f{display:flex;flex-direction:column;gap:6px}
+.f label{font-size:10.5px;color:var(--ink3);letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.f .box{border:1px solid var(--border2);background:#fff;border-radius:9px;padding:9px 11px;font-weight:500;display:flex;align-items:center;gap:8px;min-height:38px}
+.f .box.ro{background:var(--surface3);color:var(--ink2);border-style:dashed}
+.f .box.calc{background:var(--primary-soft);border-color:var(--primary-soft2);color:var(--primary2);font-weight:600}
+.f .box .mono{font-weight:600}
+.f .box .unit{color:var(--ink3);font-size:11px;margin-left:auto}
+.f .box select,.f .box input{border:0;outline:none;background:transparent;width:100%;font-weight:500}
+.f .box .caret{color:var(--ink3);margin-left:auto}
+
+/* segmented */
+.seg{display:inline-flex;background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--ink2);padding:6px 13px;border-radius:6px;font-weight:600;font-size:12px}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+
+/* matrix table */
+table{width:100%;border-collapse:collapse;font-size:12.6px}
+thead th{text-align:left;color:var(--ink3);font-weight:600;font-size:10.3px;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap}
+th.num,td.num{text-align:right;font-family:'IBM Plex Mono';font-variant-numeric:tabular-nums}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--surface3)}
+.mod-row td{background:var(--surface2);font-weight:700;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.mod-row .mname{display:flex;align-items:center;gap:9px}
+.mod-row .micon{width:7px;height:18px;border-radius:3px;background:var(--primary)}
+.line td:first-child{padding-left:30px}
+.sub-row td{font-weight:700;background:#fff;border-bottom:1px solid var(--border)}
+.tot-row td{background:var(--primary);color:#fff;font-weight:700;border:0}
+.tot-row td:first-child{border-radius:0 0 0 11px}
+.tot-row td:last-child{border-radius:0 0 11px 0}
+.rtag{font-size:10px;font-weight:600;border-radius:6px;padding:2px 8px;letter-spacing:.02em}
+.rtag.int{background:var(--primary-soft);color:var(--primary2)}
+.rtag.fl{background:var(--amber-soft);color:var(--amber)}
+.rtag.sub{background:var(--teal-soft);color:var(--teal)}
+.lvl{font-family:'IBM Plex Mono';font-weight:600;color:var(--ink);background:var(--surface3);border:1px solid var(--border);border-radius:6px;padding:1px 7px;font-size:11px;margin-right:8px}
+.editcell{color:var(--ink);position:relative}
+.editcell:after{content:"";position:absolute;right:8px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-right:1.5px solid var(--ink3);border-bottom:1.5px solid var(--ink3);transform:translateY(-60%) rotate(45deg);opacity:0}
+tbody tr.line:hover td{background:var(--primary-soft)}
+
+/* phases / gantt */
+.gantt{display:flex;flex-direction:column;gap:10px}
+.gmonths{display:grid;grid-template-columns:170px repeat(12,1fr);font-size:9.5px;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.gmonths span{text-align:center;padding-bottom:6px}
+.gmonths span:first-child{text-align:left}
+.grow{display:grid;grid-template-columns:170px repeat(12,1fr);align-items:center;height:30px}
+.grow .gname{font-weight:600;font-size:12.3px}
+.gtrack{grid-column:2 / span 12;position:relative;height:30px}
+.gbar{position:absolute;top:7px;height:16px;border-radius:6px;display:flex;align-items:center;padding:0 9px;color:#fff;font-size:10.5px;font-weight:600;white-space:nowrap;box-shadow:0 1px 3px rgba(20,30,60,.18)}
+
+/* right rail */
+.rail{position:sticky;top:80px}
+.outcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.outhead{padding:15px 18px 14px;background:linear-gradient(150deg,#2b3a8c,#3a47a0);color:#fff}
+.outhead .t{font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.85;font-weight:600}
+.outhead .marg{display:flex;align-items:baseline;gap:10px;margin-top:8px}
+.outhead .marg .pc{font-family:'IBM Plex Mono';font-size:34px;font-weight:600;letter-spacing:-1px}
+.outhead .marg .ab{font-family:'IBM Plex Mono';font-size:14px;opacity:.85}
+.outhead .lab2{font-size:11px;opacity:.8;margin-top:3px}
+.outbody{padding:16px 18px}
+.orow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border)}
+.orow:last-of-type{border-bottom:0}
+.orow .k{color:var(--ink2);font-size:12px}
+.orow .v{font-family:'IBM Plex Mono';font-weight:600}
+.mixbar{height:12px;border-radius:7px;overflow:hidden;display:flex;margin:14px 0 9px;border:1px solid var(--border)}
+.mixbar i{height:100%}
+.mixleg{display:flex;flex-direction:column;gap:7px;font-size:11.5px}
+.mixleg .ml{display:flex;align-items:center;gap:8px}
+.mixleg .ml .dot{width:9px;height:9px;border-radius:3px}
+.mixleg .ml .mv{margin-left:auto;font-family:'IBM Plex Mono';color:var(--ink2);font-weight:600}
+.scaption{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin:16px 0 6px}
+.note{background:var(--primary-soft);border:1px solid var(--primary-soft2);border-radius:10px;padding:11px 13px;color:var(--primary2);font-size:11.7px;line-height:1.5}
+.audit{font-size:11px;color:var(--ink3);margin-top:16px;display:flex;align-items:center;gap:8px}
+.divlabel{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+.divlabel .ln{flex:1;height:1px;background:var(--border)}
+.divlabel .tx{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+.legend{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink2)}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:middle}
+.smallnote{font-size:11px;color:var(--ink3);margin-top:10px}
+.addline{display:inline-flex;align-items:center;gap:7px;color:var(--primary);font-weight:600;font-size:12px;margin-top:12px;cursor:pointer}
+
+/* month-wise matrix */
+.unitcap{font-size:11.5px;color:var(--ink3);font-weight:500}.unitcap b{color:var(--ink2)}
+.matrix-wrap{overflow-x:auto;border-bottom:1px solid var(--border)}
+table.mx{min-width:1080px;border-collapse:separate;border-spacing:0}
+table.mx th,table.mx td{border-bottom:1px solid var(--surface3)}
+table.mx thead th{border-bottom:1px solid var(--border)}
+.mcol{width:54px;min-width:54px}
+table.mx th.sticky-l,table.mx td.sticky-l{position:sticky;left:0;z-index:3;width:236px;min-width:236px;text-align:left;box-shadow:1px 0 0 var(--border)}
+table.mx th.sticky-r,table.mx td.sticky-r{position:sticky;right:0;z-index:3;width:104px;min-width:104px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-l,table.mx thead th.sticky-r{background:var(--surface2);z-index:4}
+.line .sticky-l,.line .sticky-r{background:#fff}
+.mod-row .sticky-l,.mod-row .sticky-r{background:var(--surface2)}
+.tot-row .sticky-l,.tot-row .sticky-r{background:var(--primary);color:#fff}
+table.mx td.line-name{font-weight:500}
+table.mx tbody td{padding:8px 12px}
+table.mx .mod-row td{background:var(--surface2)}
+table.mx .tot-row td{background:var(--primary);color:#fff}
+table.mx .line td.num{color:var(--ink2)}
+table.mx .mod-row td.num{color:var(--ink);font-weight:700}
+table.mx .tot-row td.num{color:#fff;font-weight:700}
+.mx.collapsed .mcol{display:none}
+.mx.collapsed{min-width:0}
+
+
+/* combined effort+cost · second sticky-right column */
+table.mx th.sticky-r,table.mx td.sticky-r{right:0;width:120px;min-width:120px}
+table.mx th.sticky-r2,table.mx td.sticky-r2{position:sticky;right:120px;z-index:3;width:96px;min-width:96px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-r2{background:var(--surface2);z-index:4}
+.line .sticky-r2{background:#fff}
+.mod-row .sticky-r2{background:var(--surface2)}
+.tot-row .sticky-r2{background:var(--primary);color:#fff}
+table.mx{min-width:1100px}
+
+
+/* type column + man-day rate + cost, frozen left (line,type) & right (effort,rate,cost) */
+table.mx{min-width:1280px;border-collapse:separate;border-spacing:0}
+.mx.collapsed{min-width:0}
+.mcol{width:54px;min-width:54px}
+table.mx th.sticky-l,table.mx td.sticky-l{position:sticky;left:0;z-index:3;width:200px;min-width:200px;text-align:left;box-shadow:none}
+table.mx th.sticky-l2,table.mx td.sticky-l2{position:sticky;left:200px;z-index:3;width:112px;min-width:112px;text-align:left;box-shadow:1px 0 0 var(--border)}
+table.mx th.sticky-r,table.mx td.sticky-r{position:sticky;right:0;z-index:3;width:116px;min-width:116px;box-shadow:none}
+table.mx th.sticky-r2,table.mx td.sticky-r2{position:sticky;right:116px;z-index:3;width:104px;min-width:104px;box-shadow:none}
+table.mx th.sticky-r3,table.mx td.sticky-r3{position:sticky;right:220px;z-index:3;width:104px;min-width:104px;box-shadow:-1px 0 0 var(--border)}
+table.mx thead th.sticky-l,table.mx thead th.sticky-l2,table.mx thead th.sticky-r,table.mx thead th.sticky-r2,table.mx thead th.sticky-r3{background:var(--surface2);z-index:4}
+.line .sticky-l,.line .sticky-l2,.line .sticky-r,.line .sticky-r2,.line .sticky-r3{background:#fff}
+.mod-row .sticky-l,.mod-row .sticky-l2,.mod-row .sticky-r,.mod-row .sticky-r2,.mod-row .sticky-r3{background:var(--surface2)}
+.tot-row .sticky-l,.tot-row .sticky-l2,.tot-row .sticky-r,.tot-row .sticky-r2,.tot-row .sticky-r3{background:var(--primary);color:#fff}
+
+</style><style>
+.closebar{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:11px 16px;margin-bottom:18px;box-shadow:var(--shadow);font-size:12.5px;flex-wrap:wrap}
+.ci{display:flex;align-items:center;gap:7px;font-weight:600}.ci.muted{color:var(--ink3);font-weight:500;font-family:'IBM Plex Mono';font-size:11.5px}
+.cdiv{width:1px;height:20px;background:var(--border)}
+.hdot{display:inline-block;width:8px;height:8px;border-radius:50%}
+.held{font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:5px}
+.up{color:var(--green)}.neu{color:var(--ink3);font-weight:500}
+.recbtn{width:100%;margin-top:14px;color:#fff;border:0;padding:11px;border-radius:10px;font-weight:600;font-size:13px;box-shadow:0 2px 6px rgba(70,84,176,.3)}.recbtn:hover{filter:brightness(1.04)}
+.trail{display:flex;flex-direction:column}
+.ti{font-size:11.3px;color:var(--ink2);padding:6px 0 6px 14px;border-left:2px solid var(--green);position:relative}
+.ti.open{border-left-color:var(--amber);color:var(--ink3)}
+.ti .td{font-family:'IBM Plex Mono';color:var(--ink3);margin-right:7px}
+.tin{width:84px}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo"><div class="logomark"></div><div><div class="name"><b>PRISM</b></div><div class="sub">Project Revenue &amp; Margin</div></div></div>
+  <div class="tb-spacer"></div>
+  <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input placeholder="Search levels, rates, versions…"/></div>
+  <div class="period"><span class="lab">FY</span> 2025–26 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b94a4" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+  <div class="iconbtn"><span class="badge"></span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+  <div class="user"><div class="avatar" style="background:linear-gradient(140deg,#4654b0,#6b78d8)">PS</div><div class="who"><div class="n">P. Sharma</div><div class="r" style="color:var(--indigo)">Administrator</div></div></div>
+</div>
+<div class="shell">
+  <nav class="nav">
+    <div class="grp">Admin</div>
+    <a href="#" class="on"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>Rate Masters</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Periods &amp; Calendar</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0M16 11h5M18.5 8.5v5"/></svg>Users &amp; Roles</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4v6c0 5-3.8 8-9 10-5.2-2-9-5-9-10V6z"/></svg>Audit log</a>
+    <div class="grp">Finance</div>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Month-end Summary</a>
+    <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Projects</a>
+  </nav>
+  <main class="main">
+    <div class="crumb"><b>Admin</b><span class="sep">/</span>Rate Masters<span class="sep">/</span><b>FY 2025–26</b></div>
+    <div class="pagehead">
+      <div><h1>Rate Masters</h1><div class="meta"><span style="color:var(--ink3);font-size:12.5px">Internal cost rates by level, freelancer bands &amp; FY versioning — the reference data behind every baseline and EAC</span></div></div>
+      <div class="headactions"><button class="btn ghost">Export</button><button class="btn">New FY version</button></div>
+    </div>
+
+    <div class="closebar">
+      <div class="ci"><span style="font-weight:700;color:var(--primary)">FY 2025–26</span></div><span class="cdiv"></span>
+      <div class="ci muted">Effective Apr 2025 – Mar 2026</div><span class="cdiv"></span>
+      <div class="ci"><span class="hdot" style="background:var(--green)"></span>Published · active</div><span class="cdiv"></span>
+      <div class="ci muted">6 projects on this version</div><span class="cdiv"></span>
+      <div class="ci muted">Currency: Group (USD)</div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <div class="card">
+          <div class="ch"><div><h3>Internal cost rates — L1 to L7</h3><div class="desc">Daily cost rate (USD/md) · vs prior FY · drives baseline &amp; EAC cost</div></div><div class="right"><button class="btn ghost" style="padding:6px 12px;font-size:11.5px">Bulk uplift %</button></div></div>
+          <table>
+            <thead><tr><th>Level</th><th>Grade</th><th class="num">Cost rate / day</th><th class="num">Prior FY</th><th class="num">Δ</th><th>Status</th></tr></thead>
+            <tbody><tr class="line"><td><span class="lvl">L1</span></td><td>Analyst / Junior</td>
+      <td class="num"><input class="tin" value="288"></td>
+      <td class="num neu">277</td>
+      <td class="num up">+4.0%</td>
+      <td><span class="pill active" style="font-size:9.5px"><span class="d" style="background:var(--green)"></span>Active</span></td></tr><tr class="line"><td><span class="lvl">L2</span></td><td>Associate consultant</td>
+      <td class="num"><input class="tin" value="384"></td>
+      <td class="num neu">369</td>
+      <td class="num up">+4.1%</td>
+      <td><span class="pill active" style="font-size:9.5px"><span class="d" style="background:var(--green)"></span>Active</span></td></tr><tr class="line"><td><span class="lvl">L3</span></td><td>Consultant</td>
+      <td class="num"><input class="tin" value="496"></td>
+      <td class="num neu">477</td>
+      <td class="num up">+4.0%</td>
+      <td><span class="pill active" style="font-size:9.5px"><span class="d" style="background:var(--green)"></span>Active</span></td></tr><tr class="line"><td><span class="lvl">L4</span></td><td>Senior consultant</td>
+      <td class="num"><input class="tin" value="624"></td>
+      <td class="num neu">600</td>
+      <td class="num up">+4.0%</td>
+      <td><span class="pill active" style="font-size:9.5px"><span class="d" style="background:var(--green)"></span>Active</span></td></tr><tr class="line"><td><span class="lvl">L5</span></td><td>Principal consultant</td>
+      <td class="num"><input class="tin" value="768"></td>
+      <td class="num neu">738</td>
+      <td class="num up">+4.1%</td>
+      <td><span class="pill active" style="font-size:9.5px"><span class="d" style="background:var(--green)"></span>Active</span></td></tr><tr class="line"><td><span class="lvl">L6</span></td><td>Solution architect</td>
+      <td class="num"><input class="tin" value="960"></td>
+      <td class="num neu">923</td>
+      <td class="num up">+4.0%</td>
+      <td><span class="pill active" style="font-size:9.5px"><span class="d" style="background:var(--green)"></span>Active</span></td></tr><tr class="line"><td><span class="lvl">L7</span></td><td>Partner / Director</td>
+      <td class="num"><input class="tin" value="1200"></td>
+      <td class="num neu">1154</td>
+      <td class="num up">+4.0%</td>
+      <td><span class="pill active" style="font-size:9.5px"><span class="d" style="background:var(--green)"></span>Active</span></td></tr></tbody>
+          </table>
+          <div class="cb"><div class="smallnote">A 4.0% annual uplift was applied at the FY 2025–26 publish. Rates are locked per FY version — editing here affects <b>new</b> baselines only; existing project baselines keep the version they were created under.</div></div>
+        </div>
+
+        <div class="card">
+          <div class="ch"><div><h3>Freelancer &amp; external rates</h3><div class="desc">T&amp;M day rates · subcontractors are fixed-price (no day rate)</div></div></div>
+          <table>
+            <thead><tr><th>Resource band</th><th class="num">Day rate (USD)</th><th>Basis</th></tr></thead>
+            <tbody><tr class="line"><td>Functional consultant (T&amp;M) <span class="held" style="color:var(--teal);background:#e2f4f1">in use</span></td><td class="num"><input class="tin" value="560"></td><td class="num neu">flat day rate</td></tr><tr class="line"><td>Technical / Integration dev </td><td class="num"><input class="tin" value="600"></td><td class="num neu">flat day rate</td></tr><tr class="line"><td>Basis / Infrastructure </td><td class="num"><input class="tin" value="520"></td><td class="num neu">flat day rate</td></tr><tr class="line"><td>Data / ETL specialist </td><td class="num"><input class="tin" value="540"></td><td class="num neu">flat day rate</td></tr></tbody>
+          </table>
+          <div class="cb"><div class="smallnote">Baselines to date use the blended functional rate of <b>$560/md</b>. Subcontractor work packages are recognised by completion % against a fixed value — no daily rate applies.</div></div>
+        </div>
+
+        <div class="card">
+          <div class="ch"><div><h3>FY versions</h3><div class="desc">Each baseline references the rate version active at creation</div></div></div>
+          <table>
+            <thead><tr><th>Version</th><th>Effective</th><th class="num">Projects</th><th>Status</th><th></th></tr></thead>
+            <tbody><tr class="line"><td><b>FY 2024–25</b></td><td class="mono small">Apr 2024 – Mar 2025</td><td class="num">—</td><td><span class="pill" style="color:var(--ink3);background:var(--surface3)"><span class="d" style="background:var(--ink3)"></span>Archived</span></td><td><button class="btn ghost" style="padding:5px 11px;font-size:11px">View</button></td></tr><tr class="line"><td><b>FY 2025–26</b></td><td class="mono small">Apr 2025 – Mar 2026</td><td class="num">6</td><td><span class="pill active"><span class="d" style="background:var(--green)"></span>Published · active</span></td><td><button class="btn ghost" style="padding:5px 11px;font-size:11px">View</button></td></tr><tr class="line"><td><b>FY 2026–27</b></td><td class="mono small">Apr 2026 – Mar 2027</td><td class="num">—</td><td><span class="pill draft"><span class="d" style="background:var(--amber)"></span>Draft · in review</span></td><td><button class="btn ghost" style="padding:5px 11px;font-size:11px">Edit</button></td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rail">
+        <div class="card" style="margin-bottom:16px">
+          <div class="ch"><div><h3>Active version</h3></div></div>
+          <div class="cb" style="padding-top:8px">
+            <div class="orow"><span class="k">Version</span><span class="v" style="font-family:inherit;font-weight:700">FY 2025–26</span></div>
+            <div class="orow"><span class="k">Status</span><span class="v" style="color:var(--green)">Published</span></div>
+            <div class="orow"><span class="k">Effective</span><span class="v">Apr 25 – Mar 26</span></div>
+            <div class="orow"><span class="k">Levels</span><span class="v">7 (L1–L7)</span></div>
+            <div class="orow"><span class="k">Freelancer bands</span><span class="v">4</span></div>
+            <div class="orow"><span class="k">Projects on version</span><span class="v">6</span></div>
+            <div class="orow"><span class="k">Published by</span><span class="v" style="font-family:inherit;font-weight:600">P. Sharma</span></div>
+            <div class="orow"><span class="k">Published on</span><span class="v">28 Mar 2025</span></div>
+            <button class="recbtn" style="background:var(--indigo)">Clone to FY 2026–27</button>
+            <button class="recbtn" style="background:#fff;color:var(--indigo);border:1px solid var(--indigo);box-shadow:none;margin-top:8px">Publish draft version</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ch"><div><h3>Change audit</h3></div></div>
+          <div class="cb" style="padding-top:6px">
+            <div class="trail">
+              <div class="ti"><span class="td">28 Mar 25</span> FY 2025–26 published — 4.0% uplift on L1–L7 · P. Sharma</div>
+              <div class="ti"><span class="td">28 Mar 25</span> Freelancer base $538 → $560 · P. Sharma</div>
+              <div class="ti"><span class="td">28 Mar 25</span> L7 Partner band added · P. Sharma</div>
+              <div class="ti open"><span class="td">15 Jan 26</span> FY 2026–27 draft cloned — pending review</div>
+            </div>
+            <div class="note" style="margin-top:12px">Every rate change is versioned and logged. Published versions are immutable; corrections require a new version.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
