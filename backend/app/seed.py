@@ -6,7 +6,7 @@ honestly from man-days x rate (no overrides), so the baseline reconciles exactly
 (Nordwind planned cost $1,180,032, sold margin 36.2%) and POC/EAC are the honest
 roll-up of the detailed lines.
 
-Run:  PYTHONPATH=backend backend/.venv/Scripts/python.exe -m app.seed
+Run:  PYTHONPATH=backend backend/.venv/Scripts/python.exe -m app.seedh
 """
 from __future__ import annotations
 
